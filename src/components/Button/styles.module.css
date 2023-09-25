@@ -1,0 +1,18 @@
+.button {
+	display: flex;
+	padding: 16px 48px;
+	justify-content: center;
+	align-items: center;
+	border-radius: 4px;
+	font-family: 'Poppins', sans-serif;
+	font-weight: 500;
+}
+
+.outlined {
+	border: 1px solid rgba(0, 0, 0, 0.50);
+}
+.filled {
+	border: none;
+	color: aliceblue;
+	background: #DB4444;
+}

@@ -1,0 +1,53 @@
+.header {
+	padding: 1% 10%;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	border-bottom: 1px solid rgba(0, 0, 0, 0.3);
+}
+
+.logo {
+	font-family: 'Inter', sans-serif;
+	font-size: 24px;
+	font-weight: 700;
+	color: black;
+}
+
+.searchBar {
+	display: flex;
+	position: relative;
+}
+
+.form {
+	display: block;
+}
+
+.input {
+	width: 500px;
+	padding: 4% 5%;
+	border: 1px solid rgba(0, 0, 0, 0.5);
+	border-radius: 10px;
+	outline: black;
+	transition: all 60ms;
+}
+
+.input:focus {
+	border: 2px solid black;
+}
+
+.submit {
+	position: absolute;
+	border: none;
+	top: 17px;
+	right: 25px;
+	z-index: 2;
+}
+
+.auth {
+	display: flex;
+	justify-content: space-between;
+}
+
+.auth button:nth-child(1) {
+	margin-right: 20px;
+}

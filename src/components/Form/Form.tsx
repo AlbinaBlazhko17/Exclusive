@@ -21,16 +21,13 @@ function MyForm ({type}: { type: string }) {
 			.required('Password is required'),
 		showFields: Yup.bool(),
 		confirmPassword: Yup.string()
-				.oneOf([Yup.ref('password'), undefined], 'Passwords must match')
 				.when('showFields', ([showFields]) => {
-					console.log();
-					return showFields ? Yup.string().required('tel Password is required') : Yup.string().notRequired();
+					return showFields ? Yup.string().oneOf([Yup.ref('password'), undefined], 'Passwords must match').required('Password is required') : Yup.string().notRequired();
 				}),
-		tel: Yup.number()
-			.min(10, 'Telephone number must be at least 10 characters')
-			.when('showFields', ([showFields]) => {
+		tel: Yup.string()
+			.when('showFields', ([showFields], schema) => {
 				console.log();
-				return showFields ? Yup.number().required('tel Password is required') : Yup.number().notRequired();
+				return showFields ? Yup.string().min(10, 'Telephone number must be at least 10 characters').required('tel Password is required') : Yup.number().notRequired();
 			}),
 		gender: Yup.string()
 				.when('showFields', ([showFields]) => {
@@ -90,8 +87,8 @@ function MyForm ({type}: { type: string }) {
 					<Field
 						type="tel"
 						name="tel"
-						component={({ field, form, }) => (
-							<PhoneInput {...field} country={'ua'} onChange={(value) => {
+						component={({ field, form }) => (
+							<PhoneInput {...field} country={'ua'} name="tel" value={field.value} onChange={(value) => {
 								form.setFieldValue('tel', value);
 							}}/>
 						)}

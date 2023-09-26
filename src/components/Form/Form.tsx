@@ -25,9 +25,9 @@ function MyForm ({type}: { type: string }) {
 					return showFields ? Yup.string().oneOf([Yup.ref('password'), undefined], 'Passwords must match').required('Password is required') : Yup.string().notRequired();
 				}),
 		tel: Yup.string()
-			.when('showFields', ([showFields], schema) => {
+			.when('showFields', ([showFields]) => {
 				console.log();
-				return showFields ? Yup.string().min(10, 'Telephone number must be at least 10 characters').required('tel Password is required') : Yup.number().notRequired();
+				return showFields ? Yup.string().min(10, 'Telephone number must be at least 10 characters').required('Telephone number is required') : Yup.number().notRequired();
 			}),
 		gender: Yup.string()
 				.when('showFields', ([showFields]) => {
@@ -35,7 +35,7 @@ function MyForm ({type}: { type: string }) {
 				}),
 		agreeToPolicy: Yup.bool()
 				.when('showFields', ([showFields]) => {
-					return showFields ? Yup.bool().required('AgreeToPolicy Password is required') : Yup.bool().notRequired();
+					return showFields ? Yup.bool().oneOf([true], 'You must agree'): Yup.bool().notRequired();
 				}),
 		});
 	return (
@@ -45,8 +45,8 @@ function MyForm ({type}: { type: string }) {
 				password: '',
 				confirmPassword: '',
 				tel: '',
-				agreeToPolicy: false,
 				gender: '',
+				agreeToPolicy: false,
 				showFields: type === 'Sign up'
 			}}
 			onSubmit={(values, { setSubmitting }) => {
@@ -56,56 +56,80 @@ function MyForm ({type}: { type: string }) {
 			validationSchema={validationSchema}>
 			<Form>
 				<label className={style.formLabel}>Login</label>
+				<div className={style.field}>
+					<Field
+						type="email" name="email"
+						component={({ field }) => (
+							<Input {...field} startDecorator={<MailIcon />} placeholder='email@gmail.com'/>
+						)}
+					/>
+					<ErrorMessage name="email" render={(errorMsg) => (
+							<div className={style.error}>{errorMsg}</div>
+					)} />
+				</div>
+			<label className={style.formLabel}>Password</label>
+			<div className={style.field}>
 				<Field
-					type="email" name="email"
+					type="password"
+					name="password"
 					component={({ field }) => (
-						<Input {...field} startDecorator={<MailIcon />} placeholder='email@gmail.com'/>
+						<Input {...field} startDecorator={<Key />}/>
 					)}
 				/>
-				<ErrorMessage name="email" component="div" />
-			<label>Password</label>
-			<Field
-				type="password"
-				name="password"
-				component={({ field }) => (
-					<Input {...field} startDecorator={<Key />}/>
-				)}
-			/>
-			<ErrorMessage name="password" component="div" />
+				<ErrorMessage name="password" render={(errorMsg) => (
+							<div className={style.error}>{errorMsg}</div>
+				)} />
+			</div>
 			{type === 'Sign up'? (
 				<>
-					<label>Password</label>
-					<Field
-						type="password"
-						name="confirmPassword"
-						component={({ field }) => (
-							<Input {...field} startDecorator={<Key />}/>
-						)}
-					/>
-					<ErrorMessage name="confirmPassword" component="div" />
-					<label>Phone number</label>
-					<Field
-						type="tel"
-						name="tel"
-						component={({ field, form }) => (
-							<PhoneInput {...field} country={'ua'} name="tel" value={field.value} onChange={(value) => {
-								form.setFieldValue('tel', value);
-							}}/>
-						)}
-					/>
-					<ErrorMessage name="tel" component="div" />
-					<label>Sex</label>
-					<Field name="gender" component={RadioGroup} />
-					<ErrorMessage name="gender" component="div" />
-					<hr style={{marginBottom: '30px'}}/>
-					<label>
+					<label className={style.formLabel}>Password confirmation</label>
+					<div className={style.field}>
 						<Field
-							type="checkbox"
-							name="agreeToPolicy"
+							type="password"
+							name="confirmPassword"
+							component={({ field }) => (
+								<Input {...field} startDecorator={<Key />}/>
+							)}
 						/>
-						I agree with the Private policy
-					</label>
-					<ErrorMessage name="agreeToPolicy" component="div" />
+						<ErrorMessage name="confirmPassword" render={(errorMsg) => (
+							<div className={style.error}>{errorMsg}</div>
+						)} />
+					</div>
+					<label className={style.formLabel}>Phone number</label>
+					<div className={style.field}>
+						<Field
+							type="tel"
+							name="tel"
+							component={({ field, form }) => (
+								<PhoneInput {...field} country={'ua'} name="tel" value={field.value} onChange={(value) => {
+									form.setFieldValue('tel', value);
+								}}/>
+							)}
+						/>
+						<ErrorMessage name="tel" render={(errorMsg) => (
+							<div className={style.error}>{errorMsg}</div>
+						)} />
+					</div>
+					<label className={style.formLabel} style={{textAlign: 'center'}}>Gender</label>
+					<div className={style.field} style={{marginBottom: '20px'}}>
+						<Field name="gender" component={RadioGroup} />
+						<ErrorMessage name="gender" render={(errorMsg) => (
+							<div className={style.error}>{errorMsg}</div>
+						)} />
+					</div>
+					<hr style={{marginBottom: '30px'}}/>
+					<div className={style.field}>
+						<label>
+							<Field
+								type="checkbox"
+								name="agreeToPolicy"
+							/>
+							I agree with the Private policy
+						</label>
+						<ErrorMessage name="agreeToPolicy" render={(errorMsg) => (
+							<div className={style.error}>{errorMsg}</div>
+						)} />
+					</div>
 				</>
 			): undefined}
 			{type === 'Sign in'? <a href="#" className={style.forgot}>Forgot password?</a>: undefined}

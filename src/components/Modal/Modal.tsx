@@ -4,7 +4,7 @@ import Form from '../Form/Form';
 function MyModal({
 	open, handleClose, type
   }: {open: boolean, handleClose: () => void, type: string}) {
-	console.log(open)
+
 	return(
 		<Modal
 			aria-labelledby="modal-title"

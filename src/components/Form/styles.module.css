@@ -10,3 +10,8 @@
 	text-align: right;
 	margin-top: 2%;
 }
+
+.radio {
+	display: flex;
+	justify-content: space-around;
+}

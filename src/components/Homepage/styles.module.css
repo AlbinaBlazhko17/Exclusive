@@ -7,16 +7,14 @@
 	overflow: hidden;
 }
 
-.categories {
-	margin-right: 80px;
-}
+
 
 .list {
 	list-style-type: none;
 }
 
 .listItem {
-	width: 80px;
+	width: 200px;
 	color: black;
 	margin-bottom: 16px;
 }
@@ -30,6 +28,20 @@ li a {
 
 li:hover a {
 	font-weight: 700;
+}
+
+.arrowIcon {
+	content: url('../../assets/DropDown.svg');
+	display: none;
+	width: 20px;
+	height: 20px;
+	margin-bottom: 2px;
+	margin-left: 5px;
+	vertical-align: middle;
+}
+
+li:hover .arrowIcon {
+	display: inline-block;
 }
 
 .slider {

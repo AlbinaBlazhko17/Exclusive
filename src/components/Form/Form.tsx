@@ -10,7 +10,7 @@ import RadioGroup from '../RadioGroup/RadioGroup';
 import 'react-phone-input-2/lib/style.css'
 import style from './styles.module.css';
 
-function MyForm ({type}: { type: string }) {
+function MyForm ({type, handleClose}: { type: string, handleClose: () => void }) {
 
 	const validationSchema = Yup.object().shape({
 		email: Yup.string()
@@ -51,6 +51,8 @@ function MyForm ({type}: { type: string }) {
 			}}
 			onSubmit={(values, { setSubmitting }) => {
 				console.log(values);
+				handleClose();
+				alert('Check the console!')
 				setSubmitting(false);
 			}}
 			validationSchema={validationSchema}>

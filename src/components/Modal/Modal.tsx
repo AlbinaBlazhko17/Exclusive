@@ -34,7 +34,7 @@ function MyModal({
 				>
 					{type}
 				</Typography>
-				<Form type={type}/>
+				<Form type={type} handleClose={handleClose}/>
 			</Sheet>
 		</Modal>
 	)

@@ -29,6 +29,7 @@
 	border-radius: 10px;
 	outline: black;
 	transition: all 60ms;
+	background: #efefef;
 }
 
 .input:focus {
@@ -41,6 +42,12 @@
 	top: 17px;
 	right: 25px;
 	z-index: 2;
+}
+
+
+.input:focus + .submit {
+	top: 18px;
+	right: 24px;
 }
 
 .auth {

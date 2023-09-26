@@ -16,6 +16,7 @@
 }
 
 .listItem {
+	width: 80px;
 	color: black;
 	margin-bottom: 16px;
 }
@@ -25,6 +26,10 @@ li a {
 	font-weight: 400;
 	text-decoration: none;
 	color: black;
+}
+
+li:hover a {
+	font-weight: 700;
 }
 
 .slider {
@@ -40,4 +45,11 @@ li a {
 .slide img {
 	height: auto;
 	object-fit: cover;
+}
+
+.error {
+	color: #DB4444;
+	text-align: center;
+	font-weight: 700;
+	font-size: xx-large;
 }

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Button from "../Button/Button";
 import Modal from "../Modal/Modal";
 
@@ -8,6 +8,11 @@ function Header () {
 	const [searchTerm, setSearchTerm] = useState('');
 	const [open, setOpen] = useState(false);
 	const [type, setType] = useState('');
+	const [formData, setFormData] = useState('');
+
+	useEffect(() => {
+		console.log(formData)
+	}, [formData])
 
 	function handleClose () {
 		setOpen(false);
@@ -37,7 +42,7 @@ function Header () {
 				<Button appearance="outlined" onClick={() => handleOpen('Sign in')}>Sign in</Button>
 				<Button appearance="filled" onClick={() => handleOpen('Sign up')}>Sign up</Button>
 			</div>
-			<Modal open={open} handleClose={handleClose} type={type}/>
+			<Modal open={open} handleClose={handleClose} formData={formData} setFormData={setFormData} type={type}/>
 		</header>
 	)
 }

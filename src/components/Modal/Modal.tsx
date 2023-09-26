@@ -2,7 +2,7 @@ import {Modal, Sheet, ModalClose, Typography} from '@mui/joy';
 import Form from '../Form/Form';
 
 function MyModal({
-	open, handleClose, type
+	open, handleClose, formData, setFormData, type
   }: {open: boolean, handleClose: () => void, type: string}) {
 
 	return(
@@ -34,7 +34,7 @@ function MyModal({
 				>
 					{type}
 				</Typography>
-				<Form type={type} handleClose={handleClose}/>
+				<Form type={type} formData={formData} setFormData={setFormData} handleClose={handleClose}/>
 			</Sheet>
 		</Modal>
 	)

@@ -10,7 +10,7 @@ import RadioGroup from '../RadioGroup/RadioGroup';
 import 'react-phone-input-2/lib/style.css'
 import style from './styles.module.css';
 
-function MyForm ({type, handleClose}: { type: string, handleClose: () => void }) {
+function MyForm ({type, formData, setFormData, handleClose}: { type: string, handleClose: () => void }) {
 
 	const validationSchema = Yup.object().shape({
 		email: Yup.string()
@@ -26,7 +26,6 @@ function MyForm ({type, handleClose}: { type: string, handleClose: () => void })
 				}),
 		tel: Yup.string()
 			.when('showFields', ([showFields]) => {
-				console.log();
 				return showFields ? Yup.string().min(10, 'Telephone number must be at least 10 characters').required('Telephone number is required') : Yup.number().notRequired();
 			}),
 		gender: Yup.string()
@@ -41,7 +40,7 @@ function MyForm ({type, handleClose}: { type: string, handleClose: () => void })
 	return (
 		<Formik 
 			initialValues={{
-				email: '',
+				email: formData,
 				password: '',
 				confirmPassword: '',
 				tel: '',
@@ -56,13 +55,23 @@ function MyForm ({type, handleClose}: { type: string, handleClose: () => void })
 				setSubmitting(false);
 			}}
 			validationSchema={validationSchema}>
+			{formikProps => ( 
 			<Form>
 				<label className={style.formLabel}>Login</label>
 				<div className={style.field}>
 					<Field
 						type="email" name="email"
+						value={formData? '': formData}
 						component={({ field }) => (
-							<Input {...field} startDecorator={<MailIcon />} placeholder='email@gmail.com'/>
+							<Input 
+								{...field}
+								startDecorator={<MailIcon />}
+								placeholder='email@gmail.com'
+								onChange={(e) => {
+									setFormData(e.target.value); // Update the email state variable
+									formikProps.handleChange(e); // Update Formik's field value
+								}}// Update field value when input changes
+							/>
 						)}
 					/>
 					<ErrorMessage name="email" render={(errorMsg) => (
@@ -136,7 +145,7 @@ function MyForm ({type, handleClose}: { type: string, handleClose: () => void })
 			): undefined}
 			{type === 'Sign in'? <a href="#" className={style.forgot}>Forgot password?</a>: undefined}
 			<Button appearance='filled' type='submit' className={style.buttonSubmit}>Submit</Button>
-		</Form>
+		</Form>)}
 		</Formik>
 	)
 }

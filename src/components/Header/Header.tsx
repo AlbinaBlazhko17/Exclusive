@@ -1,10 +1,23 @@
 import { useState } from "react";
 import Button from "../Button/Button";
+import Modal from "../Modal/Modal";
 
 import style from './styles.module.css';
 
 function Header () {
 	const [searchTerm, setSearchTerm] = useState('');
+	const [open, setOpen] = useState(false);
+	const [type, setType] = useState('');
+
+	function handleClose () {
+		setOpen(false);
+	}
+
+	const handleOpen = (typeOfForm: string): void => {
+		setType(typeOfForm);
+		setOpen(true);
+	};
+
 	return (
 		<header className={style.header}>
 			<h2 className={style.logo}>Exclusive</h2>
@@ -21,9 +34,10 @@ function Header () {
 				</div>
 			</form>
 			<div className={style.auth}>
-				<Button appearance="outlined">Sign in</Button>
-				<Button appearance="filled">Sign up</Button>
+				<Button appearance="outlined" onClick={() => handleOpen('Sign in')}>Sign in</Button>
+				<Button appearance="filled" onClick={() => handleOpen('Sign up')}>Sign up</Button>
 			</div>
+			<Modal open={open} handleClose={handleClose} type={type}/>
 		</header>
 	)
 }

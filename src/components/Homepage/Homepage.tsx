@@ -19,7 +19,7 @@ const Homepage = () => {
 		const fetchData = async () => {
 			try {
 				const data = await getAllCategories();
-				setCategories(data);
+				if(!(data instanceof Error)) setCategories(data);
 				setLoading(false)
 			} catch (error) {
 				setError(true);

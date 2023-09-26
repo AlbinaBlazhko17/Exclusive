@@ -1,0 +1,12 @@
+.buttonSubmit {
+	margin: 0 auto;
+	margin-top: 10%;
+}
+
+.forgot {
+	text-decoration: none;
+	color: black;
+	display: block;
+	text-align: right;
+	margin-top: 2%;
+}

@@ -3,12 +3,12 @@ import { ButtonProps } from './Button.props';
 
 import styles from './styles.module.css';
 
-function Button ({children, appearance}: ButtonProps): JSX.Element {
+function Button ({children, appearance, className, ...props}: ButtonProps): JSX.Element {
 	return (
-		<button className={cn(styles.button, {
+		<button className={cn(styles.button, className, {
 			[styles.outlined]: appearance === 'outlined',
 			[styles.filled]: appearance === 'filled',
-		})}>{children}</button>
+		})} {...props}>{children}</button>
 	)
 }
 

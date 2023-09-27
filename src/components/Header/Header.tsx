@@ -26,12 +26,9 @@ function Header () {
 		setOpen(false);
 	}
 	useEffect(() => {
-		// Check if there's saved form data in local storage
 		const savedData = localStorage.getItem('formData');
 		if (savedData) {
-		// Parse the JSON string back into an object
 			const parsedData = JSON.parse(savedData);
-			// Update your form data state with the parsed data
 			setFormData(parsedData);
 		}
 	}, []);

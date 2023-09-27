@@ -45,6 +45,14 @@ function MyForm ({type, formData, setFormData, handleClose}: { type: string, han
 			}}
 			onSubmit={(values, { setSubmitting }) => {
 				console.log(values);
+				setFormData({
+					email: '',
+					password: '',
+					confirmPassword: '',
+					tel: '',
+					gender: '',
+					agreeToPolicy: false,
+				})
 				handleClose();
 				alert('Check the console!')
 				setSubmitting(false);

@@ -22,6 +22,16 @@ export const getAllProducts = async (offset: number, limit: number): Promise<IPr
 	}
 }
 
+export const getProductsByCategory = async (categoryId: number) => {
+	try {
+		const response = await axios.get(`https://api.escuelajs.co/api/v1/products?categoryId=${categoryId}`);
+		return response.data;
+	} catch (error) {
+		console.error('Error fetching products:', error);
+		throw error;
+	}
+}
+
 export const getSingleProducts = async (id: number): Promise<IProduct | Error> => {
 	try {
 		const response = await axios.get(`https://api.escuelajs.co/api/v1/products/${id}`);

@@ -46,7 +46,6 @@ function MyForm ({type, formData, setFormData, handleClose}: { type: string, for
 				showFields: type === 'Sign up'
 			}}
 			onSubmit={(values, { setSubmitting }) => {
-				console.log(values);
 				setFormData({
 					email: '',
 					password: '',

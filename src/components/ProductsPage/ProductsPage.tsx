@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { getAllCategories, getAllProducts } from "../../services/Api";
+import { getAllCategories, getAllProducts, getProductsByCategory } from "../../services/Api";
 import ICategory from "../../interfaces/category.interface";
 import Header from "../Header/Header";
 import IProduct from "../../interfaces/product.interface";
@@ -16,6 +16,7 @@ function ProductsPage () {
 		const [offset, setOffset] = useState(0);
 		const [limit, setLimit] = useState(16);
 		const maxOffset = Math.max(0, 200 - limit);
+		const [categoryId, setCategorId] = useState<number>(0);
 
 		const nextPage = () => {
 			if (offset < maxOffset) {
@@ -63,9 +64,26 @@ function ProductsPage () {
 			fetchData();
 		}, [offset, limit]);
 
+		useEffect(() =>{
+			const fetchData = async () => {
+				try {
+					const data = await getProductsByCategory(categoryId);
+					console.log(data)
+					if(!(data instanceof Error)) {
+						setProducts(data);
+					}
+					setLoading(false)
+				} catch (error) {
+					setError(true);
+					setLoading(false);
+				}
+			}
+			fetchData();
+		}, [categoryId])
+
 	
 		if (loading) {
-			return <div>Loading...</div>;
+			return <div style={{color: 'black'}}>Loading...</div>;
 		}
 		
 		if (error) {
@@ -78,7 +96,7 @@ function ProductsPage () {
 				<div className={style.categories}>
 					<ul className={style.list}>
 						{categories.map(category => (
-							<li className={style.listItem} key={category.id}><a href="#">{category.name}<span className={style.arrowIcon}></span></a></li>
+							<li className={style.listItem} key={category.id} onClick={() => setCategorId(+category.id)} ><a href="#">{category.name}<span className={style.arrowIcon}></span></a></li>
 						))}
 					</ul>
 				</div>

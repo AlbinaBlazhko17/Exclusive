@@ -1,16 +1,18 @@
 import * as Yup from 'yup';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
+import { ChangeEvent } from 'react';
 import Key from '@mui/icons-material/Key';
 import MailIcon from '@mui/icons-material/Mail';
 import Button from '../Button/Button';
 import RadioGroup from '../RadioGroup/RadioGroup';
 import CustomInput from './CustomInput';
 import CustomInputNumber from './CustomInputNumber';
+import {IFormData, setFormDataType} from '../Header/Header.props';
 
 import 'react-phone-input-2/lib/style.css'
 import style from './styles.module.css';
 
-function MyForm ({type, formData, setFormData, handleClose}: { type: string, handleClose: () => void }) {
+function MyForm ({type, formData, setFormData, handleClose}: { type: string, formData: IFormData,  setFormData: setFormDataType, handleClose: () => void }) {
 
 	const validationSchema = Yup.object().shape({
 		email: Yup.string()
@@ -58,7 +60,6 @@ function MyForm ({type, formData, setFormData, handleClose}: { type: string, han
 				setSubmitting(false);
 			}}
 			validationSchema={validationSchema}>
-			{formikProps => ( 
 			<Form>
 				<label className={style.formLabel}>Login</label>
 				<div className={style.field}>
@@ -126,9 +127,9 @@ function MyForm ({type, formData, setFormData, handleClose}: { type: string, han
 						<Field
 							name="gender"
 							value={formData.gender}
-							component={({field}) => (
-								<RadioGroup field={field} formData={formData} setFormData={setFormData}/>
-							)}
+							component={RadioGroup}
+							formData={formData}
+							setFormData={setFormData}
 						/>
 						<ErrorMessage name="gender" render={(errorMsg) => (
 							<div className={style.error}>{errorMsg}</div>
@@ -141,7 +142,7 @@ function MyForm ({type, formData, setFormData, handleClose}: { type: string, han
 								checked={formData.agreeToPolicy}
 								type="checkbox"
 								name="agreeToPolicy"
-								onChange={(e) => setFormData({
+								onChange={(e: ChangeEvent<HTMLInputElement>) => setFormData({
 									...formData, 
 									[e.target.name]: e.target.checked
 								})}
@@ -156,7 +157,7 @@ function MyForm ({type, formData, setFormData, handleClose}: { type: string, han
 			): undefined}
 			{type === 'Sign in'? <a href="#" className={style.forgot}>Forgot password?</a>: undefined}
 			<Button appearance='filled' type='submit' className={style.buttonSubmit}>Submit</Button>
-		</Form>)}
+			</Form>
 		</Formik>
 	)
 }

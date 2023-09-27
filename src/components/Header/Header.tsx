@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import Button from "../Button/Button";
 import Modal from "../Modal/Modal";
+import { IFormData } from "./Header.props";
 
 import style from './styles.module.css';
 
@@ -8,7 +9,7 @@ function Header () {
 	const [searchTerm, setSearchTerm] = useState('');
 	const [open, setOpen] = useState(false);
 	const [type, setType] = useState('');
-	const [formData, setFormData] = useState({
+	const [formData, setFormData] = useState<IFormData>({
 		email: '',
 		password: '',
 		confirmPassword: '',
@@ -16,10 +17,6 @@ function Header () {
 		gender: '',
 		agreeToPolicy: false,
 	});
-
-	useEffect(() => {
-		console.log(formData)
-	}, [formData])
 
 	function handleClose () {
 		localStorage.setItem('formData', JSON.stringify(formData));

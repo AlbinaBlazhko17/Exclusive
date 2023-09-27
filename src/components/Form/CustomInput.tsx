@@ -1,7 +1,8 @@
-import { useMemo } from 'react';
+import React, { useMemo } from 'react';
 import { Input } from '@mui/joy';
+import {IFormData, setFormDataType} from '../Header/Header.props';
 
-function CustomInput({ field, form, formData, setFormData, startDecorator, ...rest }) {
+function CustomInput({ field, form, formData, setFormData, startDecorator, ...rest }: { formData: IFormData; setFormData: setFormDataType, startDecorator: React.ReactElement }) {
   return useMemo(() => (
     <Input
       {...field}

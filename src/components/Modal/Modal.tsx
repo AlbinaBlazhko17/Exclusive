@@ -1,9 +1,10 @@
 import {Modal, Sheet, ModalClose, Typography} from '@mui/joy';
 import Form from '../Form/Form';
+import {IFormData, setFormDataType} from '../Header/Header.props';
 
 function MyModal({
 	open, handleClose, formData, setFormData, type
-  }: {open: boolean, handleClose: () => void, type: string}) {
+  }: {open: boolean, formData: IFormData, setFormData: setFormDataType, handleClose: () => void, type: string}) {
 
 	return(
 		<Modal

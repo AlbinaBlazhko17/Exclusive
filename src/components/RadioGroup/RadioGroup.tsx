@@ -1,7 +1,8 @@
 import {Radio} from '@mui/joy';
+import {IFormData, setFormDataType} from '../Header/Header.props';
 import style from '../Form/styles.module.css';
 
-const RadioGroup = ({ field, formData, setFormData }) => (
+const RadioGroup = ({ field, formData, setFormData }: { formData: IFormData; setFormData: setFormDataType }) => (
 	<div className={style.radio}>
 		<Radio
 			{...field}

@@ -1,7 +1,8 @@
 import { useMemo } from 'react';
 import PhoneInput from 'react-phone-input-2';
+import {IFormData, setFormDataType} from '../Header/Header.props';
 
-function CustomInputNumber({ field, form, formData, setFormData, startDecorator, ...rest }) {
+function CustomInputNumber({ field, form, formData, setFormData, startDecorator, ...rest }: { formData: IFormData; setFormData: setFormDataType, startDecorator: React.ReactElement }) {
   return useMemo(() => (
     <PhoneInput
       {...field}

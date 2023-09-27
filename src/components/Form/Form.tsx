@@ -5,7 +5,9 @@ import Key from '@mui/icons-material/Key';
 import MailIcon from '@mui/icons-material/Mail';
 import Button from '../Button/Button';
 import PhoneInput from 'react-phone-input-2';
+import { useMemo } from 'react';
 import RadioGroup from '../RadioGroup/RadioGroup';
+import CustomInput from './CustomInput';
 
 import 'react-phone-input-2/lib/style.css'
 import style from './styles.module.css';
@@ -40,12 +42,7 @@ function MyForm ({type, formData, setFormData, handleClose}: { type: string, han
 	return (
 		<Formik 
 			initialValues={{
-				email: formData,
-				password: '',
-				confirmPassword: '',
-				tel: '',
-				gender: '',
-				agreeToPolicy: false,
+				...formData,
 				showFields: type === 'Sign up'
 			}}
 			onSubmit={(values, { setSubmitting }) => {
@@ -60,17 +57,21 @@ function MyForm ({type, formData, setFormData, handleClose}: { type: string, han
 				<label className={style.formLabel}>Login</label>
 				<div className={style.field}>
 					<Field
-						type="email" name="email"
-						value={formData? '': formData}
-						component={({ field }) => (
+						type="email"
+						name="email"
+						value={formData.email}
+						component={({ field, form }) => (
 							<Input 
 								{...field}
 								startDecorator={<MailIcon />}
 								placeholder='email@gmail.com'
 								onChange={(e) => {
-									setFormData(e.target.value); // Update the email state variable
-									formikProps.handleChange(e); // Update Formik's field value
-								}}// Update field value when input changes
+									setFormData({
+										...formData, 
+										[e.target.name]: e.target.value
+									})
+									formikProps.setFieldValue("email", e.target.value);
+								}}
 							/>
 						)}
 					/>
@@ -83,8 +84,16 @@ function MyForm ({type, formData, setFormData, handleClose}: { type: string, han
 				<Field
 					type="password"
 					name="password"
+					value={formData.password}
 					component={({ field }) => (
-						<Input {...field} startDecorator={<Key />}/>
+						<Input 
+							{...field} 
+							startDecorator={<Key />}
+							onChange={(e) => setFormData({
+								...formData, 
+								[e.target.name]: e.target.value
+							})}
+						/>
 					)}
 				/>
 				<ErrorMessage name="password" render={(errorMsg) => (
@@ -96,10 +105,18 @@ function MyForm ({type, formData, setFormData, handleClose}: { type: string, han
 					<label className={style.formLabel}>Password confirmation</label>
 					<div className={style.field}>
 						<Field
+							value={formData.confirmPassword}
 							type="password"
 							name="confirmPassword"
 							component={({ field }) => (
-								<Input {...field} startDecorator={<Key />}/>
+								<Input
+									{...field}
+									startDecorator={<Key />}
+									onChange={(e) => setFormData({
+										...formData, 
+										[e.target.name]: e.target.value
+									})}
+								/>
 							)}
 						/>
 						<ErrorMessage name="confirmPassword" render={(errorMsg) => (
@@ -111,10 +128,16 @@ function MyForm ({type, formData, setFormData, handleClose}: { type: string, han
 						<Field
 							type="tel"
 							name="tel"
-							component={({ field, form }) => (
-								<PhoneInput {...field} country={'ua'} name="tel" value={field.value} onChange={(value) => {
-									form.setFieldValue('tel', value);
-								}}/>
+							value={formData.tel}
+							component={({ field }) => (
+								<Input
+									{...field}
+									startDecorator={<Key />}
+									onChange={(e) => setFormData({
+										...formData, 
+										[e.target.name]: e.target.value
+									})}
+								/>
 							)}
 						/>
 						<ErrorMessage name="tel" render={(errorMsg) => (
@@ -123,7 +146,13 @@ function MyForm ({type, formData, setFormData, handleClose}: { type: string, han
 					</div>
 					<label className={style.formLabel} style={{textAlign: 'center'}}>Gender</label>
 					<div className={style.field} style={{marginBottom: '20px'}}>
-						<Field name="gender" component={RadioGroup} />
+						<Field
+							name="gender"
+							value={formData.gender}
+							component={({field}) => (
+								<RadioGroup field={field} formData={formData} setFormData={setFormData}/>
+							)}
+						/>
 						<ErrorMessage name="gender" render={(errorMsg) => (
 							<div className={style.error}>{errorMsg}</div>
 						)} />
@@ -132,8 +161,13 @@ function MyForm ({type, formData, setFormData, handleClose}: { type: string, han
 					<div className={style.field}>
 						<label>
 							<Field
+								checked={formData.agreeToPolicy}
 								type="checkbox"
 								name="agreeToPolicy"
+								onChange={(e) => setFormData({
+									...formData, 
+									[e.target.name]: e.target.checked
+								})}
 							/>
 							I agree with the Private policy
 						</label>

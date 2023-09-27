@@ -8,15 +8,33 @@ function Header () {
 	const [searchTerm, setSearchTerm] = useState('');
 	const [open, setOpen] = useState(false);
 	const [type, setType] = useState('');
-	const [formData, setFormData] = useState('');
+	const [formData, setFormData] = useState({
+		email: '',
+		password: '',
+		confirmPassword: '',
+		tel: '',
+		gender: '',
+		agreeToPolicy: false,
+	});
 
 	useEffect(() => {
 		console.log(formData)
 	}, [formData])
 
 	function handleClose () {
+		localStorage.setItem('formData', JSON.stringify(formData));
 		setOpen(false);
 	}
+	useEffect(() => {
+		// Check if there's saved form data in local storage
+		const savedData = localStorage.getItem('formData');
+		if (savedData) {
+		// Parse the JSON string back into an object
+			const parsedData = JSON.parse(savedData);
+			// Update your form data state with the parsed data
+			setFormData(parsedData);
+		}
+	}, []);
 
 	const handleOpen = (typeOfForm: string): void => {
 		setType(typeOfForm);

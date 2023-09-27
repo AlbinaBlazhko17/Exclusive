@@ -29,6 +29,25 @@
 	width: 200px;
 	color: black;
 	margin-bottom: 16px;
+	cursor: pointer;
+}
+
+.listItem:hover div {
+	font-weight: bold;
+}
+
+.listItem:hover .arrowIcon {
+	display: inline-block;
+}
+
+.arrowIcon {
+	content: url('../../assets/DropDown.svg');
+	display: none;
+	width: 20px;
+	height: 20px;
+	margin-bottom: 2px;
+	margin-left: 5px;
+	vertical-align: middle;
 }
 
 .products {

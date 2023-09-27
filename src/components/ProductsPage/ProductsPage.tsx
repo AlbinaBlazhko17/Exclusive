@@ -96,7 +96,7 @@ function ProductsPage () {
 				<div className={style.categories}>
 					<ul className={style.list}>
 						{categories.map(category => (
-							<li className={style.listItem} key={category.id} onClick={() => setCategorId(+category.id)} ><a href="#">{category.name}<span className={style.arrowIcon}></span></a></li>
+							<li className={style.listItem} key={category.id} onClick={() => setCategorId(+category.id)}><div>{category.name}<span className={style.arrowIcon}></span></div></li>
 						))}
 					</ul>
 				</div>

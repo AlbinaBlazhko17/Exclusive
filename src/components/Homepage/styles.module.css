@@ -30,6 +30,10 @@ li:hover a {
 	font-weight: 700;
 }
 
+li:hover .arrowIcon {
+	display: inline-block;
+}
+
 .arrowIcon {
 	content: url('../../assets/DropDown.svg');
 	display: none;
@@ -40,9 +44,6 @@ li:hover a {
 	vertical-align: middle;
 }
 
-li:hover .arrowIcon {
-	display: inline-block;
-}
 
 .slider {
 	max-width: 1300px;

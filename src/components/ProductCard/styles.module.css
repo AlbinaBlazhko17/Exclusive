@@ -1,0 +1,39 @@
+.card {
+	padding: 5% 5%;
+	max-width: 300px;
+	border-radius: 5%;
+	box-shadow: 0px 25px 32px 0px rgba(67, 67, 67, 0.14);
+	background-color: #fbe1e1;
+	transition: all 200ms;
+	cursor: pointer;
+}
+
+.title, .price {
+	color: black;
+}
+
+.card:hover {
+	transform: scale(1.2);
+}
+
+.img {
+	width: 100%;
+	height: auto;
+	object-fit: cover;
+	border-top-left-radius: 10px;
+	border-top-right-radius: 10px
+}
+
+.add {
+	width: 100%;
+	background: #DB4444;
+	border: none;
+	font-family: 'Poppins';
+	color: white;
+	padding: 2%;
+	cursor: pointer;
+}
+.descr {
+	margin-top: auto;
+}
+

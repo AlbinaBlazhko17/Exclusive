@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { Link } from 'react-router-dom';
 import Button from "../Button/Button";
 import Modal from "../Modal/Modal";
 import { IFormData } from "../../interfaces/formData.interface";
@@ -37,7 +38,9 @@ function Header () {
 
 	return (
 		<header className={style.header}>
-			<h2 className={style.logo}>Exclusive</h2>
+			<Link to="/" className={style.logo}>
+				Exclusive
+			</Link>
 			<form action="">
 				<div className={style.searchBar}>
 					<input

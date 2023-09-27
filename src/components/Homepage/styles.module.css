@@ -12,6 +12,8 @@
 }
 
 .listItem {
+	display: block;
+	text-decoration: none;
 	width: 200px;
 	color: black;
 	margin-bottom: 16px;
@@ -57,9 +59,3 @@ li:hover .arrowIcon {
 	object-fit: cover;
 }
 
-.error {
-	color: #DB4444;
-	text-align: center;
-	font-weight: 700;
-	font-size: xx-large;
-}

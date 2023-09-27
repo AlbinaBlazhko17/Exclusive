@@ -1,0 +1,48 @@
+.wrapper {
+	padding: 0 8%;
+	margin-top: 3%;
+	display: flex;
+	justify-content: space-between;
+}
+
+.productsWrapper {
+	width: 100%;
+	display: grid;
+	grid-template-columns: 1fr;
+	grid-template-rows: auto auto;
+	margin-bottom: 5%;
+}
+
+.error {
+	color: #DB4444;
+	text-align: center;
+	font-weight: 700;
+	font-size: xx-large;
+}
+
+.list {
+	list-style-type: none;
+	width: 100%;
+}
+
+.listItem {
+	width: 200px;
+	color: black;
+	margin-bottom: 16px;
+}
+
+.products {
+	width: 100%;
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+	grid-auto-flow: row;
+	justify-content: center;
+	row-gap: 30px;
+	column-gap: 8%;
+}
+
+.buttonsPagination {
+	display: flex;
+	margin: 0 auto;
+	margin-top: 20px;
+}

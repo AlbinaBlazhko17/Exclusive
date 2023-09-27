@@ -3,20 +3,25 @@ import PhoneInput from 'react-phone-input-2';
 import {IFormData, setFormDataType} from '../../interfaces/formData.interface';
 
 function CustomInputNumber({ field, form, formData, setFormData, startDecorator, ...rest }: { formData: IFormData; setFormData: setFormDataType, startDecorator: React.ReactElement }) {
-  return useMemo(() => (
-    <PhoneInput
-      {...field}
-      {...rest}
+	return useMemo(() => (
+		<PhoneInput
+			{...field}
+			{...rest}
 		country={'ua'}
-      onChange={(value) => {
-        setFormData({
-          ...formData,
-          tel: value
-        });
-        form.setFieldValue(field.name, value);
-      }}
-    />
-  ), [field.name, formData, form, setFormData, startDecorator]);
+		inputStyle={{
+			fontFamily: 'Poppins',
+			fontSize: 'inherit',
+			fontWeight: 'inherit'
+		}}
+			onChange={(value) => {
+				setFormData({
+					...formData,
+					tel: value
+				});
+				form.setFieldValue(field.name, value);
+			}}
+		/>
+	), [field.name, formData, form, setFormData, startDecorator]);
 }
 
 export default CustomInputNumber;

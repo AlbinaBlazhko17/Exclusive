@@ -1,6 +1,6 @@
 import {Modal, Sheet, ModalClose, Typography} from '@mui/joy';
 import Form from '../Form/Form';
-import {IFormData, setFormDataType} from '../Header/Header.props';
+import {IFormData, setFormDataType} from '../../interfaces/formData.interface';
 
 function MyModal({
 	open, handleClose, formData, setFormData, type

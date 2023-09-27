@@ -1,5 +1,5 @@
 import {Radio} from '@mui/joy';
-import {IFormData, setFormDataType} from '../Header/Header.props';
+import {IFormData, setFormDataType} from '../../interfaces/formData.interface';
 import style from '../Form/styles.module.css';
 
 const RadioGroup = ({ field, formData, setFormData }: { formData: IFormData; setFormData: setFormDataType }) => (

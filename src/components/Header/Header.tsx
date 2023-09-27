@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import Button from "../Button/Button";
 import Modal from "../Modal/Modal";
-import { IFormData } from "./Header.props";
+import { IFormData } from "../../interfaces/formData.interface";
 
 import style from './styles.module.css';
 

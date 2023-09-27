@@ -7,7 +7,7 @@ import Button from '../Button/Button';
 import RadioGroup from '../RadioGroup/RadioGroup';
 import CustomInput from './CustomInput';
 import CustomInputNumber from './CustomInputNumber';
-import {IFormData, setFormDataType} from '../Header/Header.props';
+import {IFormData, setFormDataType} from '../../interfaces/formData.interface';
 
 import 'react-phone-input-2/lib/style.css'
 import style from './styles.module.css';

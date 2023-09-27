@@ -60,104 +60,109 @@ function MyForm ({type, formData, setFormData, handleClose}: { type: string, for
 				setSubmitting(false);
 			}}
 			validationSchema={validationSchema}>
-			<Form>
-				<label className={style.formLabel}>Login</label>
-				<div className={style.field}>
-					<Field
-						type="email"
-						name="email"
-						value={formData.email}
-						component={CustomInput}
-						formData={formData}
-						setFormData={setFormData}
-						startDecorator={<MailIcon />}
-					/>
-					<ErrorMessage name="email" render={(errorMsg) => (
-							<div className={style.error}>{errorMsg}</div>
-					)} />
-				</div>
-			<label className={style.formLabel}>Password</label>
-			<div className={style.field}>
-				<Field
-					type="password"
-					name="password"
-					value={formData.password}
-					component={CustomInput}
-					formData={formData}
-					setFormData={setFormData}
-					startDecorator={<Key />}
-				/>
-				<ErrorMessage name="password" render={(errorMsg) => (
-							<div className={style.error}>{errorMsg}</div>
-				)} />
-			</div>
-			{type === 'Sign up'? (
-				<>
-					<label className={style.formLabel}>Password confirmation</label>
+			{({ setFieldValue }) => (
+				<Form>
+					<label className={style.formLabel}>Login</label>
 					<div className={style.field}>
 						<Field
-							value={formData.confirmPassword}
-							type="password"
-							name="confirmPassword"
+							type="email"
+							name="email"
+							value={formData.email}
 							component={CustomInput}
 							formData={formData}
 							setFormData={setFormData}
-							startDecorator={<Key />}
+							startDecorator={<MailIcon />}
 						/>
-						<ErrorMessage name="confirmPassword" render={(errorMsg) => (
-							<div className={style.error}>{errorMsg}</div>
+						<ErrorMessage name="email" render={(errorMsg) => (
+								<div className={style.error}>{errorMsg}</div>
 						)} />
 					</div>
-					<label className={style.formLabel}>Phone number</label>
-					<div className={style.field}>
-						<Field
-							type="tel"
-							name="tel"
-							value={formData.tel}
-							component={CustomInputNumber}
-							formData={formData}
-							setFormData={setFormData}
-						/>
-						<ErrorMessage name="tel" render={(errorMsg) => (
-							<div className={style.error}>{errorMsg}</div>
-						)} />
-					</div>
-					<label className={style.formLabel} style={{textAlign: 'center'}}>Gender</label>
-					<div className={style.field} style={{marginBottom: '20px'}}>
-						<Field
-							name="gender"
-							value={formData.gender}
-							component={RadioGroup}
-							formData={formData}
-							setFormData={setFormData}
-						/>
-						<ErrorMessage name="gender" render={(errorMsg) => (
-							<div className={style.error}>{errorMsg}</div>
-						)} />
-					</div>
-					<hr style={{marginBottom: '30px'}}/>
-					<div className={style.field}>
-						<label>
+				<label className={style.formLabel}>Password</label>
+				<div className={style.field}>
+					<Field
+						type="password"
+						name="password"
+						value={formData.password}
+						component={CustomInput}
+						formData={formData}
+						setFormData={setFormData}
+						startDecorator={<Key />}
+					/>
+					<ErrorMessage name="password" render={(errorMsg) => (
+								<div className={style.error}>{errorMsg}</div>
+					)} />
+				</div>
+				{type === 'Sign up'? (
+					<>
+						<label className={style.formLabel}>Password confirmation</label>
+						<div className={style.field}>
 							<Field
-								checked={formData.agreeToPolicy}
-								type="checkbox"
-								name="agreeToPolicy"
-								onChange={(e: ChangeEvent<HTMLInputElement>) => setFormData({
-									...formData, 
-									[e.target.name]: e.target.checked
-								})}
+								value={formData.confirmPassword}
+								type="password"
+								name="confirmPassword"
+								component={CustomInput}
+								formData={formData}
+								setFormData={setFormData}
+								startDecorator={<Key />}
 							/>
-							I agree with the Private policy
-						</label>
-						<ErrorMessage name="agreeToPolicy" render={(errorMsg) => (
-							<div className={style.error}>{errorMsg}</div>
-						)} />
-					</div>
-				</>
-			): undefined}
-			{type === 'Sign in'? <a href="#" className={style.forgot}>Forgot password?</a>: undefined}
-			<Button appearance='filled' type='submit' className={style.buttonSubmit}>Submit</Button>
-			</Form>
+							<ErrorMessage name="confirmPassword" render={(errorMsg) => (
+								<div className={style.error}>{errorMsg}</div>
+							)} />
+						</div>
+						<label className={style.formLabel}>Phone number</label>
+						<div className={style.field}>
+							<Field
+								type="tel"
+								name="tel"
+								value={formData.tel}
+								component={CustomInputNumber}
+								formData={formData}
+								setFormData={setFormData}
+							/>
+							<ErrorMessage name="tel" render={(errorMsg) => (
+								<div className={style.error}>{errorMsg}</div>
+							)} />
+						</div>
+						<label className={style.formLabel} style={{textAlign: 'center'}}>Gender</label>
+						<div className={style.field} style={{marginBottom: '20px'}}>
+							<Field
+								name="gender"
+								value={formData.gender}
+								component={RadioGroup}
+								formData={formData}
+								setFormData={setFormData}
+							/>
+							<ErrorMessage name="gender" render={(errorMsg) => (
+								<div className={style.error}>{errorMsg}</div>
+							)} />
+						</div>
+						<hr style={{marginBottom: '30px'}}/>
+						<div className={style.field}>
+							<label>
+								<Field
+									checked={formData.agreeToPolicy}
+									type="checkbox"
+									name="agreeToPolicy"
+									onChange={(e: ChangeEvent<HTMLInputElement>) => {
+										setFormData({
+											...formData, 
+											[e.target.name]: e.target.checked
+										})
+										setFieldValue('agreeToPolicy', e.target.checked);
+									}}
+								/>
+								I agree with the Private policy
+							</label>
+							<ErrorMessage name="agreeToPolicy" render={(errorMsg) => (
+								<div className={style.error}>{errorMsg}</div>
+							)} />
+						</div>
+					</>
+				): undefined}
+				{type === 'Sign in'? <a href="#" className={style.forgot}>Forgot password?</a>: undefined}
+				<Button appearance='filled' type='submit' className={style.buttonSubmit}>Submit</Button>
+				</Form>
+			)}
 		</Formik>
 	)
 }

@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import { useMemo } from 'react';
 import { Input } from '@mui/joy';
 
 function CustomInput({ field, form, formData, setFormData, startDecorator, ...rest }) {
@@ -11,7 +11,7 @@ function CustomInput({ field, form, formData, setFormData, startDecorator, ...re
           ...formData,
           [field.name]: e.target.value
         });
-        form.setFieldValue(field.name, e.target.value); // Use formik's setFieldValue method
+        form.setFieldValue(field.name, e.target.value);
       }}
       startDecorator={startDecorator}
     />

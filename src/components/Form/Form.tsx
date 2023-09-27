@@ -1,13 +1,11 @@
 import * as Yup from 'yup';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
-import { Input } from '@mui/joy';
 import Key from '@mui/icons-material/Key';
 import MailIcon from '@mui/icons-material/Mail';
 import Button from '../Button/Button';
-import PhoneInput from 'react-phone-input-2';
-import { useMemo } from 'react';
 import RadioGroup from '../RadioGroup/RadioGroup';
 import CustomInput from './CustomInput';
+import CustomInputNumber from './CustomInputNumber';
 
 import 'react-phone-input-2/lib/style.css'
 import style from './styles.module.css';
@@ -60,20 +58,10 @@ function MyForm ({type, formData, setFormData, handleClose}: { type: string, han
 						type="email"
 						name="email"
 						value={formData.email}
-						component={({ field, form }) => (
-							<Input 
-								{...field}
-								startDecorator={<MailIcon />}
-								placeholder='email@gmail.com'
-								onChange={(e) => {
-									setFormData({
-										...formData, 
-										[e.target.name]: e.target.value
-									})
-									formikProps.setFieldValue("email", e.target.value);
-								}}
-							/>
-						)}
+						component={CustomInput}
+						formData={formData}
+						setFormData={setFormData}
+						startDecorator={<MailIcon />}
 					/>
 					<ErrorMessage name="email" render={(errorMsg) => (
 							<div className={style.error}>{errorMsg}</div>
@@ -85,16 +73,10 @@ function MyForm ({type, formData, setFormData, handleClose}: { type: string, han
 					type="password"
 					name="password"
 					value={formData.password}
-					component={({ field }) => (
-						<Input 
-							{...field} 
-							startDecorator={<Key />}
-							onChange={(e) => setFormData({
-								...formData, 
-								[e.target.name]: e.target.value
-							})}
-						/>
-					)}
+					component={CustomInput}
+					formData={formData}
+					setFormData={setFormData}
+					startDecorator={<Key />}
 				/>
 				<ErrorMessage name="password" render={(errorMsg) => (
 							<div className={style.error}>{errorMsg}</div>
@@ -108,16 +90,10 @@ function MyForm ({type, formData, setFormData, handleClose}: { type: string, han
 							value={formData.confirmPassword}
 							type="password"
 							name="confirmPassword"
-							component={({ field }) => (
-								<Input
-									{...field}
-									startDecorator={<Key />}
-									onChange={(e) => setFormData({
-										...formData, 
-										[e.target.name]: e.target.value
-									})}
-								/>
-							)}
+							component={CustomInput}
+							formData={formData}
+							setFormData={setFormData}
+							startDecorator={<Key />}
 						/>
 						<ErrorMessage name="confirmPassword" render={(errorMsg) => (
 							<div className={style.error}>{errorMsg}</div>
@@ -129,16 +105,9 @@ function MyForm ({type, formData, setFormData, handleClose}: { type: string, han
 							type="tel"
 							name="tel"
 							value={formData.tel}
-							component={({ field }) => (
-								<Input
-									{...field}
-									startDecorator={<Key />}
-									onChange={(e) => setFormData({
-										...formData, 
-										[e.target.name]: e.target.value
-									})}
-								/>
-							)}
+							component={CustomInputNumber}
+							formData={formData}
+							setFormData={setFormData}
 						/>
 						<ErrorMessage name="tel" render={(errorMsg) => (
 							<div className={style.error}>{errorMsg}</div>

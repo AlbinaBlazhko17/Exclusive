@@ -8,20 +8,36 @@ const RadioGroup = ({ field, formData, setFormData }) => (
 			checked={field.value === 'Male'}
 			value="Male"
 			label='Male'
-			onChange={() => setFormData({
-				...formData, 
-				gender: 'Male'
-			})}
+			onChange={() => {
+				setFormData({
+					...formData, 
+					gender: 'Male'
+				})
+				field.onChange({
+					target: {
+						name: field.name,
+						value: 'Male',
+					},
+				});
+			}}
 		/>
 		<Radio
 			{...field}
 			checked={field.value === 'Female'}
 			value="Female"
 			label='Female'
-			onChange={() => setFormData({
-				...formData, 
-				gender: 'Female'
-			})}
+			onChange={() => {
+				setFormData({
+					...formData, 
+					gender: 'Female'
+				})
+				field.onChange({
+					target: {
+						name: field.name,
+						value: 'Female',
+					},
+				});
+			}}
 		/>
 	</div>
 );

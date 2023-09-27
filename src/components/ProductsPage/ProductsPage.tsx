@@ -3,6 +3,7 @@ import { getAllCategories, getAllProducts, getProductsByCategory } from "../../s
 import ICategory from "../../interfaces/category.interface";
 import Header from "../Header/Header";
 import IProduct from "../../interfaces/product.interface";
+import cn from 'classnames';
 
 import style from './styles.module.css';
 import ProductCard from "../ProductCard/ProductCard";
@@ -96,7 +97,8 @@ function ProductsPage () {
 				<div className={style.categories}>
 					<ul className={style.list}>
 						{categories.map(category => (
-							<li className={style.listItem} key={category.id} onClick={() => setCategorId(+category.id)}><div>{category.name}<span className={style.arrowIcon}></span></div></li>
+							<li className={cn(style.listItem, 
+								+category.id === categoryId ? style.selectedCategory : '')} key={category.id} onClick={() => setCategorId(+category.id)}><div>{category.name}<span className={style.arrowIcon}></span></div></li>
 						))}
 					</ul>
 				</div>

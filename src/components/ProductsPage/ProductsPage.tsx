@@ -4,11 +4,11 @@ import ICategory from "../../interfaces/category.interface";
 import Header from "../Header/Header";
 import IProduct from "../../interfaces/product.interface";
 import cn from 'classnames';
+import { Link, useNavigate } from "react-router-dom";
 
 import style from './styles.module.css';
 import ProductCard from "../ProductCard/ProductCard";
 import Button from "../Button/Button";
-import { dividerClasses } from "@mui/joy";
 
 function ProductsPage () {
 		const [products, setProducts] = useState<IProduct[]>([])
@@ -19,6 +19,7 @@ function ProductsPage () {
 		const [limit, setLimit] = useState(16);
 		const [maxOffset, setMaxOffset] = useState(0);
 		const [categoryId, setCategorId] = useState<number>(0);
+		const navigate = useNavigate();
 
 		const nextPage = () => {
 			console.log('Next page');
@@ -108,18 +109,20 @@ function ProductsPage () {
 			<div className={style.wrapper}>
 				<div className={style.categories}>
 					<ul className={style.list}>
-						<li className={cn(style.listItem, 
-								categoryId === 0 ? style.selectedCategory : '')} onClick={() => {setCategorId(0); setOffset(0)}}><div>All categories<span className={style.arrowIcon}></span></div></li>
+						<Link to='/products' className={cn(style.listItem, 
+								categoryId === 0 ? style.selectedCategory : '')} onClick={() => {setCategorId(0); setOffset(0);}}><div>All categories<span className={style.arrowIcon}></span></div></Link>
 						{categories.map(category => (
-							<li className={cn(style.listItem, 
-								+category.id === categoryId ? style.selectedCategory : '')} key={category.id} onClick={() => {setCategorId(+category.id); setOffset(0)}}><div>{category.name}<span className={style.arrowIcon}></span></div></li>
+							<Link to={`/products/${category.name}`} className={cn(style.listItem, 
+								+category.id === categoryId ? style.selectedCategory : '')} key={category.id} onClick={() => {setCategorId(+category.id); setOffset(0);}}><div>{category.name}<span className={style.arrowIcon}></span></div></Link>
 						))}
 					</ul>
 				</div>
 				<div className={style.productsWrapper}>
 						<div className={style.products}>
 							{products.length !== 0 ?products.map((product: IProduct) => (
-								<ProductCard key={product.id} product={product} />
+								<Link to={`/products/${categoryId}/${product.id}`} key={product.id} style={{ textDecoration: 'none', color: 'black' }}>
+									<ProductCard product={product} />
+								</Link>
 							)): <div style={{textAlign: 'center', color: 'black', fontSize: '40px', fontWeight: 'bolder'}}>Here is no products</div>}
 						</div>
 						<div className={style.buttonsPagination}>

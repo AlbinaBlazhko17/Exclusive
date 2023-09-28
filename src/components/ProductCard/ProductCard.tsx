@@ -1,20 +1,22 @@
 import IProduct from '../../interfaces/product.interface';
 import style from './styles.module.css';
 
-function ProductCard ({product}: {product: IProduct}) {
-	const {images, title, price} = product;
+function ProductCard (
+	{product}: {product: IProduct}
+	) {
+	const { images, title, price, description} = product;
 	return (
 		<div className={style.card}>
-			<img src={images[0]? images[0]: 'src/assets/product_not.png'} alt={title} className={style.img}
+			<img src={images[0]} alt={title} className={style.img}
 				onError={(e) => {
-					const imgElement = e.target as HTMLImageElement; // Cast e.target to HTMLImageElement
-					imgElement.src = 'src/assets/product_not.png'; // Set the source to the default image
+					const imgElement = e.target as HTMLImageElement;
+					imgElement.src = 'src/assets/product_not.png';
 				}}
 			/>
 			<div className={style.descr}>
 				<div className={style.title}>{title}</div>
 				<div className={style.price}>$ {price}</div>
-				<button className={style.add}>Add to card</button>
+				<div className={style.title}>{description.slice(0,50)}</div>
 			</div>
 		</div>
 	)

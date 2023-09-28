@@ -52,7 +52,7 @@ export const getProductsByCategoryPagination = async (offset: number, limit: num
 	}
 }
 
-export const getSingleProducts = async (id: number): Promise<IProduct | Error> => {
+export const getSingleProduct = async (id: number): Promise<IProduct | Error> => {
 	try {
 		const response = await axios.get(`https://api.escuelajs.co/api/v1/products/${id}`);
 		return response.data;

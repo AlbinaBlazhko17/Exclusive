@@ -63,12 +63,11 @@
 .buttonsPagination {
 	display: flex;
 	margin: 0 auto;
-	margin-top: 20px;
+	margin-top: 50px;
 }
 
 .selectedCategory {
 	font-weight: bold;
-	text-decoration: underline;
 }
 
 .selectedCategory .arrowIcon {

@@ -12,7 +12,27 @@ export const getAllCategories = async (): Promise<ICategory[] | Error> => {
 	}
 }
 
-export const getAllProducts = async (offset: number, limit: number): Promise<IProduct[] | Error> => {
+export const getAllProducts = async (): Promise<number | Error> => {
+	try {
+		const response = await axios.get(`https://api.escuelajs.co/api/v1/products`);
+		return response.data.length;
+	} catch (error) {
+		console.error('Error fetching products:', error);
+		throw error;
+	}
+}
+
+export const getProductsByCategory = async (categoryId: number): Promise<number | Error> => {
+	try {
+		const response = await axios.get(`https://api.escuelajs.co/api/v1/products?categoryId=${categoryId}`);
+		return response.data.length;
+	} catch (error) {
+		console.error('Error fetching products:', error);
+		throw error;
+	}
+}
+
+export const getAllProductsPagination = async (offset: number, limit: number): Promise<IProduct[] | Error> => {
 	try {
 		const response = await axios.get(`https://api.escuelajs.co/api/v1/products?offset=${offset}&limit=${limit}`);
 		return response.data;
@@ -22,9 +42,9 @@ export const getAllProducts = async (offset: number, limit: number): Promise<IPr
 	}
 }
 
-export const getProductsByCategory = async (categoryId: number) => {
+export const getProductsByCategoryPagination = async (offset: number, limit: number, categoryId: number) => {
 	try {
-		const response = await axios.get(`https://api.escuelajs.co/api/v1/products?categoryId=${categoryId}`);
+		const response = await axios.get(`https://api.escuelajs.co/api/v1/products?offset=${offset}&limit=${limit}&categoryId=${categoryId}`);
 		return response.data;
 	} catch (error) {
 		console.error('Error fetching products:', error);

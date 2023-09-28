@@ -4,27 +4,25 @@ import ICategory from "../../interfaces/category.interface";
 import Header from "../Header/Header";
 import IProduct from "../../interfaces/product.interface";
 import cn from 'classnames';
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 
 import style from './styles.module.css';
 import ProductCard from "../ProductCard/ProductCard";
 import Button from "../Button/Button";
 
 function ProductsPage () {
-		const [products, setProducts] = useState<IProduct[]>([])
+		const [products, setProducts] = useState<IProduct[]>([]);
+		const { categoryId } = useParams();
 		const [categories, setCategories] = useState<ICategory[]>([]);
 		const [loading, setLoading] = useState(true);
 		const [error, setError] = useState(false);
 		const [offset, setOffset] = useState(0);
 		const [limit, setLimit] = useState(16);
 		const [maxOffset, setMaxOffset] = useState(0);
-		const [categoryId, setCategorId] = useState<number>(0);
-		const navigate = useNavigate();
+		const [categoryIdTo, setCategorId] = useState<number>(+categoryId || 0);
+		console.log('Category' + categoryId);
 
 		const nextPage = () => {
-			console.log('Next page');
-			console.log('Offset' + offset);
-			console.log('MaxOffset' + maxOffset);
 			if (offset < maxOffset) {
 				setOffset(offset + limit);
 			}
@@ -59,41 +57,54 @@ function ProductsPage () {
 		}, []);
 
 		useEffect(() => {
+			if (categoryId) {
+				setCategorId(+categoryId);
+			} else {
+				setCategorId(0);
+			}
+		}, [categoryId]);
+
+		useEffect(() => {
 			const fetchData = async () => {
 				try {
-
-					const data = await getAllProductsPagination(offset, limit);
-
-					if(!(data instanceof Error)) {
+					let data;
+					if (categoryIdTo !== 0) {
+						data = await getProductsByCategoryPagination(offset, limit, categoryIdTo);
+						console.log(data);
+					} else {
+						data = await getAllProductsPagination(offset, limit);
+					}
+		
+					if (!(data instanceof Error)) {
 						setProducts(data);
 					}
-					setLoading(false)
+					setLoading(false);
 				} catch (error) {
 					setError(true);
 					setLoading(false);
 				}
-			}
+			};
 			fetchData();
-		}, [offset, limit]);
+		}, [offset, limit, categoryIdTo]);
 
-		useEffect(() =>{
-			const fetchData = async () => {
-				try {
-					const dataForOffset = await getProductsByCategory(categoryId);
-					if(!(dataForOffset instanceof Error)) setMaxOffset(Math.max(0, dataForOffset - limit));
+		// useEffect(() =>{
+		// 	const fetchData = async () => {
+		// 		try {
+		// 			const dataForOffset = await getProductsByCategory(categoryIdTo);
+		// 			if(!(dataForOffset instanceof Error)) setMaxOffset(Math.max(0, dataForOffset - limit));
 
-					const data = await getProductsByCategoryPagination(offset, limit, categoryId);
-					if(!(data instanceof Error)) {
-						setProducts(data);
-					}
-					setLoading(false)
-				} catch (error) {
-					setError(true);
-					setLoading(false);
-				}
-			}
-			fetchData();
-		}, [categoryId])
+		// 			const data = await getProductsByCategoryPagination(offset, limit, categoryIdTo);
+		// 			if(!(data instanceof Error)) {
+		// 				setProducts(data);
+		// 			}
+		// 			setLoading(false)
+		// 		} catch (error) {
+		// 			setError(true);
+		// 			setLoading(false);
+		// 		}
+		// 	}
+		// 	fetchData();
+		// }, [categoryIdTo])
 
 	
 		if (loading) {
@@ -110,17 +121,17 @@ function ProductsPage () {
 				<div className={style.categories}>
 					<ul className={style.list}>
 						<Link to='/products' className={cn(style.listItem, 
-								categoryId === 0 ? style.selectedCategory : '')} onClick={() => {setCategorId(0); setOffset(0);}}><div>All categories<span className={style.arrowIcon}></span></div></Link>
+								categoryIdTo === 0 ? style.selectedCategory : '')} onClick={() => {setCategorId(0); setOffset(0);}}><div>All categories<span className={style.arrowIcon}></span></div></Link>
 						{categories.map(category => (
-							<Link to={`/products/${category.name}`} className={cn(style.listItem, 
-								+category.id === categoryId ? style.selectedCategory : '')} key={category.id} onClick={() => {setCategorId(+category.id); setOffset(0);}}><div>{category.name}<span className={style.arrowIcon}></span></div></Link>
+							<Link to={`/products/${category.id}`} className={cn(style.listItem, 
+								+category.id === categoryIdTo ? style.selectedCategory : '')} key={category.id} onClick={() => {setCategorId(+category.id); setOffset(0);}}><div>{category.name}<span className={style.arrowIcon}></span></div></Link>
 						))}
 					</ul>
 				</div>
 				<div className={style.productsWrapper}>
 						<div className={style.products}>
 							{products.length !== 0 ?products.map((product: IProduct) => (
-								<Link to={`/products/${categoryId}/${product.id}`} key={product.id} style={{ textDecoration: 'none', color: 'black' }}>
+								<Link to={`/products/${product.category.id}/${product.id}`} key={product.id} style={{ textDecoration: 'none', color: 'black' }}>
 									<ProductCard product={product} />
 								</Link>
 							)): <div style={{textAlign: 'center', color: 'black', fontSize: '40px', fontWeight: 'bolder'}}>Here is no products</div>}

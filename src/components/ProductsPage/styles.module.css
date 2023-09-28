@@ -1,5 +1,5 @@
 .wrapper {
-	padding: 0 8%;
+	padding: 0 11% 0 10%;
 	margin-top: 3%;
 	display: flex;
 	justify-content: space-between;
@@ -22,7 +22,8 @@
 
 .list {
 	list-style-type: none;
-	width: 100%;
+	width: 180px;
+	padding-inline-start: 0px;
 }
 
 .listItem {

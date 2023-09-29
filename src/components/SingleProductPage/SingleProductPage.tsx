@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { useParams, useLocation, Link } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 import Header from '../Header/Header';
 import IProduct from '../../interfaces/product.interface';
 import { getSingleProduct } from '../../services/Api';
@@ -15,7 +15,6 @@ function SingleProductPage () {
 	const [singleProduct, setSingleProduct] = useState<IProduct>();
 	const [loading, setLoading] = useState(true);
 	const [error, setError] = useState(false);
-	const location = useLocation();
 	const [cartQuantity, setCartQuantity] = useState(1);
   
 	const handleQuantityChange = (newQuantity: number) => {
@@ -70,6 +69,7 @@ function SingleProductPage () {
 						<hr style={{marginBottom: 120}}/>
 						<div className={style.buy}>
 							<QuantityPicker onQuantityChange={handleQuantityChange}/>
+							<Button appearance='filled' className={style.buyButton}>Add to cart</Button>
 							<Button appearance='filled' className={style.buyButton}>Buy now</Button>
 							<div className={style.wishlist}>
 								<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32" fill="none">

@@ -4,25 +4,21 @@ import TextField from '@mui/material/TextField';
 
 import style from './styles.module.css';
 
-function QuantityPicker({ onQuantityChange, ...props }) {
-	const [quantity, setQuantity] = useState(1);
+function QuantityPicker({ quantity, onQuantityChange, ...props }) {
 
 	const handleDecrement = () => {
 		if (quantity > 1) {
-			setQuantity(quantity - 1);
 			onQuantityChange(quantity - 1);
 		}
 	};
 
 	const handleIncrement = () => {
-		setQuantity(quantity + 1);
 		onQuantityChange(quantity + 1);
 	};
 
 	const handleQuantityChange = (event) => {
 		const newQuantity = parseInt(event.target.value, 10);
 		if (!isNaN(newQuantity) && newQuantity >= 1) {
-			setQuantity(newQuantity);
 			onQuantityChange(newQuantity);
 		}
 	};

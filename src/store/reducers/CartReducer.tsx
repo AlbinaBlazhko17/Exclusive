@@ -25,6 +25,24 @@ const cart = createReducer(initialState, (builder) => {
 				results: updatedResults,
 			};
 		})
+		.addCase(removeItemFromCart, (state, action) => { 
+			const idToRemove = action.payload.id;
+
+			const updatedResults = state.results.filter((item) => item.id !== idToRemove);
+
+			const updatedResultsObject = updatedResults.reduce((acc, item, index) => {
+				acc[index] = item;
+				return acc;
+			}, {});
+
+			setLocalStorage('cart', updatedResultsObject);
+
+			return {
+				...state,
+				results: updatedResults,
+			};
+		})
+		.addDefaultCase(state => state)
 })
 
 

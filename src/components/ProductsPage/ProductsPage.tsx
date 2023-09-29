@@ -35,7 +35,7 @@ function ProductsPage () {
 		};
 
 		useEffect(() => {
-			const fetchData = async () => {
+			(async () => {
 				try {
 					const data = await getAllCategories();
 					const dataForOffset = await getAllProducts();
@@ -52,8 +52,7 @@ function ProductsPage () {
 					setError(true);
 					setLoading(false);
 				}
-			}
-			fetchData();
+			}) ()
 		}, []);
 
 		useEffect(() => {
@@ -65,7 +64,7 @@ function ProductsPage () {
 		}, [categoryId]);
 
 		useEffect(() => {
-			const fetchData = async () => {
+			(async () => {
 				try {
 					let data;
 					if (categoryIdTo !== 0) {
@@ -83,8 +82,7 @@ function ProductsPage () {
 					setError(true);
 					setLoading(false);
 				}
-			};
-			fetchData();
+			})();
 		}, [offset, limit, categoryIdTo]);
 
 		// useEffect(() =>{

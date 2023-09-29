@@ -3,6 +3,7 @@ import ProductCard from '../ProductCard/ProductCard';
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import IProduct from '../../interfaces/product.interface';
+import Subheader from '../Subheader/Subheader';
 
 import style from './styles.module.css';
 
@@ -13,11 +14,7 @@ function WishlistPage () {
 		<>
 			<Header/>
 			<div className={style.wishlist}>
-				<div className={style.subheader}>
-					<div className={style.redBox}></div>
-					<h3>Wishlist</h3>
-				</div>
-				<hr style={{backgroundColor: '#DB4444', height: '2px', border: '0', marginBottom: '5%'}} />
+				<Subheader/>
 				<div className={style.products}>
 					{wishlist.length !== 0 ? wishlist.map((product: IProduct) => (
 						<Link to={`/products/${product.category.id}/${product.id}`} key={product.id} style={{ textDecoration: 'none', color: 'black' }}>

@@ -1,0 +1,17 @@
+.subheader {
+	display: flex;
+	align-items: center;
+}
+
+.subheader h3 {
+	color: #DB4444;
+	font-size: 40px;
+}
+
+.redBox {
+	width: 20px;
+	height: 40px;
+	background-color: #DB4444;
+	border-radius: 4px;
+	margin-right: 20px;
+}

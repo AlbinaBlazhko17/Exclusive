@@ -42,11 +42,15 @@ function SingleProductPage () {
 	};
 
 	const handleAddToCart = () => {
-		dispatch(addItemToCart(singleProduct));
+		const productWithCartQuantity = {
+			...singleProduct,
+			cartQuantity: 1,
+		};
+		dispatch(addItemToCart(productWithCartQuantity));
 	}
 
 	useEffect(() => {
-		const fetchData = async () => {
+		(async () => {
 			try {
 				let data;
 				if(productId) data = await getSingleProduct(+productId);
@@ -64,8 +68,7 @@ function SingleProductPage () {
 				setError(true);
 				setLoading(false);
 			}
-		}
-		fetchData();
+		}) ();
 	}, []);
 
 	return (

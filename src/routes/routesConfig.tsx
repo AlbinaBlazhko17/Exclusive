@@ -1,3 +1,4 @@
+import CartPage from '../components/CartPage/CartPage';
 import Homepage from '../components/Homepage/Homepage';
 import ProductsPage from '../components/ProductsPage/ProductsPage';
 import SingleProductPage from '../components/SingleProductPage/SingleProductPage';
@@ -23,6 +24,10 @@ const routesConfig = [
 	{
 		path: '/wishlist',
 		element: <WishlistPage/>
+	},
+	{
+		path: '/cart',
+		element: <CartPage/>
 	}
 	// {
 	// 	path: '*',

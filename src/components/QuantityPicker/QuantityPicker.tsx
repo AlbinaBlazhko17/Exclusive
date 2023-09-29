@@ -4,7 +4,7 @@ import TextField from '@mui/material/TextField';
 
 import style from './styles.module.css';
 
-function QuantityPicker({ onQuantityChange }) {
+function QuantityPicker({ onQuantityChange, ...props }) {
 	const [quantity, setQuantity] = useState(1);
 
 	const handleDecrement = () => {
@@ -28,7 +28,7 @@ function QuantityPicker({ onQuantityChange }) {
 	};
 
 	return (
-		<div className={style.picker}>
+		<div className={style.picker} {...props}>
 			<Button appearance={quantity === 1? 'outlined': 'filled' } className={style.prickerButton} onClick={handleDecrement}>
 				<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
 					<g id="icon-minus">

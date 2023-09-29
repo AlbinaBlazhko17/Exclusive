@@ -1,0 +1,57 @@
+.wrapper {
+	margin-top: 10%;
+	padding: 0 11% 0 10%;
+}
+
+.header {
+	display: grid;
+	display: flex;
+	justify-content: space-between;
+	margin-bottom: 5%;
+	padding: 0 10px;
+}
+
+.headerItem {
+	width: 250px;
+	text-align: center;
+}
+
+.products {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	border: 1px solid #ccc;
+	padding: 10px;
+	border-radius: 4px;
+	margin-bottom: 5px;
+}
+
+.products > div {
+	width: 250px;
+}
+
+.price {
+	text-align: center;
+}
+
+.quantity {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.subtotal {
+	text-align: center;
+}
+
+.productImage {
+	display: flex;
+	align-items: center;
+
+}
+
+.product img {
+	max-width: 100%;
+	height: auto;
+}
+

@@ -8,7 +8,7 @@ import style from './styles.module.css';
 
 function WishlistPage () {
 	const wishlist = useSelector(state => state.wishlist.results);
-	console.log(wishlist);
+
 	return (
 		<>
 			<Header/>

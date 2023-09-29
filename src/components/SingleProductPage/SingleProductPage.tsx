@@ -29,13 +29,7 @@ function SingleProductPage () {
 			dispatch(removePersonFromWishlist({ id: singleProduct?.id }));
 			setWishlist(false);
 		} else {
-			dispatch(addPersonToWishlist({
-					id: singleProduct.id,
-					name: singleProduct.title,
-					img: singleProduct.images[0],
-					price: singleProduct?.price,
-					description: singleProduct?.description,
-		}));
+			dispatch(addPersonToWishlist(singleProduct));
 			setWishlist(true);
 		}
 	}

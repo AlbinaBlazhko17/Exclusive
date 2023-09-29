@@ -32,7 +32,7 @@ function QuantityPicker({ onQuantityChange }) {
 			<Button appearance={quantity === 1? 'outlined': 'filled' } className={style.prickerButton} onClick={handleDecrement}>
 				<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
 					<g id="icon-minus">
-						<path id="Vector" d="M20 12H4" stroke={quantity === 1? 'black': 'white'} stroke-width="1.5" stroke-linecap="round"/>
+						<path id="Vector" d="M20 12H4" stroke={quantity === 1? 'black': 'white'} strokeWidth="1.5" strokeLinecap="round"/>
 					</g>
 				</svg>
 			</Button>
@@ -46,7 +46,7 @@ function QuantityPicker({ onQuantityChange }) {
 			<Button appearance={'filled'} style={{borderTopLeftRadius: 0, borderBottomLeftRadius: 0}} className={style.prickerButton} onClick={handleIncrement}>
 		<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
 			<g id="icon-plus">
-			<path id="Vector" d="M12 20V12M12 12V4M12 12H20M12 12H4" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
+			<path id="Vector" d="M12 20V12M12 12V4M12 12H20M12 12H4" stroke="white" strokeWidth="1.5" strokeLinecap="round"/>
 			</g>
 		</svg>
 			</Button>

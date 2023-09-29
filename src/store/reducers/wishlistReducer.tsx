@@ -1,5 +1,5 @@
 import { createReducer } from "@reduxjs/toolkit";
-import { addPersonToWishlist, removePersonFromWishlist, loadFromLocalStorage} from '../actions/actions';
+import { addItemToWishlist, removeItemFromWishlist, loadFromLocalStorage} from '../actions/actions';
 import {getLocalStorage, setLocalStorage} from '../../utils/localStorage';
 
 
@@ -9,7 +9,7 @@ const initialState = {
 
 const wishlist = createReducer(initialState, (builder) => {
 		builder
-				.addCase(addPersonToWishlist, (state, action) => { 
+				.addCase(addItemToWishlist, (state, action) => { 
 					const newItem = { ...action.payload };
 
 					const updatedResults = [...state.results, newItem];
@@ -26,7 +26,7 @@ const wishlist = createReducer(initialState, (builder) => {
 						results: updatedResults,
 					};
 				}) 
-				.addCase(removePersonFromWishlist, (state, action) => { 
+				.addCase(removeItemFromWishlist, (state, action) => { 
 					const idToRemove = action.payload.id;
 
 					const updatedResults = state.results.filter((item) => item.id !== idToRemove);

@@ -7,7 +7,7 @@ import notFound from '../../assets/product_not.png';
 import QuantityPicker from '../QuantityPicker/QuantityPicker';
 import Button from '../Button/Button';
 import { useDispatch, useSelector } from 'react-redux';
-import { addPersonToWishlist, removePersonFromWishlist} from '../../store/actions/actions';
+import { addItemToWishlist, removeItemFromWishlist, addItemToCart} from '../../store/actions/actions';
 
 import style from './styles.module.css';
 
@@ -18,18 +18,20 @@ function SingleProductPage () {
 	const [loading, setLoading] = useState(true);
 	const [error, setError] = useState(false);
 	const [cartQuantity, setCartQuantity] = useState(1);
+	const [cartAdd, setCartAdd] = useState(false);
 	const [wishlist, setWishlist] = useState(false);
-	const storeData = useSelector(state => state.wishlist);
+	const storeDataWishlist = useSelector(state => state.wishlist.results);
+	const storeDataCart = useSelector(state => state.cart.results);
 
 	const dispatch = useDispatch();
 
 	const dispatchFavouritePeople = () => {
 		if (wishlist) {
 			console.log(singleProduct?.id);
-			dispatch(removePersonFromWishlist({ id: singleProduct?.id }));
+			dispatch(removeItemFromWishlist({ id: singleProduct?.id }));
 			setWishlist(false);
 		} else {
-			dispatch(addPersonToWishlist(singleProduct));
+			dispatch(addItemToWishlist(singleProduct));
 			setWishlist(true);
 		}
 	}
@@ -38,6 +40,10 @@ function SingleProductPage () {
 	const handleQuantityChange = (newQuantity: number) => {
 		setCartQuantity(newQuantity);
 	};
+
+	const handleAddToCart = () => {
+		dispatch(addItemToCart(singleProduct));
+	}
 
 	useEffect(() => {
 		const fetchData = async () => {
@@ -48,7 +54,7 @@ function SingleProductPage () {
 				if(!(data instanceof Error)) {
 					setSingleProduct(data);
 				}
-				storeData.results.forEach(item => {
+				storeDataWishlist.forEach(item => {
 					if (item.id === +productId) setWishlist(true);
 					else setWishlist(false);
 				});
@@ -92,7 +98,7 @@ function SingleProductPage () {
 						<hr style={{marginBottom: 120}}/>
 						<div className={style.buy}>
 							<QuantityPicker onQuantityChange={handleQuantityChange}/>
-							<Button appearance='filled' className={style.buyButton}>Add to cart</Button>
+							<Button appearance='filled' className={style.buyButton} onClick={handleAddToCart}>Add to cart</Button>
 							<Button appearance='filled' className={style.buyButton}>Buy now</Button>
 							<div className={style.wishlist} onClick={dispatchFavouritePeople}>
 								<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32" fill="none">

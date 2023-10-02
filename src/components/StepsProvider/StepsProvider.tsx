@@ -13,8 +13,12 @@ export function StepsProvider({ children }) {
 		setCurrentStep(currentStep - 1);
 	};
 
+	const resetStep = () => {
+		setCurrentStep(0);
+	}
+
 	return (
-		<StepContext.Provider value={{ currentStep, nextStep, previousStep }}>
+		<StepContext.Provider value={{ currentStep, nextStep, previousStep, resetStep }}>
 			{children}
 		</StepContext.Provider>
 	);

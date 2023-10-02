@@ -1,18 +1,26 @@
-import { Route, Routes, Navigate } from 'react-router-dom';
+import { Route, Routes, Navigate, useLocation } from 'react-router-dom';
 import { useContext } from 'react';
 import StepContext from '../StepsProvider/StepsProvider';
 import routesConfig from '../../routes/routesConfig';
+import { useEffect } from 'react';
 
 import 'swiper/css';
 import './App.css'
 
 function App() {
-  const { currentStep } = useContext(StepContext);
+  const { currentStep, resetStep } = useContext(StepContext);
+  const location = useLocation();
+
+  useEffect(() => {
+		if (location.pathname !== '/cart/form') {
+			resetStep();
+		}
+	}, [location, resetStep]);
 
   const dynamicRoutes = routesConfig.map((route, index) => {
 
     if (route.path === '/cart/form' && currentStep !== 1 || route.path === '/cart/form/confirm' && currentStep !== 2) {
-      console.log('Current step'+ currentStep)
+      console.log('Current step' + currentStep)
       return (
         <Route
           key={index}

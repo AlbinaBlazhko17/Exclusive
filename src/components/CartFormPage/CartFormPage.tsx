@@ -1,16 +1,16 @@
-import Header from '../Header/Header';
-import * as Yup from 'yup';
 import { ErrorMessage, Field, Form, Formik } from 'formik';
-
-import style from './styles.module.css';
-import { getLocalStorage, setLocalStorage } from '../../utils/localStorage';
-import { useEffect, useState, useContext } from 'react';
+import * as Yup from 'yup';
+import Header from '../Header/Header';
+import { useContext, useEffect, useState } from 'react';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { IFormDataDelivery } from '../../interfaces/formDataDelivery.interface';
+import { setLocalStorage } from '../../utils/localStorage';
+import Button from '../Button/Button';
 import CustomInput from '../FormToSign/CustomInput';
 import CustomInputNumber from '../FormToSign/CustomInputNumber';
-import Button from '../Button/Button';
 import StepContext from '../StepsProvider/StepsProvider';
-import { Link, useNavigate } from 'react-router-dom';
+
+import style from './styles.module.css';
 
 function CartFormPage () {
 	const [formDataDelivery, setFormDataDelivery] = useState<IFormDataDelivery>({
@@ -26,11 +26,7 @@ function CartFormPage () {
 
 	const { previousStep, nextStep } = useContext(StepContext);
 	const navigator = useNavigate();
-
-	useEffect(() => {
-		const dataFromLocalstorage = getLocalStorage('delivery');
-		if (dataFromLocalstorage.length) setFormDataDelivery(dataFromLocalstorage);
-	}, []);
+	
 
 	useEffect(() => {
 		setLocalStorage('delivery', formDataDelivery);

@@ -20,7 +20,6 @@ function ProductsPage () {
 		const [limit, setLimit] = useState(16);
 		const [maxOffset, setMaxOffset] = useState(0);
 		const [categoryIdTo, setCategorId] = useState<number>(+categoryId || 0);
-		console.log('Category' + categoryId);
 
 		const nextPage = () => {
 			if (offset < maxOffset) {

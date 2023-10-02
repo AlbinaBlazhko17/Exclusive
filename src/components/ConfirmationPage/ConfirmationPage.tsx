@@ -4,10 +4,8 @@ import StepContext from '../StepsProvider/StepsProvider';
 import { useContext } from 'react';
 
 function ConfirmationPage() {
-	const { previousStep } = useContext(StepContext);
-
-	previousStep();
-	previousStep();
+	const { resetStep } = useContext(StepContext);
+	resetStep();
 	return (
 		<>
 			<Header/>

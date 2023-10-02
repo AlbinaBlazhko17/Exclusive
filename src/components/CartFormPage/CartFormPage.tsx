@@ -10,7 +10,7 @@ import CustomInput from '../FormToSign/CustomInput';
 import CustomInputNumber from '../FormToSign/CustomInputNumber';
 import Button from '../Button/Button';
 import StepContext from '../StepsProvider/StepsProvider';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 function CartFormPage () {
 	const [formDataDelivery, setFormDataDelivery] = useState<IFormDataDelivery>({
@@ -24,7 +24,8 @@ function CartFormPage () {
 		additionalInfo: '',
 	});
 
-	const { previosStep, nextStep } = useContext(StepContext);
+	const { previousStep, nextStep } = useContext(StepContext);
+	const navigator = useNavigate();
 
 	useEffect(() => {
 		const dataFromLocalstorage = getLocalStorage('delivery');
@@ -73,6 +74,7 @@ function CartFormPage () {
 				onSubmit={(values, {setSubmitting}) => {
 					console.log(values);
 					nextStep();
+					navigator('/cart/form/confirm')
 					setSubmitting(false);
 				}}>
 				<Form className={style.formWrapper}>
@@ -191,8 +193,8 @@ function CartFormPage () {
 						)} />
 					</div>
 					<div className={style.buttons}>
-						<Link to='/cart'><Button appearance='filled' style={{marginRight: '30px'}} onClick={previosStep}>Back to cart</Button></Link>
-						<Link to='/cart/confirm'><Button type='submit' appearance='filled'>Confirm order</Button></Link>
+						<Link to='/cart' style={{textDecoration: 'none'}}><Button appearance='filled' style={{marginRight: '30px'}} onClick={previousStep}>Back to cart</Button></Link>
+						<Button type='submit' appearance='filled'>Confirm order</Button>
 					</div>
 				</Form>
 			</Formik>

@@ -1,7 +1,13 @@
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import Header from "../Header/Header";
+import StepContext from '../StepsProvider/StepsProvider';
+import { useContext } from 'react';
 
 function ConfirmationPage() {
+	const { previousStep } = useContext(StepContext);
+
+	previousStep();
+	previousStep();
 	return (
 		<>
 			<Header/>

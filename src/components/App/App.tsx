@@ -12,7 +12,7 @@ function App() {
   const location = useLocation();
 
   useEffect(() => {
-		if (location.pathname !== '/cart/form') {
+		if (location.pathname !== '/cart/form' && location.pathname !== '/cart/form/confirm') {
 			resetStep();
 		}
 	}, [location, resetStep]);

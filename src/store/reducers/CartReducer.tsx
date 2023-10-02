@@ -1,5 +1,5 @@
 import { createReducer } from "@reduxjs/toolkit";
-import { addItemToCart, removeItemFromCart } from '../actions/actions';
+import { addItemToCart, removeItemFromCart, removeAllItemsFromCart } from '../actions/actions';
 import {getLocalStorage, setLocalStorage} from '../../utils/localStorage';
 
 
@@ -40,6 +40,12 @@ const cart = createReducer(initialState, (builder) => {
 			return {
 				...state,
 				results: updatedResults,
+			};
+		})
+		.addCase(removeAllItemsFromCart, (state, action) => {
+			localStorage.removeItem('cart');
+			return {
+				...initialState,
 			};
 		})
 		.addDefaultCase(state => state)

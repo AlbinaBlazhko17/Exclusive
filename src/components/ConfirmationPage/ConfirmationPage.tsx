@@ -1,11 +1,18 @@
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import Header from "../Header/Header";
 import StepContext from '../StepsProvider/StepsProvider';
-import { useContext } from 'react';
+import { useContext, useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import { removeAllItemsFromCart } from '../../store/actions/actions';
 
 function ConfirmationPage() {
 	const { resetStep } = useContext(StepContext);
-	resetStep();
+	const dispatcher = useDispatch();
+
+	useEffect(() => {
+		resetStep();
+		dispatcher(removeAllItemsFromCart);
+	}, [])
 	return (
 		<>
 			<Header/>
@@ -13,6 +20,9 @@ function ConfirmationPage() {
 				<CheckCircleIcon sx={{color: '#74e8ae', width: '100px', height: '100px', margin: 'auto'}} fontSize="large" />
 			</div>
 			<div style={{color: '#74e8ae', fontSize: '40px', textAlign: 'center'}}>Thank you for your order!</div>
+			<div>
+
+			</div>
 		</>
 	)
 }

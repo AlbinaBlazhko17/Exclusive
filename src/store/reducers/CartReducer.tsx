@@ -1,55 +1,58 @@
 import { createReducer } from "@reduxjs/toolkit";
-import { addItemToCart, removeItemFromCart, removeAllItemsFromCart } from '../actions/actions';
-import {getLocalStorage, setLocalStorage} from '../../utils/localStorage';
+import { addItem, removeItem, removeAllItems } from '../actions/actions';
+import { setLocalStorage} from '../../utils/localStorage';
 
 
-const initialState = {
-	results: Object.values(getLocalStorage('cart')) || [],
-}
-
-const cart = createReducer(initialState, (builder) => {
-		builder.addCase(addItemToCart, (state, action) => {
-			const newItem = { ...action.payload };
-
+function createStorageReducer(initialState) {
+	return createReducer(initialState, (builder) => {
+		builder
+			.addCase(addItem, (state, action) => {
+			const { item, storageKey } = action.payload;
+	
+			const newItem = { ...item };
+	
 			const updatedResults = [...state.results, newItem];
-
+	
 			const updatedResultsObject = updatedResults.reduce((acc, item, index) => {
 				acc[index] = item;
 				return acc;
 			}, {});
-
-			setLocalStorage('cart', updatedResultsObject);
-
+	
+			setLocalStorage(storageKey, updatedResultsObject);
+	
 			return {
 				...state,
 				results: updatedResults,
 			};
 		})
-		.addCase(removeItemFromCart, (state, action) => { 
-			const idToRemove = action.payload.id;
-
-			const updatedResults = state.results.filter((item) => item.id !== idToRemove);
-
+		.addCase(removeItem, (state, action) => {
+			const { id, storageKey } = action.payload;
+	
+			const updatedResults = state.results.filter((item) => item.id !== id);
+	
 			const updatedResultsObject = updatedResults.reduce((acc, item, index) => {
 				acc[index] = item;
 				return acc;
 			}, {});
-
-			setLocalStorage('cart', updatedResultsObject);
-
+	
+			setLocalStorage(storageKey, updatedResultsObject);
+	
 			return {
 				...state,
 				results: updatedResults,
 			};
 		})
-		.addCase(removeAllItemsFromCart, (state, action) => {
-			localStorage.removeItem('cart');
+		.addCase(removeAllItems, (state, action) => {
+			const { storageKey } = action.payload;
+			localStorage.removeItem(storageKey);
 			return {
 				...initialState,
 			};
 		})
-		.addDefaultCase(state => state)
-})
+		.addDefaultCase((state) => state);
+	});
+  }
+  
 
 
-export default cart;
+export default createStorageReducer;

@@ -7,7 +7,7 @@ import notFound from '../../assets/product_not.png';
 import QuantityPicker from '../QuantityPicker/QuantityPicker';
 import Button from '../Button/Button';
 import { useDispatch, useSelector } from 'react-redux';
-import { addItemToWishlist, removeItemFromWishlist, addItemToCart} from '../../store/actions/actions';
+import { addItem, removeItem } from '../../store/actions/actions';
 import StepContext from '../StepsProvider/StepsProvider';
 
 import style from './styles.module.css';
@@ -30,10 +30,10 @@ function SingleProductPage () {
 	const dispatchFavouritePeople = () => {
 		if (wishlist) {
 			console.log(singleProduct?.id);
-			dispatch(removeItemFromWishlist({ id: singleProduct?.id }));
+			dispatch(removeItem({ id: singleProduct?.id, storageKey: 'wishlist' }));
 			setWishlist(false);
 		} else {
-			dispatch(addItemToWishlist(singleProduct));
+			dispatch(addItem({item: singleProduct, storageKey: 'wishlist'}));
 			setWishlist(true);
 		}
 	}
@@ -48,8 +48,8 @@ function SingleProductPage () {
 			...singleProduct,
 			cartQuantity,
 		};
-		dispatch(addItemToCart(productWithCartQuantity));
-		dispatch(removeItemFromWishlist(singleProduct));
+		dispatch(addItem({ item: productWithCartQuantity, storageKey: 'cart' }));
+		dispatch(removeItem({ item: singleProduct, storageKey: 'wishlist' }));
 	}
 
 	useEffect(() => {

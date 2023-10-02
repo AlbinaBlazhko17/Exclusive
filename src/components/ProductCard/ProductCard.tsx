@@ -7,18 +7,18 @@ import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import Button from '../Button/Button';
 import { useDispatch } from 'react-redux';
-import { removeItemFromWishlist} from '../../store/actions/actions';
+import { removeItem } from '../../store/actions/actions';
 
 
 function ProductCard (
 	{product, type = 'listOfProducts'}: {product: IProduct, type: string},
 	) {
 	const { id, images, title, price, description} = product;
-	const dispatch = useDispatch();
+	const wishlistDispatch = useDispatch();
 
 	function handleClick(e) {
 		e.preventDefault();
-		dispatch(removeItemFromWishlist({ id }));
+		wishlistDispatch(removeItem({ id, storageKey: 'wishlist' }));
 	}
 	return (
 		<Card sx={{ maxWidth: type === 'listOfProducts'? 400: 500, minWidth: 250, height: type === 'listOfProducts'? 300: 540, position: 'relative'}} className={style.card}>

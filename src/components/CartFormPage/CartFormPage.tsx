@@ -2,7 +2,7 @@ import { ErrorMessage, Field, Form, Formik } from 'formik';
 import * as Yup from 'yup';
 import Header from '../Header/Header';
 import { useContext, useEffect, useState } from 'react';
-import { Link, useNavigate, useLocation } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { IFormDataDelivery } from '../../interfaces/formDataDelivery.interface';
 import { setLocalStorage } from '../../utils/localStorage';
 import Button from '../Button/Button';
@@ -26,7 +26,6 @@ function CartFormPage () {
 
 	const { previousStep, nextStep } = useContext(StepContext);
 	const navigator = useNavigate();
-	
 
 	useEffect(() => {
 		setLocalStorage('delivery', formDataDelivery);
@@ -68,7 +67,7 @@ function CartFormPage () {
 				initialValues={formDataDelivery}
 				validationSchema={validationSchema}
 				onSubmit={(values, {setSubmitting}) => {
-					console.log(values);
+					console.log('Form values:', values);
 					nextStep();
 					navigator('/cart/form/confirm')
 					setSubmitting(false);
@@ -147,15 +146,15 @@ function CartFormPage () {
 					<label className={style.formLabel}>Phone number</label>
 						<div className={style.field}>
 							<Field
-								type="tel"
-								name="tel"
+								type="text"
+								name="phoneNumber"
 								value={formDataDelivery.phoneNumber}
 								component={CustomInputNumber}
 								formData={formDataDelivery}
 								setFormData={setFormDataDelivery}
 								width={'400px'}
 							/>
-							<ErrorMessage name="tel" render={(errorMsg) => (
+							<ErrorMessage name="phoneNumber" render={(errorMsg) => (
 								<div className={style.error}>{errorMsg}</div>
 							)} />
 						</div>
@@ -188,10 +187,8 @@ function CartFormPage () {
 								<div className={style.error}>{errorMsg}</div>
 						)} />
 					</div>
-					<div className={style.buttons}>
-						<Link to='/cart' style={{textDecoration: 'none'}}><Button appearance='filled' style={{marginRight: '30px'}} onClick={previousStep}>Back to cart</Button></Link>
+						{/* <Link to='/cart' style={{textDecoration: 'none'}}><Button appearance='filled' style={{marginRight: '30px'}} onClick={previousStep}>Back to cart</Button></Link> */}
 						<Button type='submit' appearance='filled'>Confirm order</Button>
-					</div>
 				</Form>
 			</Formik>
 

@@ -1,18 +1,24 @@
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import Header from "../Header/Header";
-import StepContext from '../StepsProvider/StepsProvider';
-import { useContext, useEffect } from 'react';
-import { useDispatch } from 'react-redux';
-import { removeAllItemsFromCart } from '../../store/actions/actions';
+import { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { removeAllItems } from '../../store/actions/actions';
+import CartItem from '../CartItems/CartItems';
 
 function ConfirmationPage() {
-	const { resetStep } = useContext(StepContext);
-	const dispatcher = useDispatch();
+	const [order, setOrder] = useState([]);
+	const cart = useSelector(state => state.cart.results);
+	const cartDispatch = useDispatch();
 
 	useEffect(() => {
-		resetStep();
-		dispatcher(removeAllItemsFromCart);
-	}, [])
+		setOrder(cart);
+		cartDispatch(removeAllItems({ storageKey: 'cart'}));
+	}, []);
+
+	useEffect(() => {
+		console.log(order);
+	}, [order])
+
 	return (
 		<>
 			<Header/>
@@ -21,7 +27,10 @@ function ConfirmationPage() {
 			</div>
 			<div style={{color: '#74e8ae', fontSize: '40px', textAlign: 'center'}}>Thank you for your order!</div>
 			<div>
-
+				{order.map((orderItem) => (
+					<CartItem cartItem={orderItem} />
+				))
+				}
 			</div>
 		</>
 	)

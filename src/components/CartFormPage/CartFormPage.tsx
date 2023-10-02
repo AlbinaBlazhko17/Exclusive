@@ -4,11 +4,13 @@ import { ErrorMessage, Field, Form, Formik } from 'formik';
 
 import style from './styles.module.css';
 import { getLocalStorage, setLocalStorage } from '../../utils/localStorage';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useContext } from 'react';
 import { IFormDataDelivery } from '../../interfaces/formDataDelivery.interface';
 import CustomInput from '../FormToSign/CustomInput';
 import CustomInputNumber from '../FormToSign/CustomInputNumber';
 import Button from '../Button/Button';
+import StepContext from '../StepsProvider/StepsProvider';
+import { Link } from 'react-router-dom';
 
 function CartFormPage () {
 	const [formDataDelivery, setFormDataDelivery] = useState<IFormDataDelivery>({
@@ -22,6 +24,8 @@ function CartFormPage () {
 		additionalInfo: '',
 	});
 
+	const { previosStep, nextStep } = useContext(StepContext);
+
 	useEffect(() => {
 		const dataFromLocalstorage = getLocalStorage('delivery');
 		if (dataFromLocalstorage.length) setFormDataDelivery(dataFromLocalstorage);
@@ -29,7 +33,7 @@ function CartFormPage () {
 
 	useEffect(() => {
 		setLocalStorage('delivery', formDataDelivery);
-	}, [formDataDelivery])
+	}, [formDataDelivery]);
 
 	const validationSchema = Yup.object().shape({
 		firstName: Yup.string()
@@ -68,6 +72,7 @@ function CartFormPage () {
 				validationSchema={validationSchema}
 				onSubmit={(values, {setSubmitting}) => {
 					console.log(values);
+					nextStep();
 					setSubmitting(false);
 				}}>
 				<Form className={style.formWrapper}>
@@ -170,9 +175,24 @@ function CartFormPage () {
 								<div className={style.error}>{errorMsg}</div>
 						)} />
 					</div>
+					<label className={style.formLabel}>Additional info</label>
+					<div className={style.field}>
+						<Field
+							type="text"
+							name="additionalInfo"
+							as="textarea"
+							value={formDataDelivery.additionalInfo}
+							component={CustomInput}
+							formData={formDataDelivery}
+							setFormData={setFormDataDelivery}
+						/>
+						<ErrorMessage name="additionalInfo" render={(errorMsg) => (
+								<div className={style.error}>{errorMsg}</div>
+						)} />
+					</div>
 					<div className={style.buttons}>
-						<Button appearance='filled' style={{marginRight: '30px'}}>Back to cart</Button>
-						<Button type='submit' appearance='filled'>Confirm order</Button>
+						<Link to='/cart'><Button appearance='filled' style={{marginRight: '30px'}} onClick={previosStep}>Back to cart</Button></Link>
+						<Link to='/cart/confirm'><Button type='submit' appearance='filled'>Confirm order</Button></Link>
 					</div>
 				</Form>
 			</Formik>

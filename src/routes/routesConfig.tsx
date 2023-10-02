@@ -36,7 +36,7 @@ const routesConfig = [
 		element: <CartFormPage/>
 	},
 	{
-		path: '/cart/form/confirmation',
+		path: '/cart/form/confirm',
 		element: <ConfirmationPage/>
 	}
 	// {

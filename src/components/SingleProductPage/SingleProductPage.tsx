@@ -44,9 +44,10 @@ function SingleProductPage () {
 	const handleAddToCart = () => {
 		const productWithCartQuantity = {
 			...singleProduct,
-			cartQuantity: 1,
+			cartQuantity,
 		};
 		dispatch(addItemToCart(productWithCartQuantity));
+		dispatch(removeItemFromWishlist(singleProduct));
 	}
 
 	useEffect(() => {
@@ -100,7 +101,7 @@ function SingleProductPage () {
 						<p className={style.description}>{singleProduct?.description}</p>
 						<hr style={{marginBottom: 120}}/>
 						<div className={style.buy}>
-							<QuantityPicker onQuantityChange={handleQuantityChange}/>
+							<QuantityPicker onQuantityChange={handleQuantityChange} quantity={cartQuantity}/>
 							<Button appearance='filled' className={style.buyButton} onClick={handleAddToCart}>Add to cart</Button>
 							<Button appearance='filled' className={style.buyButton}>Buy now</Button>
 							<div className={style.wishlist} onClick={dispatchFavouritePeople}>

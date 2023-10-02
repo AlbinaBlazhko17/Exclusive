@@ -1,4 +1,6 @@
+import CartFormPage from '../components/CartFormPage/CartFormPage';
 import CartPage from '../components/CartPage/CartPage';
+import ConfirmationPage from '../components/ConfirmationPage/ConfirmationPage';
 import Homepage from '../components/Homepage/Homepage';
 import ProductsPage from '../components/ProductsPage/ProductsPage';
 import SingleProductPage from '../components/SingleProductPage/SingleProductPage';
@@ -28,6 +30,14 @@ const routesConfig = [
 	{
 		path: '/cart',
 		element: <CartPage/>
+	},
+	{
+		path: '/cart/form',
+		element: <CartFormPage/>
+	},
+	{
+		path: '/cart/form/confirmation',
+		element: <ConfirmationPage/>
 	}
 	// {
 	// 	path: '*',

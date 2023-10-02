@@ -24,6 +24,7 @@ function Header () {
 		localStorage.setItem('formData', JSON.stringify(formData));
 		setOpen(false);
 	}
+
 	useEffect(() => {
 		const savedData = localStorage.getItem('formData');
 		if (savedData) {

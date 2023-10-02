@@ -1,6 +1,6 @@
-import {Modal, Sheet, ModalClose, Typography} from '@mui/joy';
-import Form from '../Form/Form';
-import {IFormData, setFormDataType} from '../../interfaces/formData.interface';
+import { Modal, ModalClose, Sheet, Typography } from '@mui/joy';
+import { IFormData, setFormDataType } from '../../interfaces/formData.interface';
+import FormToSign from '../FormToSign/FormToSign';
 
 function MyModal({
 	open, handleClose, formData, setFormData, type
@@ -35,7 +35,7 @@ function MyModal({
 				>
 					{type}
 				</Typography>
-				<Form type={type} formData={formData} setFormData={setFormData} handleClose={handleClose}/>
+				<FormToSign type={type} formData={formData} setFormData={setFormData} handleClose={handleClose}/>
 			</Sheet>
 		</Modal>
 	)

@@ -1,18 +1,18 @@
-import * as Yup from 'yup';
-import { Formik, Form, Field, ErrorMessage } from 'formik';
-import { ChangeEvent } from 'react';
 import Key from '@mui/icons-material/Key';
 import MailIcon from '@mui/icons-material/Mail';
+import { ErrorMessage, Field, Form, Formik } from 'formik';
+import { ChangeEvent } from 'react';
+import * as Yup from 'yup';
+import { IFormData, setFormDataType } from '../../interfaces/formData.interface';
 import Button from '../Button/Button';
-import RadioGroup from '../RadioGroup/RadioGroup';
 import CustomInput from './CustomInput';
 import CustomInputNumber from './CustomInputNumber';
-import {IFormData, setFormDataType} from '../../interfaces/formData.interface';
+import RadioGroup from './RadioGroup';
 
-import 'react-phone-input-2/lib/style.css'
+import 'react-phone-input-2/lib/style.css';
 import style from './styles.module.css';
 
-function MyForm ({type, formData, setFormData, handleClose}: { type: string, formData: IFormData,  setFormData: setFormDataType, handleClose: () => void }) {
+function FormToSign ({type, formData, setFormData, handleClose}: { type: string, formData: IFormData,  setFormData: setFormDataType, handleClose: () => void }) {
 
 	const validationSchema = Yup.object().shape({
 		email: Yup.string()
@@ -166,4 +166,4 @@ function MyForm ({type, formData, setFormData, handleClose}: { type: string, for
 	)
 }
 
-export default MyForm;
+export default FormToSign;

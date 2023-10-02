@@ -2,16 +2,17 @@ import { useMemo } from 'react';
 import PhoneInput from 'react-phone-input-2';
 import {IFormData, setFormDataType} from '../../interfaces/formData.interface';
 
-function CustomInputNumber({ field, form, formData, setFormData, startDecorator, ...rest }: { formData: IFormData; setFormData: setFormDataType, startDecorator: React.ReactElement }) {
+function CustomInputNumber({ field, form, formData, setFormData, startDecorator, width,...props }: { formData: IFormData; setFormData: setFormDataType, startDecorator: React.ReactElement, width?: string }) {
 	return useMemo(() => (
 		<PhoneInput
 			{...field}
-			{...rest}
+			{...props}
 		country={'ua'}
 		inputStyle={{
 			fontFamily: 'Poppins',
 			fontSize: 'inherit',
-			fontWeight: 'inherit'
+			fontWeight: 'inherit',
+			width
 		}}
 			onChange={(value) => {
 				setFormData({

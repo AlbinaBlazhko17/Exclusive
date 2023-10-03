@@ -13,27 +13,32 @@ import StepContext from '../StepsProvider/StepsProvider';
 import style from './styles.module.css';
 
 function CartFormPage () {
-	const [formDataDelivery, setFormDataDelivery] = useState<IFormDataDelivery>({
+
+	const initialFormDataDelivery = getLocalStorage('delivery') || {
 		firstName: '',
 		lastName: '',
 		city: '',
 		streetAddress: '',
 		apartments: '',
-		phoneNumber: '',
+		tel: '',
 		email: '',
 		additionalInfo: '',
-	});
+	}
+	const [formDataDelivery, setFormDataDelivery] = useState<IFormDataDelivery>(initialFormDataDelivery);
 
 	const { previousStep, nextStep } = useContext(StepContext);
 	const navigator = useNavigate();
 
 	useEffect(() => {
+		localStorage.setItem('isCartFormPage', 'true');
 		const data = getLocalStorage('delivery');
-		if(data) setFormDataDelivery(data);
-	}, [])
+		if (data) {
+			setFormDataDelivery(data);
+		}
+	}, []);
 
 	useEffect(() => {
-		setLocalStorage('delivery', formDataDelivery)
+		setLocalStorage('delivery', formDataDelivery);
 	}, [formDataDelivery]);
 
 	const validationSchema = Yup.object().shape({
@@ -152,14 +157,14 @@ function CartFormPage () {
 						<div className={style.field}>
 							<Field
 								type="text"
-								name="phoneNumber"
-								value={formDataDelivery.phoneNumber}
+								name="tel"
+								value={formDataDelivery.tel}
 								component={CustomInputNumber}
 								formData={formDataDelivery}
 								setFormData={setFormDataDelivery}
 								width={'400px'}
 							/>
-							<ErrorMessage name="phoneNumber" render={(errorMsg) => (
+							<ErrorMessage name="tel" render={(errorMsg) => (
 								<div className={style.error}>{errorMsg}</div>
 							)} />
 						</div>

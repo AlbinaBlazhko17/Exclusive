@@ -16,28 +16,27 @@ function CartPage () {
 	const { nextStep, currentStep } = useContext(StepContext);
 	const navigator = useNavigate();
 	let total = 0;
-	console.log(cart)
 
 	const handleRemoveFromCart = (id) => {
 		cartDispatch(removeItemFromCart({ id }));
 	}
 
-	useEffect(() => {
-		console.log(currentStep);
-	}, [currentStep])
-
 	return(
 		<>
 			<Header/>
 				<div className={style.wrapper}>
-					<Subheader/>
-					<hr style={{backgroundColor: '#DB4444', height: '2px', border: '0', marginBottom: '5%'}} />
-						<div className={style.header}>
-							<div className={style.headerItem} style={{width: '300px',display: 'flex', justifySelf: 'start'}}>Product</div>
-							<div className={style.headerItem}>Price</div>
-							<div className={style.headerItem}>Quantity</div>
-							<div className={style.headerItem}>Subtotal</div>
-						</div>
+					<Subheader type={'Cart'}/>
+					{cart.length? (
+						<>
+							<hr style={{backgroundColor: '#DB4444', height: '2px', border: '0', marginBottom: '5%'}} />
+							<div className={style.header}>
+								<div className={style.headerItem} style={{width: '300px',display: 'flex', justifySelf: 'start'}}>Product</div>
+								<div className={style.headerItem}>Price</div>
+								<div className={style.headerItem}>Quantity</div>
+								<div className={style.headerItem}>Subtotal</div>
+							</div>
+						</>
+					): undefined}
 					<div>
 					{
 						cart.length? (
@@ -52,12 +51,12 @@ function CartPage () {
 		
 						): <h2 style={{textAlign: 'center', fontSize: '40px', fontWeight: 'bolder'}}>Cart is empty</h2>
 						}
-						{cart.length && (
+						{cart.length? (
 							<div style={{display: 'flex', flexDirection: 'column', alignItems: 'end' }}>
 								<div style={{float: 'right', fontWeight: 'bold', fontSize: '20px', marginRight: '5%'}}>Total: {total} $</div>
 								<Button appearance='filled' onClick={() => {nextStep(); navigator('/cart/form')}} style={{marginTop: '20px'}}>Procees to checkout</Button>
 							</div>
-						)}
+						): undefined}
 					</div>
 				</div>
 		</>

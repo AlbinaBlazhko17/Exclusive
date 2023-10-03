@@ -19,7 +19,6 @@ function SingleProductPage () {
 	const [loading, setLoading] = useState(true);
 	const [error, setError] = useState(false);
 	const [cartQuantity, setCartQuantity] = useState(1);
-	const [cartAdd, setCartAdd] = useState(false);
 	const [wishlist, setWishlist] = useState(false);
 	const storeDataWishlist = useSelector(state => state.wishlist.results);
 	const { nextStep, currentStep } = useContext(StepContext);
@@ -29,7 +28,6 @@ function SingleProductPage () {
 
 	const dispatchFavouritePeople = () => {
 		if (wishlist) {
-			console.log(singleProduct?.id);
 			dispatch(removeItemFromWishlist( singleProduct?.id ));
 			setWishlist(false);
 		} else {
@@ -50,6 +48,7 @@ function SingleProductPage () {
 		};
 		dispatch(addItemToCart( productWithCartQuantity ));
 		dispatch(removeItemFromWishlist( singleProduct ));
+		setWishlist(false);
 	}
 
 	useEffect(() => {

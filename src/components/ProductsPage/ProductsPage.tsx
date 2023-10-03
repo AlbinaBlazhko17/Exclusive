@@ -68,7 +68,6 @@ function ProductsPage () {
 					let data;
 					if (categoryIdTo !== 0) {
 						data = await getProductsByCategoryPagination(offset, limit, categoryIdTo);
-						console.log(data);
 					} else {
 						data = await getAllProductsPagination(offset, limit);
 					}

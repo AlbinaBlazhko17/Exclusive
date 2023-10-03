@@ -19,7 +19,7 @@ function App() {
   const dynamicRoutes = routesConfig.map((route, index) => {
 
     if (route.path === '/cart/form' && currentStep !== 1 || route.path === '/cart/form/confirm' && currentStep !== 2) {
-      console.log('Current step' + currentStep)
+
       return (
         <Route
           key={index}

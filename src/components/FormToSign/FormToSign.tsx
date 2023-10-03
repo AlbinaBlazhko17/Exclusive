@@ -46,6 +46,7 @@ function FormToSign ({type, formData, setFormData, handleClose}: { type: string,
 				showFields: type === 'Sign up'
 			}}
 			onSubmit={(values, { setSubmitting }) => {
+				console.log(values);
 				setFormData({
 					email: '',
 					password: '',

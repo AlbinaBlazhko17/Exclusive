@@ -9,15 +9,17 @@ function ConfirmationPage() {
 	const [order, setOrder] = useState([]);
 	const cart = useSelector(state => state.cart.results);
 	const cartDispatch = useDispatch();
+	let total = 0;
 
 	useEffect(() => {
+		localStorage.setItem('isConfirmPage', 'true');
 		setOrder(cart);
 		cartDispatch(removeAllItemsFromCart());
 	}, []);
 
-	useEffect(() => {
-		console.log(order);
-	}, [order])
+	// useEffect(() => {
+	// 	console.log(order);
+	// }, [order])
 
 	return (
 		<>
@@ -27,10 +29,17 @@ function ConfirmationPage() {
 			</div>
 			<div style={{color: '#74e8ae', fontSize: '40px', textAlign: 'center'}}>Thank you for your order!</div>
 			<div style={{padding: '2% 10%'}}>
-				{order.map((orderItem) => (
-					<CartItem key={orderItem.id} cartItem={orderItem} />
-				))
+				{
+					order.map(orderItem => {
+						const subtotal = orderItem.price * orderItem.cartQuantity;
+
+						total += subtotal;
+						return (
+							<CartItem key={orderItem.id} cartItem={orderItem} />
+						)
+					})
 				}
+				<div style={{float: 'right', fontWeight: 'bold', fontSize: '20px'}}>Total: {total} $</div>
 			</div>
 		</>
 	)

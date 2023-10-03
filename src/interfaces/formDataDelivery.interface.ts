@@ -5,7 +5,7 @@ export interface IFormDataDelivery {
 	city: string,
 	streetAddress: string,
 	apartments: string,
-	phoneNumber: string,
+	tel: string,
 	email: string,
 	additionalInfo: string;
 }

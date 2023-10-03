@@ -1,10 +1,10 @@
 import style from './styles.module.css';
 
-function Subheader () {
+function Subheader ({type}) {
 	return (
 		<div className={style.subheader}>
 			<div className={style.redBox}></div>
-			<h3>Cart</h3>
+			<h3>{type}</h3>
 		</div>
 	)
 }

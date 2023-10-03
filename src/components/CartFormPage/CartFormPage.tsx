@@ -30,7 +30,6 @@ function CartFormPage () {
 	const navigator = useNavigate();
 
 	useEffect(() => {
-		localStorage.setItem('isCartFormPage', 'true');
 		const data = getLocalStorage('delivery');
 		if (data) {
 			setFormDataDelivery(data);
@@ -60,7 +59,7 @@ function CartFormPage () {
 			.required('Street address is required'),
 		apartments: Yup.number()
 			.max(10, 'Apartmants is too long'),
-		phoneNumber: Yup.string()
+		tel: Yup.string()
 			.min(10, 'Phone number is too short')
 			.required('Phone number is required'),
 		email: Yup.string()

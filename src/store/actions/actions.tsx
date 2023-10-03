@@ -6,3 +6,5 @@ export const loadFromLocalStorage = createAction('LOAD_FROM_LOCALSTORAGE');
 export const addItemToCart = createAction('ADD_ITEM_TO_CART');
 export const removeItemFromCart = createAction('REMOVE_ITEM_FROM_CART');
 export const removeAllItemsFromCart = createAction('REMOVE_ALL_ITEMS_FROM_CART');
+export const addItemToBuyNow = createAction('ADD_ITEM_TO_BUY_NOW');
+export const removeItemFromBuyNow = createAction('REMOVE_ITEM_FROM_BUY_NOW');

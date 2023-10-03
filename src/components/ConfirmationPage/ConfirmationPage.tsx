@@ -2,7 +2,7 @@ import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import Header from "../Header/Header";
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { removeAllItemsFromCart } from '../../store/actions/actions';
+import { removeAllItemsFromCart, removeItemFromBuyNow } from '../../store/actions/actions';
 import CartItem from '../CartItems/CartItems';
 
 function ConfirmationPage() {
@@ -12,9 +12,11 @@ function ConfirmationPage() {
 	let total = 0;
 
 	useEffect(() => {
-		localStorage.setItem('isConfirmPage', 'true');
+		
 		setOrder(cart);
-		cartDispatch(removeAllItemsFromCart());
+		localStorage.getItem('typeOfBuy') === 'addToCart'
+			? cartDispatch(removeAllItemsFromCart())
+			: cartDispatch(removeItemFromBuyNow());
 	}, []);
 
 	// useEffect(() => {

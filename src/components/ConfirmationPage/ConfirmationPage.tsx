@@ -2,7 +2,7 @@ import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import Header from "../Header/Header";
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { removeAllItems } from '../../store/actions/actions';
+import { removeAllItemsFromCart } from '../../store/actions/actions';
 import CartItem from '../CartItems/CartItems';
 
 function ConfirmationPage() {
@@ -12,7 +12,7 @@ function ConfirmationPage() {
 
 	useEffect(() => {
 		setOrder(cart);
-		cartDispatch(removeAllItems({ storageKey: 'cart'}));
+		cartDispatch(removeAllItemsFromCart());
 	}, []);
 
 	useEffect(() => {
@@ -26,9 +26,9 @@ function ConfirmationPage() {
 				<CheckCircleIcon sx={{color: '#74e8ae', width: '100px', height: '100px', margin: 'auto'}} fontSize="large" />
 			</div>
 			<div style={{color: '#74e8ae', fontSize: '40px', textAlign: 'center'}}>Thank you for your order!</div>
-			<div>
+			<div style={{padding: '2% 10%'}}>
 				{order.map((orderItem) => (
-					<CartItem cartItem={orderItem} />
+					<CartItem key={orderItem.id} cartItem={orderItem} />
 				))
 				}
 			</div>

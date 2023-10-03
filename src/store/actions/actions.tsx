@@ -1,6 +1,8 @@
-import { createAction } from '@reduxjs/toolkit';
+import { createAction } from "@reduxjs/toolkit";
 
-export const addItem = createAction('ADD_ITEM');
-export const removeItem = createAction('REMOVE_ITEM');
+export const addItemToWishlist = createAction('ADD_ITEM_TO_WISHLIST');
+export const removeItemFromWishlist = createAction('REMOVE_ITEM_FROM_WISHLIST');
 export const loadFromLocalStorage = createAction('LOAD_FROM_LOCALSTORAGE');
-export const removeAllItems = createAction('REMOVE_ALL_ITEMS');
+export const addItemToCart = createAction('ADD_ITEM_TO_CART');
+export const removeItemFromCart = createAction('REMOVE_ITEM_FROM_CART');
+export const removeAllItemsFromCart = createAction('REMOVE_ALL_ITEMS_FROM_CART');

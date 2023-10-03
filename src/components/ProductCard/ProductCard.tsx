@@ -7,7 +7,7 @@ import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import Button from '../Button/Button';
 import { useDispatch } from 'react-redux';
-import { removeItem } from '../../store/actions/actions';
+import { removeItemFromWishlist } from '../../store/actions/actions';
 
 
 function ProductCard (
@@ -18,7 +18,7 @@ function ProductCard (
 
 	function handleClick(e) {
 		e.preventDefault();
-		wishlistDispatch(removeItem({ id, storageKey: 'wishlist' }));
+		wishlistDispatch(removeItemFromWishlist({ id }));
 	}
 	return (
 		<Card sx={{ maxWidth: type === 'listOfProducts'? 400: 500, minWidth: 250, height: type === 'listOfProducts'? 300: 540, position: 'relative'}} className={style.card}>

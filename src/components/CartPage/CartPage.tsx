@@ -1,7 +1,7 @@
 import { useContext, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link, useNavigate } from 'react-router-dom';
-import { removeItem } from '../../store/actions/actions';
+import { useNavigate } from 'react-router-dom';
+import { removeItemFromCart } from '../../store/actions/actions';
 import Header from '../Header/Header';
 import StepContext from '../StepsProvider/StepsProvider';
 import Button from '../Button/Button';
@@ -16,9 +16,10 @@ function CartPage () {
 	const { nextStep, currentStep } = useContext(StepContext);
 	const navigator = useNavigate();
 	let total = 0;
+	console.log(cart)
 
 	const handleRemoveFromCart = (id) => {
-		cartDispatch(removeItem({ id, storageKey: 'cart' }));
+		cartDispatch(removeItemFromCart({ id }));
 	}
 
 	useEffect(() => {
@@ -45,7 +46,7 @@ function CartPage () {
 
 								total += subtotal;
 								return (
-									<CartItem key={cartItem.id} cartItem={cartItem} handleRemoveFromCart={handleRemoveFromCart}/>
+									<CartItem key={cartItem.id} cartItem={cartItem} handleRemoveFromCart={handleRemoveFromCart} type='cart'/>
 								)
 							})
 		

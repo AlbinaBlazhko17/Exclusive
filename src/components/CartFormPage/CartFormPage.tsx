@@ -4,7 +4,7 @@ import Header from '../Header/Header';
 import { useContext, useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { IFormDataDelivery } from '../../interfaces/formDataDelivery.interface';
-import { setLocalStorage } from '../../utils/localStorage';
+import { setLocalStorage, getLocalStorage } from '../../utils/localStorage';
 import Button from '../Button/Button';
 import CustomInput from '../FormToSign/CustomInput';
 import CustomInputNumber from '../FormToSign/CustomInputNumber';
@@ -28,7 +28,12 @@ function CartFormPage () {
 	const navigator = useNavigate();
 
 	useEffect(() => {
-		setLocalStorage('delivery', formDataDelivery);
+		const data = getLocalStorage('delivery');
+		if(data) setFormDataDelivery(data);
+	}, [])
+
+	useEffect(() => {
+		setLocalStorage('delivery', formDataDelivery)
 	}, [formDataDelivery]);
 
 	const validationSchema = Yup.object().shape({

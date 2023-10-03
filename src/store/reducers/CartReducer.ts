@@ -45,7 +45,7 @@ const cart = createReducer(initialState, (builder) => {
 		.addCase(removeAllItemsFromCart, (state, action) => {
 			localStorage.removeItem('cart');
 			return {
-				...initialState,
+				results: []
 			};
 		})
 		.addDefaultCase(state => state)

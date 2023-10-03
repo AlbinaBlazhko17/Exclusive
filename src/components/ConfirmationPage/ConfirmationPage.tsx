@@ -4,24 +4,28 @@ import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { removeAllItemsFromCart, removeItemFromBuyNow } from '../../store/actions/actions';
 import CartItem from '../CartItems/CartItems';
+import updateOrdersAndSales from '../../utils/Orders';
+import store from '../../store/store';
 
 function ConfirmationPage() {
 	const [order, setOrder] = useState([]);
-	const cart = useSelector(state => state.cart.results);
+	const cart = localStorage.getItem('typeOfBuy') === 'addToCart'? store.getState().cart.results: store.getState().buyNow;
 	const cartDispatch = useDispatch();
 	let total = 0;
 
+	const handleRemoveItems = () => {
+		if (localStorage.getItem('typeOfBuy') === 'addToCart') {
+			cartDispatch(removeAllItemsFromCart());
+		} else {
+			cartDispatch(removeItemFromBuyNow());
+		}
+	};
+	
 	useEffect(() => {
-		
-		setOrder(cart);
-		localStorage.getItem('typeOfBuy') === 'addToCart'
-			? cartDispatch(removeAllItemsFromCart())
-			: cartDispatch(removeItemFromBuyNow());
+		if(localStorage.getItem('typeOfBuy') !== 'addToCart') setOrder([cart])
+		else setOrder(cart);
+		handleRemoveItems();
 	}, []);
-
-	// useEffect(() => {
-	// 	console.log(order);
-	// }, [order])
 
 	return (
 		<>

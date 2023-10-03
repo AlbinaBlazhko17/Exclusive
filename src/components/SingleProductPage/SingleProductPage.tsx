@@ -43,10 +43,14 @@ function SingleProductPage () {
 	};
 
 	const handleBuyNow = () => {
+		const productWithCartQuantity = {
+			...singleProduct,
+			cartQuantity,
+		};
 		nextStep();
 		navigator('/cart/form');
 		localStorage.setItem('typeOfBuy', 'buyNow');
-		dispatch(addItemToBuyNow( singleProduct));
+		dispatch(addItemToBuyNow( productWithCartQuantity ));
 		dispatch(removeItemFromWishlist( singleProduct ));
 		setWishlist(false);
 	}

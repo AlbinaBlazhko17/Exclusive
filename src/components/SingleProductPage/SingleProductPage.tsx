@@ -11,7 +11,6 @@ import { addItemToCart, addItemToWishlist, removeItemFromWishlist, addItemToBuyN
 import StepContext from '../StepsProvider/StepsProvider';
 
 import style from './styles.module.css';
-import { setLocalStorage } from '../../utils/localStorage';
 
 
 function SingleProductPage () {

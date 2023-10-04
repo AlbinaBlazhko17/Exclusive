@@ -2,13 +2,13 @@ import { useContext } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { removeItemFromCart } from '../../store/actions/actions';
+import Button from '../Button/Button';
 import Header from '../Header/Header';
 import StepContext from '../StepsProvider/StepsProvider';
-import Button from '../Button/Button';
 import Subheader from '../Subheader/Subheader';
+import CartItem from '../CartItems/CartItems';
 
 import style from './styles.module.css';
-import CartItem from '../CartItems/CartItems';
 
 function CartPage () {
 	const cart = useSelector(state => state.cart.results);
@@ -21,10 +21,15 @@ function CartPage () {
 		cartDispatch(removeItemFromCart({ id }));
 	}
 
+	const goBack = () => {
+		navigator(-1);
+	};
+
 	return(
 		<>
 			<Header/>
 				<div className={style.wrapper}>
+					<Button appearance='filled' style={{marginRight: '30px'}} onClick={goBack}>Go Back</Button>
 					<Subheader type={'Cart'}/>
 					{cart.length? (
 						<>

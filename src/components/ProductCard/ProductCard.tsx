@@ -7,7 +7,7 @@ import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import Button from '../Button/Button';
 import { useDispatch } from 'react-redux';
-import { removeItemFromWishlist } from '../../store/actions/actions';
+import { addItemToCart, removeItemFromWishlist } from '../../store/actions/actions';
 
 
 function ProductCard (
@@ -15,13 +15,19 @@ function ProductCard (
 	) {
 	const { id, images, title, price, description} = product;
 	const wishlistDispatch = useDispatch();
+	const cartQuantity = 1;
 
 	function handleClick(e) {
 		e.preventDefault();
 		wishlistDispatch(removeItemFromWishlist({ id }));
 	}
+
+	function handleAddToCart(e) {
+		e.preventDefault();
+		wishlistDispatch(addItemToCart({...product, cartQuantity }));
+	}
 	return (
-		<Card sx={{ maxWidth: type === 'listOfProducts'? 400: 500, minWidth: 250, height: type === 'listOfProducts'? 300: 540, position: 'relative'}} className={style.card}>
+		<Card sx={{ maxWidth: type === 'listOfProducts'? 400: 500, minWidth: 250, height: type === 'listOfProducts'? 400: 540, position: 'relative'}} className={style.card}>
 			{
 				type === 'listOfWishlist' && (
 					<div onClick={(e) => handleClick(e)}>
@@ -33,7 +39,7 @@ function ProductCard (
 			}
 			<CardMedia
 				component="img"
-				height={type === 'listOfProducts'? '140px': '350px' }
+				height={type === 'listOfProducts'? '200px': '350px' }
 				image={images[0]}
 				sx={{borderRadius: '5%'}}
 				alt={style.title}
@@ -52,11 +58,7 @@ function ProductCard (
 				<Typography variant="body2" color="text.secondary">
 					{description.slice(0,50)}
 				</Typography>
-				{
-					type === 'listOfWishlist' && (
-						<Button appearance='filled' style={{width: '100%', marginTop: '20px'}}>Add to card</Button>
-					)
-				}
+					<Button appearance='filled' style={{width: '100%', marginTop: '20px'}} onClick={handleAddToCart}>Add to card</Button>
 			</CardContent>
 		</Card>
 	)

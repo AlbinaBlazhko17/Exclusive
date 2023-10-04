@@ -1,18 +1,25 @@
+import { useSelector } from 'react-redux';
+import { Link, useNavigate } from 'react-router-dom';
+import IProduct from '../../interfaces/product.interface';
+import Button from '../Button/Button';
 import Header from '../Header/Header';
 import ProductCard from '../ProductCard/ProductCard';
-import { Link } from 'react-router-dom';
-import { useSelector } from 'react-redux';
-import IProduct from '../../interfaces/product.interface';
 import Subheader from '../Subheader/Subheader';
 
 import style from './styles.module.css';
 
 function WishlistPage () {
 	const wishlist = useSelector(state => state.wishlist.results);
+	const navigator = useNavigate();
+
+	const goBack = () => {
+		navigator(-1);
+	};
 
 	return (
 		<>
 			<Header/>
+			<Button appearance='filled' style={{marginRight: '30px'}} onClick={goBack}>Go Back</Button>
 			<div className={style.wishlist}>
 				<Subheader type={'Wishlist'}/>
 				<div className={style.products}>

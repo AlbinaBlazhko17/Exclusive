@@ -2,7 +2,7 @@ import { ErrorMessage, Field, Form, Formik } from 'formik';
 import * as Yup from 'yup';
 import Header from '../Header/Header';
 import { useContext, useEffect, useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { IFormDataDelivery } from '../../interfaces/formDataDelivery.interface';
 import { setLocalStorage, getLocalStorage } from '../../utils/localStorage';
 import Button from '../Button/Button';
@@ -202,7 +202,7 @@ function CartFormPage () {
 						)} />
 					</div>
 					<div style={{display: 'flex', justifyContent: 'space-between'}}>
-						<Link to='/cart' style={{textDecoration: 'none'}}><Button appearance='filled' style={{marginRight: '30px'}} onClick={goBack}>Back</Button></Link>
+						<Button appearance='filled' style={{marginRight: '30px'}} onClick={goBack}>Go Back</Button>
 						<Button type='submit' appearance='filled'>Confirm order</Button>
 					</div>
 				</Form>

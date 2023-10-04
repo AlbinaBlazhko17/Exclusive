@@ -6,7 +6,7 @@ import Button from '../Button/Button';
 import Header from '../Header/Header';
 import StepContext from '../StepsProvider/StepsProvider';
 import Subheader from '../Subheader/Subheader';
-import CartItem from '../CartItems/CartItems';
+import CartItem from '../CartItem/CartItem';
 
 import style from './styles.module.css';
 

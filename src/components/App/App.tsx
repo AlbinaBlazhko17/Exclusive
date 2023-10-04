@@ -7,7 +7,16 @@ import 'swiper/css';
 import './App.css'
 
 function App() {
-  const { currentStep, resetStep } = useContext(StepContext);
+  const stepContext = useContext(StepContext);
+
+  if (!stepContext) {
+    throw new Error(
+      "stepContext has to be used within <Provider>"
+    );
+  }
+
+  const { currentStep, resetStep } = stepContext;
+
   const location = useLocation();
 
   useEffect(() => {

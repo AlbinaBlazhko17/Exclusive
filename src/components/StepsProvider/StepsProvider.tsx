@@ -1,8 +1,9 @@
-import { createContext, useState, useEffect } from 'react';
+import { createContext, useState, useEffect, ReactNode } from 'react';
+import IStepContextType from '../../interfaces/stepContext.interface';
 
-const StepContext = createContext({});
+const StepContext = createContext<IStepContextType | null>(null);
 
-export function StepsProvider({ children }) {
+export function StepsProvider({ children }: {children: ReactNode}) {
 
   const [currentStep, setCurrentStep] = useState(() => {
     const storedStep = localStorage.getItem('currentStep');
@@ -21,7 +22,6 @@ export function StepsProvider({ children }) {
     setCurrentStep(0);
   };
 
-  // Store currentStep in local storage whenever it changes
   useEffect(() => {
     localStorage.setItem('currentStep', currentStep.toString());
   }, [currentStep]);

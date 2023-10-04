@@ -2,8 +2,9 @@ import { Link } from 'react-router-dom';
 import NotFound from '../../assets/product_not.png';
 
 import style from './styles.module.css';
+import ICartItem from './CartItem.props';
 
-function CartItem ({cartItem, handleRemoveFromCart, type = 'confirm'}) {
+function CartItem ({cartItem, handleRemoveFromCart, type = 'confirm'}: ICartItem) {
 	return (
 		<>
 			<div key={cartItem.id} className={style.products}>

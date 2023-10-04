@@ -26,8 +26,16 @@ function CartFormPage () {
 		additionalInfo: '',
 	}
 	const [formDataDelivery, setFormDataDelivery] = useState<IFormDataDelivery>(initialFormDataDelivery);
+	const stepContext = useContext(StepContext);
 
-	const { nextStep } = useContext(StepContext);
+	if (!stepContext) {
+		throw new Error(
+			"stepContext has to be used within <Provider>"
+		);
+	}
+
+	const { nextStep } = stepContext;
+
 	const navigator = useNavigate();
 
 	const goBack = () => {

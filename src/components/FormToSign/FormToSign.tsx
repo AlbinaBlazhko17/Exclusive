@@ -15,7 +15,7 @@ import style from './styles.module.css';
 function FormToSign ({type, formData, setFormData, handleClose}: { type: string, formData: IFormData,  setFormData: setFormDataType, handleClose: () => void }) {
 	const [showForgotPassword, setShowForgotPassword] = useState(false);
 
-	function handleForgotPassword (e) {
+	function handleForgotPassword (e: React.MouseEvent<HTMLAnchorElement>) {
 		e.preventDefault();
 		setShowForgotPassword(true);
 	}

@@ -3,7 +3,7 @@ import Header from "../Header/Header";
 import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { removeAllItemsFromCart, removeItemFromBuyNow } from '../../store/actions/actions';
-import CartItem from '../CartItems/CartItems';
+import CartItem from '../CartItem/CartItem';
 import store from '../../store/store';
 
 function ConfirmationPage() {

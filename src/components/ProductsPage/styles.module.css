@@ -74,3 +74,26 @@
 .selectedCategory .arrowIcon {
 	display: inline-block;
 }
+
+@media screen and (max-width: 685px) {
+	.wrapper {
+		padding: 0 7%;
+	}
+}
+
+@media screen and (max-width: 425px) {
+	.wrapper {
+		flex-direction: column;
+	}
+
+	.list {
+		display: flex;
+		justify-content: space-between;
+		flex-wrap: wrap;
+		width: 100%;
+		text-align: center;
+	}
+	.list a {
+		width: 100%;
+	}
+}

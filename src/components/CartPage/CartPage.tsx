@@ -45,7 +45,6 @@ function CartPage () {
 					<Subheader type={'Cart'}/>
 					{cart.length? (
 						<>
-							<hr style={{backgroundColor: '#DB4444', height: '2px', border: '0', marginBottom: '5%'}} />
 							<div className={style.header}>
 								<div className={style.headerItem} style={{width: '300px',display: 'flex', justifySelf: 'start'}}>Product</div>
 								<div className={style.headerItem}>Price</div>

@@ -1,15 +1,15 @@
 import { Link } from 'react-router-dom';
 import NotFound from '../../assets/product_not.png';
+import ICartItem from './CartItem.props';
 
 import style from './styles.module.css';
-import ICartItem from './CartItem.props';
 
 function CartItem ({cartItem, handleRemoveFromCart, type = 'confirm'}: ICartItem) {
 	return (
 		<>
 			<div key={cartItem.id} className={style.products}>
 				<div className={style.productImage} style={{width: '300px'}}>
-					<img src={cartItem.images[0]} alt={cartItem.title} style={{ width: '100px', height: '100px', borderRadius: '4px', marginRight: '20px'}}
+					<img src={cartItem.images[0]} alt={cartItem.title}
 						onError={(e) => {
 						const imgElement = e.target as HTMLImageElement;
 						imgElement.src = NotFound;

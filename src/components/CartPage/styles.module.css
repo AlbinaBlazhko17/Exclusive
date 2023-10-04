@@ -4,7 +4,6 @@
 }
 
 .header {
-	display: grid;
 	display: flex;
 	justify-content: space-between;
 	margin-bottom: 5%;
@@ -14,5 +13,11 @@
 .headerItem {
 	width: 250px;
 	text-align: center;
+}
+
+@media screen and (max-width: 685px) {
+	.wrapper {
+		padding: 0 5%;
+	}
 }
 

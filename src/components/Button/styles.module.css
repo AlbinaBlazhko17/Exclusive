@@ -17,3 +17,11 @@
 	color: aliceblue;
 	background: #DB4444;
 }
+
+
+@media screen and (max-width: 1025px) {
+	.button {
+		padding: 10px 30px;
+		font-weight: 400;
+	}
+}

@@ -50,7 +50,7 @@ function ProductCard (
 			/>
 			<CardContent className={style.descr}>
 				<Typography gutterBottom variant="h5" component="div">
-					{title}
+					{title.slice(0, 15)}
 				</Typography>
 				<Typography gutterBottom variant="h6" component="div">
 					$ {price}

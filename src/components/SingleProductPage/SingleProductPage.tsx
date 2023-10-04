@@ -28,7 +28,7 @@ function SingleProductPage () {
 
 	const dispatchFavouritePeople = () => {
 		if (wishlist) {
-			dispatch(removeItemFromWishlist( singleProduct?.id ));
+			dispatch(removeItemFromWishlist( singleProduct.id ));
 			setWishlist(false);
 		} else {
 			dispatch(addItemToWishlist( singleProduct ));

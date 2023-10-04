@@ -1,7 +1,7 @@
-import IProduct from "../../interfaces/product.interface";
+import { IProductWithQuantity } from "../../interfaces/product.interface";
 
 export default interface ICartItem {
-	cartItem: IProduct & {cartQuantity: number};
+	cartItem: IProductWithQuantity;
 	handleRemoveFromCart: (id: number) => void;
 	type: string;
 }

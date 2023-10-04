@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { getAllCategories, getAllProducts, getProductsByCategory, getAllProductsPagination, getProductsByCategoryPagination } from "../../services/Api";
+import { getAllCategories, getAllProducts, getAllProductsPagination, getProductsByCategoryPagination } from "../../services/Api";
 import ICategory from "../../interfaces/category.interface";
 import Header from "../Header/Header";
 import IProduct from "../../interfaces/product.interface";
@@ -19,7 +19,7 @@ function ProductsPage () {
 		const [offset, setOffset] = useState(0);
 		const [limit, setLimit] = useState(16);
 		const [maxOffset, setMaxOffset] = useState(0);
-		const [categoryIdTo, setCategorId] = useState<number>(+categoryId || 0);
+		const [categoryIdTo, setCategorId] = useState<number>(categoryId && +categoryId || 0);
 
 		const nextPage = () => {
 			if (offset < maxOffset) {

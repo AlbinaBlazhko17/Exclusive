@@ -1,6 +1,6 @@
 import style from './styles.module.css';
 
-function Subheader ({type}) {
+function Subheader ({type}: {type: string}) {
 	return (
 		<div className={style.subheader}>
 			<div className={style.redBox}></div>

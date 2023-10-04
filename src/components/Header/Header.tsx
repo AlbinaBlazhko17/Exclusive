@@ -8,9 +8,9 @@ import WishlistCartCounter from "../WishlistCartCounter/WishListCartCounter";
 import style from './styles.module.css';
 
 function Header () {
-	const [searchTerm, setSearchTerm] = useState('');
-	const [open, setOpen] = useState(false);
-	const [type, setType] = useState('');
+	const [searchTerm, setSearchTerm] = useState<string>('');
+	const [open, setOpen] = useState<boolean>(false);
+	const [type, setType] = useState<string>('');
 	const [formData, setFormData] = useState<IFormData>({
 		email: '',
 		password: '',

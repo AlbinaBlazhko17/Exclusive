@@ -1,5 +1,4 @@
 import IProduct from '../../interfaces/product.interface';
-import style from './styles.module.css';
 import notFound from '../../assets/product_not.png';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
@@ -9,20 +8,21 @@ import Button from '../Button/Button';
 import { useDispatch } from 'react-redux';
 import { addItemToCart, removeItemFromWishlist } from '../../store/actions/actions';
 
+import style from './styles.module.css';
 
 function ProductCard (
-	{product, type = 'listOfProducts'}: {product: IProduct, type: string},
+	{product, type = 'listOfProducts'}: {product: IProduct, type?: string},
 	) {
 	const { id, images, title, price, description} = product;
 	const wishlistDispatch = useDispatch();
 	const cartQuantity = 1;
 
-	function handleClick(e) {
+	function handleClick(e: React.MouseEvent<HTMLElement>) {
 		e.preventDefault();
-		wishlistDispatch(removeItemFromWishlist({ id }));
+		wishlistDispatch(removeItemFromWishlist( id ));
 	}
 
-	function handleAddToCart(e) {
+	function handleAddToCart(e: React.MouseEvent<HTMLButtonElement>) {
 		e.preventDefault();
 		wishlistDispatch(addItemToCart({...product, cartQuantity }));
 	}
@@ -30,7 +30,7 @@ function ProductCard (
 		<Card sx={{ maxWidth: type === 'listOfProducts'? 400: 500, minWidth: 250, height: type === 'listOfProducts'? 400: 540, position: 'relative'}} className={style.card}>
 			{
 				type === 'listOfWishlist' && (
-					<div onClick={(e) => handleClick(e)}>
+					<div onClick={handleClick}>
 						<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" style={{position: 'absolute', width: '40px', height: '40px', right: '10%', top: '10%'}}>
 							<path d="M20 5.57143H5.33333L6.66667 21H17.3333L18.6667 5.57143H4M12 9.42857V17.1429M15.3333 9.42857L14.6667 17.1429M8.66667 9.42857L9.33333 17.1429M9.33333 5.57143L10 3H14L14.6667 5.57143" stroke="black" stroke-width="1.56" stroke-linecap="round" stroke-linejoin="round"/>
 						</svg>

@@ -7,4 +7,8 @@ export default interface IProduct {
 	description: string
 	category: ICategory
 	images: string[]
-  }
+}
+
+export interface IProductWithQuantity extends IProduct{
+	cartQuantity: number;
+}

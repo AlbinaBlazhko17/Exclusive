@@ -5,11 +5,12 @@ import Button from '../Button/Button';
 import Header from '../Header/Header';
 import ProductCard from '../ProductCard/ProductCard';
 import Subheader from '../Subheader/Subheader';
+import IState from '../../interfaces/state.interface';
 
 import style from './styles.module.css';
 
 function WishlistPage () {
-	const wishlist = useSelector(state => state.wishlist.results);
+	const wishlist = useSelector((state: IState) => state.wishlist.results);
 	const navigator = useNavigate();
 
 	const goBack = () => {

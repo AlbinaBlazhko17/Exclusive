@@ -7,18 +7,30 @@ import Header from '../Header/Header';
 import StepContext from '../StepsProvider/StepsProvider';
 import Subheader from '../Subheader/Subheader';
 import CartItem from '../CartItem/CartItem';
+import IState from '../../interfaces/state.interface';
+import store from '../../store/store';
 
 import style from './styles.module.css';
+import { IProductWithQuantity } from '../../interfaces/product.interface';
+type AppDispatch = typeof store.dispatch
 
 function CartPage () {
-	const cart = useSelector(state => state.cart.results);
-	const cartDispatch = useDispatch();
-	const { nextStep, currentStep } = useContext(StepContext);
+	const cart: IProductWithQuantity[] = useSelector((state: IState) => state.cart.results);
+	const cartDispatch: AppDispatch = useDispatch();
+	const stepContext = useContext(StepContext);
+
+	if (!stepContext) {
+		throw new Error(
+			"stepContext has to be used within <Provider>"
+		);
+	}
+	const { nextStep } = stepContext;
+
 	const navigator = useNavigate();
 	let total = 0;
 
-	const handleRemoveFromCart = (id) => {
-		cartDispatch(removeItemFromCart({ id }));
+	const handleRemoveFromCart = (id: number): void => {
+		cartDispatch(removeItemFromCart( id ));
 	}
 
 	const goBack = () => {
@@ -45,8 +57,8 @@ function CartPage () {
 					<div>
 					{
 						cart.length? (
-							cart.map(cartItem => {
-								const subtotal = cartItem.price * cartItem.cartQuantity;
+							cart.map((cartItem) => {
+								const subtotal = cartItem.price * cartItem?.cartQuantity;
 
 								total += subtotal;
 								return (

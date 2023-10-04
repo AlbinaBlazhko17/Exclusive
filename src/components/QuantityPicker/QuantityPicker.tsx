@@ -3,7 +3,7 @@ import TextField from '@mui/material/TextField';
 
 import style from './styles.module.css';
 
-function QuantityPicker({ quantity, onQuantityChange, ...props }) {
+function QuantityPicker({ quantity, onQuantityChange, ...props }: {quantity: number, onQuantityChange: (newQuantity: number) => void}) {
 
 	const handleDecrement = () => {
 		if (quantity > 1) {
@@ -15,8 +15,8 @@ function QuantityPicker({ quantity, onQuantityChange, ...props }) {
 		onQuantityChange(quantity + 1);
 	};
 
-	const handleQuantityChange = (event) => {
-		const newQuantity = parseInt(event.target.value, 10);
+	const handleQuantityChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+		const newQuantity = parseInt(e.target.value, 10);
 		if (!isNaN(newQuantity) && newQuantity >= 1) {
 			onQuantityChange(newQuantity);
 		}

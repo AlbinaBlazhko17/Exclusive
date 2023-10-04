@@ -5,10 +5,13 @@ import { useDispatch } from 'react-redux';
 import { removeAllItemsFromCart, removeItemFromBuyNow } from '../../store/actions/actions';
 import CartItem from '../CartItem/CartItem';
 import store from '../../store/store';
+import { IProductWithQuantity } from '../../interfaces/product.interface';
+type RootState = ReturnType<typeof store.getState>
+
 
 function ConfirmationPage() {
-	const [order, setOrder] = useState([]);
-	const cart = localStorage.getItem('typeOfBuy') === 'addToCart'? store.getState().cart.results: store.getState().buyNow;
+	const [order, setOrder] = useState<IProductWithQuantity[]>([]);
+	const cart = localStorage.getItem('typeOfBuy') === 'addToCart'? (store.getState() as RootState).cart.results as IProductWithQuantity[]: (store.getState() as RootState).buyNow as IProductWithQuantity | null;
 	const cartDispatch = useDispatch();
 	let total = 0;
 
@@ -21,8 +24,21 @@ function ConfirmationPage() {
 	};
 	
 	useEffect(() => {
-		if(localStorage.getItem('typeOfBuy') !== 'addToCart') setOrder([cart])
-		else setOrder(cart);
+		const typeOfBuy = localStorage.getItem('typeOfBuy');
+
+		if (typeOfBuy !== 'addToCart') {
+			if (cart !== null) {
+				setOrder([cart as IProductWithQuantity]);
+			} else {
+				setOrder([]);
+			}
+		} else {
+			if (Array.isArray(cart)) {
+				setOrder(cart);
+			} else {
+				setOrder([]);
+			}
+		}
 		handleRemoveItems();
 	}, []);
 

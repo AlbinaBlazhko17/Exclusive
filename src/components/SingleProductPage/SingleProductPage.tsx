@@ -11,6 +11,7 @@ import { addItemToCart, addItemToWishlist, removeItemFromWishlist, addItemToBuyN
 import StepContext from '../StepsProvider/StepsProvider';
 
 import style from './styles.module.css';
+import IState from '../../interfaces/state.interface';
 
 
 function SingleProductPage () {
@@ -20,7 +21,7 @@ function SingleProductPage () {
 	const [error, setError] = useState(false);
 	const [cartQuantity, setCartQuantity] = useState(1);
 	const [wishlist, setWishlist] = useState(false);
-	const storeDataWishlist = useSelector(state => state.wishlist.results);
+	const storeDataWishlist = useSelector((state: IState) => state.wishlist.results);
 	const { nextStep } = useContext(StepContext);
 	const navigator = useNavigate();
 

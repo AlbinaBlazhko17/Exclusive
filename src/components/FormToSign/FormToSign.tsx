@@ -1,7 +1,7 @@
 import Key from '@mui/icons-material/Key';
 import MailIcon from '@mui/icons-material/Mail';
 import { ErrorMessage, Field, Form, Formik } from 'formik';
-import { ChangeEvent } from 'react';
+import { ChangeEvent, useState } from 'react';
 import * as Yup from 'yup';
 import { IFormData, setFormDataType } from '../../interfaces/formData.interface';
 import Button from '../Button/Button';
@@ -13,14 +13,21 @@ import 'react-phone-input-2/lib/style.css';
 import style from './styles.module.css';
 
 function FormToSign ({type, formData, setFormData, handleClose}: { type: string, formData: IFormData,  setFormData: setFormDataType, handleClose: () => void }) {
+	const [showForgotPassword, setShowForgotPassword] = useState(false);
+
+	function handleForgotPassword (e) {
+		e.preventDefault();
+		setShowForgotPassword(true);
+	}
 
 	const validationSchema = Yup.object().shape({
 		email: Yup.string()
 			.email('Invalid email address')
 			.required('Email is required'),
 		password: Yup.string()
-			.min(6, 'Password must be at least 6 characters')
-			.required('Password is required'),
+			.when('showForgotPassword', ([showForgotPassword]) => {
+				return showForgotPassword ? Yup.string().min(6, 'Password must be at least 6 characters').required('Password is required') : Yup.string().notRequired();
+			}),
 		showFields: Yup.bool(),
 		confirmPassword: Yup.string()
 				.when('showFields', ([showFields]) => {
@@ -62,36 +69,41 @@ function FormToSign ({type, formData, setFormData, handleClose}: { type: string,
 			validationSchema={validationSchema}>
 			{({ setFieldValue }) => (
 				<Form>
-					<label className={style.formLabel}>Login</label>
-					<div className={style.field}>
-						<Field
-							type="email"
-							name="email"
-							value={formData.email}
-							component={CustomInput}
-							formData={formData}
-							setFormData={setFormData}
-							startDecorator={<MailIcon />}
-						/>
-						<ErrorMessage name="email" render={(errorMsg) => (
-								<div className={style.error}>{errorMsg}</div>
-						)} />
-					</div>
-				<label className={style.formLabel}>Password</label>
-				<div className={style.field}>
-					<Field
-						type="password"
-						name="password"
-						value={formData.password}
-						component={CustomInput}
-						formData={formData}
-						setFormData={setFormData}
-						startDecorator={<Key />}
-					/>
-					<ErrorMessage name="password" render={(errorMsg) => (
-								<div className={style.error}>{errorMsg}</div>
-					)} />
-				</div>
+					{!showForgotPassword && (
+						<>
+							<label className={style.formLabel}>Login</label>
+							<div className={style.field}>
+								<Field
+									type="email"
+									name="email"
+									value={formData.email}
+									component={CustomInput}
+									formData={formData}
+									setFormData={setFormData}
+									startDecorator={<MailIcon />}
+								/>
+								<ErrorMessage name="email" render={(errorMsg) => (
+										<div className={style.error}>{errorMsg}</div>
+								)} />
+							</div>
+						<label className={style.formLabel}>Password</label>
+						<div className={style.field}>
+							<Field
+								type="password"
+								name="password"
+								value={formData.password}
+								component={CustomInput}
+								formData={formData}
+								setFormData={setFormData}
+								startDecorator={<Key />}
+							/>
+							<ErrorMessage name="password" render={(errorMsg) => (
+										<div className={style.error}>{errorMsg}</div>
+							)} />
+						</div>
+						</>
+					)}
+
 				{type === 'Sign up'? (
 					<>
 						<label className={style.formLabel}>Password confirmation</label>
@@ -159,7 +171,26 @@ function FormToSign ({type, formData, setFormData, handleClose}: { type: string,
 						</div>
 					</>
 				): undefined}
-				{type === 'Sign in'? <a href="#" className={style.forgot}>Forgot password?</a>: undefined}
+				{showForgotPassword && type === 'Sign in'? (
+						<>
+							<label className={style.formLabel}>Email</label>
+							<div className={style.field}>
+								<Field
+									type="email"
+									name="email"
+									value={formData.email}
+									component={CustomInput}
+									formData={formData}
+									setFormData={setFormData}
+									startDecorator={<MailIcon />}
+								/>
+								<ErrorMessage name="email" render={(errorMsg) => (
+										<div className={style.error}>{errorMsg}</div>
+								)} />
+							</div>
+						</>
+				): undefined}
+				{type === 'Sign in' && !showForgotPassword? <a href="#" className={style.forgot} onClick={handleForgotPassword}>Forgot password?</a>: undefined}
 				<Button appearance='filled' type='submit' className={style.buttonSubmit}>Submit</Button>
 				</Form>
 			)}

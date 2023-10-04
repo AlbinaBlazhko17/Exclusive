@@ -35,7 +35,7 @@ const cart = createReducer(initialState, (builder) => {
 				};
 			})
 			.addCase(removeItemFromCart, (state, action) => { 
-				const idToRemove = action.payload.id;
+				const idToRemove = action.payload;
 
 				const updatedResults = state.results.filter((item) => item.id !== idToRemove);
 

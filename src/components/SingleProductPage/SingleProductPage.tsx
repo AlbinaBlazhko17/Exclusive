@@ -1,7 +1,7 @@
 import { useState, useEffect, useContext } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
 import Header from '../Header/Header';
-import IProduct from '../../interfaces/product.interface';
+import IProduct, { IProductWithQuantity } from '../../interfaces/product.interface';
 import { getSingleProduct } from '../../services/Api';
 import notFound from '../../assets/product_not.png';
 import QuantityPicker from '../QuantityPicker/QuantityPicker';
@@ -22,18 +22,27 @@ function SingleProductPage () {
 	const [cartQuantity, setCartQuantity] = useState(1);
 	const [wishlist, setWishlist] = useState(false);
 	const storeDataWishlist = useSelector((state: IState) => state.wishlist.results);
-	const { nextStep } = useContext(StepContext);
+	const stepContext = useContext(StepContext);
+
+	if (!stepContext) {
+		throw new Error(
+			"stepContext has to be used within <Provider>"
+		);
+	}
+	const {nextStep} = stepContext;
 	const navigator = useNavigate();
 
 	const dispatch = useDispatch();
 
 	const dispatchFavouritePeople = () => {
-		if (wishlist) {
-			dispatch(removeItemFromWishlist( singleProduct.id ));
-			setWishlist(false);
-		} else {
-			dispatch(addItemToWishlist( singleProduct ));
-			setWishlist(true);
+		if(singleProduct) {
+			if (wishlist) {
+				dispatch(removeItemFromWishlist( singleProduct.id ));
+				setWishlist(false);
+			} else {
+				dispatch(addItemToWishlist( singleProduct ));
+				setWishlist(true);
+			}
 		}
 	}
 
@@ -50,9 +59,11 @@ function SingleProductPage () {
 		nextStep();
 		navigator('/cart/form');
 		localStorage.setItem('typeOfBuy', 'buyNow');
-		dispatch(addItemToBuyNow( productWithCartQuantity ));
-		dispatch(removeItemFromCart({ id: singleProduct.id }));
-		dispatch(removeItemFromWishlist( singleProduct ));
+		if(productWithCartQuantity && singleProduct) {
+			dispatch(addItemToBuyNow( productWithCartQuantity as IProductWithQuantity ));
+			dispatch(removeItemFromCart( singleProduct.id ));
+			dispatch(removeItemFromWishlist( singleProduct.id ));
+		}
 		setWishlist(false);
 	}
 
@@ -62,8 +73,8 @@ function SingleProductPage () {
 			cartQuantity,
 		};
 		localStorage.setItem('typeOfBuy', 'addToCart');
-		dispatch(addItemToCart( productWithCartQuantity ));
-		dispatch(removeItemFromWishlist( singleProduct ));
+		dispatch(addItemToCart( productWithCartQuantity as IProductWithQuantity ));
+		singleProduct && dispatch(removeItemFromWishlist( singleProduct.id ));
 		setWishlist(false);
 	}
 
@@ -77,7 +88,9 @@ function SingleProductPage () {
 					setSingleProduct(data);
 				}
 				storeDataWishlist.forEach(item => {
-					if (item.id === +productId) setWishlist(true);
+					if(productId) {
+						if (item.id === +productId) setWishlist(true);
+					}
 					else setWishlist(false);
 				});
 

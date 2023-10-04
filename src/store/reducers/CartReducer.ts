@@ -1,18 +1,22 @@
 import { createReducer } from "@reduxjs/toolkit";
 import { addItemToCart, removeItemFromCart, removeAllItemsFromCart } from '../actions/actions';
 import {getLocalStorage, setLocalStorage} from '../../utils/localStorage';
+import { IProductWithQuantity } from "../../interfaces/product.interface";
 
+interface CartState {
+	results: IProductWithQuantity[];
+}
 
-const initialState = {
+const initialState: CartState = {
 	results: Object.values(getLocalStorage('cart')) || [],
 }
 
 const cart = createReducer(initialState, (builder) => {
 		builder
 			.addCase(addItemToCart, (state, action) => {
-				const newItem = { ...action.payload };
-				const existingItemIndex = state.results.findIndex(item => item.id === newItem.id);
-				let updatedResults = [];
+				const newItem = { ...action.payload } as IProductWithQuantity;
+				const existingItemIndex = state.results.findIndex((item: IProductWithQuantity) => item.id === newItem.id);
+				let updatedResults: IProductWithQuantity[] = [];
 
 				if (existingItemIndex !== -1 && state.results.length !== 0) {
 					updatedResults = state.results.map(item =>
@@ -22,10 +26,10 @@ const cart = createReducer(initialState, (builder) => {
 					updatedResults = [...state.results, newItem];
 				}
 
-				const updatedResultsObject = updatedResults.reduce((acc, item, index) => {
-					acc[index] = item;
+				const updatedResultsObject: IProductWithQuantity[] = updatedResults.reduce((acc: IProductWithQuantity[], item) => {
+					acc.push(item);
 					return acc;
-				}, {});
+				}, []);
 
 				setLocalStorage('cart', updatedResultsObject);
 
@@ -39,10 +43,10 @@ const cart = createReducer(initialState, (builder) => {
 
 				const updatedResults = state.results.filter((item) => item.id !== idToRemove);
 
-				const updatedResultsObject = updatedResults.reduce((acc, item, index) => {
-					acc[index] = item;
+				const updatedResultsObject: IProductWithQuantity[] = updatedResults.reduce((acc: IProductWithQuantity[], item) => {
+					acc.push(item);
 					return acc;
-				}, {});
+				}, []);
 
 				setLocalStorage('cart', updatedResultsObject);
 
@@ -51,7 +55,7 @@ const cart = createReducer(initialState, (builder) => {
 					results: updatedResults,
 				};
 			})
-			.addCase(removeAllItemsFromCart, (state, action) => {
+			.addCase(removeAllItemsFromCart, () => {
 				localStorage.removeItem('cart');
 				return {
 					results: []

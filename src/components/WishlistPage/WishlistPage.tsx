@@ -19,8 +19,8 @@ function WishlistPage () {
 	return (
 		<>
 			<Header/>
-			<Button appearance='filled' style={{marginRight: '30px'}} onClick={goBack}>Go Back</Button>
 			<div className={style.wishlist}>
+			<Button appearance='filled' style={{marginRight: '30px'}} onClick={goBack}>Go Back</Button>
 				<Subheader type={'Wishlist'}/>
 				<div className={style.products}>
 					{wishlist.length !== 0 ? wishlist.map((product: IProduct) => (

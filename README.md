@@ -16,7 +16,7 @@ Functionality:
       - Breadcrumbs (when you click on the product category it will be redirect to all products and filtered by category)
       - Quantity selector
       - Buy now redirect to delivery form and then to Confirmation page (when you click buy now it removes item from wishlist)
-      - Add to cart (when you click multiple times on it, items will be stacked and quantity in cart will be increased)
+      - Add to cart (when you click multiple times on it, items will be stacked and quantity in cart will be increased. Removes item from wishlist)
       - Wishlist (add items to wishlist and remove item, fill change)
    5. Wishlist:
       - Go back button (previous page)

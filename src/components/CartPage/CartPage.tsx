@@ -1,4 +1,4 @@
-import { useContext, useEffect } from 'react';
+import { useContext } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { removeItemFromCart } from '../../store/actions/actions';
@@ -54,7 +54,7 @@ function CartPage () {
 						{cart.length? (
 							<div style={{display: 'flex', flexDirection: 'column', alignItems: 'end' }}>
 								<div style={{float: 'right', fontWeight: 'bold', fontSize: '20px', marginRight: '5%'}}>Total: {total} $</div>
-								<Button appearance='filled' onClick={() => {nextStep(); navigator('/cart/form')}} style={{marginTop: '20px'}}>Procees to checkout</Button>
+								<Button appearance='filled' onClick={() => {nextStep(); navigator('/cart/form'); localStorage.setItem('typeOfBuy', 'addToCart')}} style={{marginTop: '20px'}}>Procees to checkout</Button>
 							</div>
 						): undefined}
 					</div>

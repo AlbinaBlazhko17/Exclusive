@@ -1,10 +1,9 @@
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import Header from "../Header/Header";
 import { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { removeAllItemsFromCart, removeItemFromBuyNow } from '../../store/actions/actions';
 import CartItem from '../CartItems/CartItems';
-import updateOrdersAndSales from '../../utils/Orders';
 import store from '../../store/store';
 
 function ConfirmationPage() {

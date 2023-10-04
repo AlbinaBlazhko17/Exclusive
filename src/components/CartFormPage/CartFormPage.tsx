@@ -10,6 +10,7 @@ import CustomInput from '../FormToSign/CustomInput';
 import CustomInputNumber from '../FormToSign/CustomInputNumber';
 import StepContext from '../StepsProvider/StepsProvider';
 
+
 import style from './styles.module.css';
 
 function CartFormPage () {
@@ -26,8 +27,12 @@ function CartFormPage () {
 	}
 	const [formDataDelivery, setFormDataDelivery] = useState<IFormDataDelivery>(initialFormDataDelivery);
 
-	const { previousStep, nextStep } = useContext(StepContext);
+	const { nextStep } = useContext(StepContext);
 	const navigator = useNavigate();
+
+	const goBack = () => {
+		navigator(-1);
+	};
 
 	useEffect(() => {
 		const data = getLocalStorage('delivery');
@@ -196,8 +201,10 @@ function CartFormPage () {
 								<div className={style.error}>{errorMsg}</div>
 						)} />
 					</div>
-						{/* <Link to='/cart' style={{textDecoration: 'none'}}><Button appearance='filled' style={{marginRight: '30px'}} onClick={previousStep}>Back to cart</Button></Link> */}
+					<div style={{display: 'flex', justifyContent: 'space-between'}}>
+						<Link to='/cart' style={{textDecoration: 'none'}}><Button appearance='filled' style={{marginRight: '30px'}} onClick={goBack}>Back</Button></Link>
 						<Button type='submit' appearance='filled'>Confirm order</Button>
+					</div>
 				</Form>
 			</Formik>
 

@@ -1,14 +1,13 @@
 import { createReducer } from "@reduxjs/toolkit";
 import { addItemToBuyNow, removeItemFromBuyNow } from '../actions/actions';
 
-const buyNow = createReducer(null, (builder) => {
+const buyNow = createReducer({}, (builder) => {
 	builder
 		.addCase(addItemToBuyNow, (state, action) => {
-
-		return { ...action.payload };
+		return { ...action.payload } ;
 		})
-		.addCase(removeItemFromBuyNow, (state, action) => {
-			return null;
+		.addCase(removeItemFromBuyNow, () => {
+			return;
 		})
 		.addDefaultCase((state) => state);
   });

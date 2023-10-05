@@ -12,7 +12,7 @@ import StepContext from '../StepsProvider/StepsProvider';
 import { removeAllItemsFromCart, removeItemFromBuyNow } from '../../store/actions/actions';
 import store from '../../store/store';
 import { useDispatch } from 'react-redux';
-
+import { IProductWithQuantity } from '../../interfaces/product.interface';
 type RootState = ReturnType<typeof store.getState>
 
 

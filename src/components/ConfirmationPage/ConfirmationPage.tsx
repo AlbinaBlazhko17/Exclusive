@@ -1,7 +1,6 @@
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import Header from "../Header/Header";
 import { useEffect, useState } from 'react';
-import { useDispatch } from 'react-redux';
 import CartItem from '../CartItem/CartItem';
 
 import { IProductWithQuantity } from '../../interfaces/product.interface';

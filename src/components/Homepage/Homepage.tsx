@@ -7,6 +7,7 @@ import 'swiper/css';
 import 'swiper/css/pagination';
 
 import style from './styles.module.css';
+import MostSellingProducts from '../MostSellingProducts/MostSellingProducts';
 
 const Homepage = () => {
 	return (
@@ -44,6 +45,9 @@ const Homepage = () => {
 						</SwiperSlide>
 					</Swiper>
 				</div>
+			</div>
+			<div>
+				<MostSellingProducts/>
 			</div>
 		</>
 	)

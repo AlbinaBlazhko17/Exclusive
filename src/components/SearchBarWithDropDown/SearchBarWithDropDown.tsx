@@ -12,7 +12,6 @@ import { Link, useNavigate } from 'react-router-dom';
 
 import style from './styles.module.css';
 import { IconButton } from '@mui/joy';
-import { InputAdornment } from '@mui/material';
 
 
 function SearchBarWithDropDown () {

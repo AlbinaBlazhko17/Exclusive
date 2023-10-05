@@ -4,6 +4,9 @@ import { useEffect, useState } from "react";
 import { getProductsBySearch } from "../../services/Api";
 import ProductCard from "../ProductCard/ProductCard";
 
+import style from './styles.module.css';
+import Header from "../Header/Header";
+
 function SearchResults () {
 	const [results, setResults] = useState();
 	const location = useLocation();
@@ -26,14 +29,19 @@ function SearchResults () {
 
 	return (
 		<>
-			<Subheader type="Search results"/>
-			{
-				results? (
-					results.map (product => (
-						<ProductCard product={product}/>
-					))
-				): <div>Products not found!</div>
-			}
+			<Header/>
+			<div style={{padding: '5% 10%'}}>
+				<Subheader type="Search results"/>
+				<div className={style.results}>
+					{
+						results? (
+							results.map (product => (
+								<ProductCard product={product}/>
+							))
+						): <div>Products not found!</div>
+					}
+				</div>
+			</div>
 		</>
 	)
 }

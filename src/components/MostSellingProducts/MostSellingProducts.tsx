@@ -26,10 +26,6 @@ function MostSellingProducts () {
     return allOrders.find(order => order.id === +productId);
   });
 
-//   useEffect(() => {
-//     setBestSelling(mostSoldProductObjects);
-//   }, [mostSoldProductObjects]);
-
 	return (
 		<>
 			<Subheader type={'Best selling products'}/>

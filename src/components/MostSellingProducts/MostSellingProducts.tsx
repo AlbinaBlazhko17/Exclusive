@@ -1,9 +1,7 @@
-import { useEffect, useState } from "react";
 import Subheader from "../Subheader/Subheader";
 import ProductCard from "../ProductCard/ProductCard";
 
 function MostSellingProducts () {
-	const [bestSelling,  setBestSelling] = useState();
 	const dataFromLocalStorage = localStorage.getItem('orders');
 	const orders = dataFromLocalStorage? Object.values(JSON.parse(dataFromLocalStorage)): [];
 

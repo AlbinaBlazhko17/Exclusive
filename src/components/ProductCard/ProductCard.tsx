@@ -27,7 +27,7 @@ function ProductCard (
 		wishlistDispatch(addItemToCart({...product, cartQuantity }));
 	}
 	return (
-		<Card sx={{ maxWidth: type === 'listOfProducts'? 400: 500, minWidth: 250, height: type === 'listOfProducts'? 400: 540, position: 'relative'}} className={style.card}>
+		<Card sx={{ maxWidth: 400, minWidth: 250, maxHeight: 'max-content', position: 'relative'}} className={style.card}>
 			{
 				type === 'listOfWishlist' && (
 					<div onClick={handleClick}>

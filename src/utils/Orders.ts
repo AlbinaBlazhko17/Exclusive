@@ -1,24 +1,28 @@
 import { getLocalStorage, setLocalStorage } from "./localStorage";
 
 const updateOrdersAndSales = (order) => {
-	const existingOrders = getLocalStorage('orders') || {};
-	console.log(existingOrders)
+	const ordersFromLocalStorage = localStorage.getItem('orders');
+	let existingOrders = ordersFromLocalStorage ? Object.values(JSON.parse(ordersFromLocalStorage)): [];
+	if(!existingOrders.length) existingOrders.push(order)
 
-	for (const orderKey in existingOrders) {
-		if (existingOrders.hasOwnProperty(orderKey)) {
-		  const orderItems = existingOrders[orderKey];
-	  
-		  // Find the item with the specified itemId in the orderItems array
-		  const itemToUpdate = orderItems.find(item => item.id === order.id);
-	  
-		  if (itemToUpdate) {
-			// Update the sales count for the found item
-			itemToUpdate.sales += order.cartQuantity;
-		  }
-		}
-	  }
-	  
-	setLocalStorage('orders', existingOrders);
+	const newItems = [];
+
+	existingOrders.forEach(el => {
+		order.forEach(item => {
+			if(el.id === item.id) el.numberOfSelling += item.cartQuantity;
+			else newItems.push(order);
+		})
+	})
+	
+	console.log(newItems);
+	existingOrders = [...existingOrders, ...newItems];
+
+	const updatedResultsObject = existingOrders.reduce((acc, item) => {
+		acc.push(item);
+		return acc;
+	}, []);
+
+	localStorage.setItem('orders', JSON.stringify(updatedResultsObject));
 };
 
 export default updateOrdersAndSales;

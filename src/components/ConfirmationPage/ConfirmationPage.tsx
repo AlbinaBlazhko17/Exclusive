@@ -2,44 +2,36 @@ import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import Header from "../Header/Header";
 import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { removeAllItemsFromCart, removeItemFromBuyNow } from '../../store/actions/actions';
 import CartItem from '../CartItem/CartItem';
-import store from '../../store/store';
+
 import { IProductWithQuantity } from '../../interfaces/product.interface';
-type RootState = ReturnType<typeof store.getState>
+
 
 
 function ConfirmationPage() {
 	const [order, setOrder] = useState<IProductWithQuantity[]>([]);
-	const cart = localStorage.getItem('typeOfBuy') === 'addToCart'? (store.getState() as RootState).cart.results as IProductWithQuantity[]: (store.getState() as RootState).buyNow as IProductWithQuantity | null;
-	const cartDispatch = useDispatch();
+	const ordersFromLocalStorage = localStorage.getItem('orders');
+	const savedOrders = ordersFromLocalStorage? Object.values(JSON.parse(localStorage.getItem('orders'))): [];
+	const lastItem = savedOrders[savedOrders.length - 1];
 	let total = 0;
 
-	const handleRemoveItems = () => {
-		if (localStorage.getItem('typeOfBuy') === 'addToCart') {
-			cartDispatch(removeAllItemsFromCart());
-		} else {
-			cartDispatch(removeItemFromBuyNow());
-		}
-	};
-	
+
 	useEffect(() => {
 		const typeOfBuy = localStorage.getItem('typeOfBuy');
-
+		
 		if (typeOfBuy !== 'addToCart') {
-			if (cart !== null) {
-				setOrder([cart as IProductWithQuantity]);
+			if (lastItem !== null) {
+				setOrder([lastItem as IProductWithQuantity]);
 			} else {
 				setOrder([]);
 			}
 		} else {
-			if (Array.isArray(cart)) {
-				setOrder(cart);
+			if (Array.isArray(lastItem)) {
+				setOrder(lastItem);
 			} else {
 				setOrder([]);
 			}
 		}
-		handleRemoveItems();
 	}, []);
 
 	return (

@@ -9,11 +9,19 @@ import Button from '../Button/Button';
 import CustomInput from '../FormToSign/CustomInput';
 import CustomInputNumber from '../FormToSign/CustomInputNumber';
 import StepContext from '../StepsProvider/StepsProvider';
+import { removeAllItemsFromCart, removeItemFromBuyNow } from '../../store/actions/actions';
+import store from '../../store/store';
+import { useDispatch } from 'react-redux';
+
+type RootState = ReturnType<typeof store.getState>
+
 
 
 import style from './styles.module.css';
+import updateOrdersAndSales from '../../utils/Orders';
 
 function CartFormPage () {
+	const cart = localStorage.getItem('typeOfBuy') === 'addToCart'? (store.getState() as RootState).cart.results as IProductWithQuantity[]: (store.getState() as RootState).buyNow as IProductWithQuantity | null;
 
 	const initialFormDataDelivery = getLocalStorage('delivery') || {
 		firstName: '',
@@ -27,6 +35,15 @@ function CartFormPage () {
 	}
 	const [formDataDelivery, setFormDataDelivery] = useState<IFormDataDelivery>(initialFormDataDelivery);
 	const stepContext = useContext(StepContext);
+	const cartDispatch = useDispatch();
+
+	const handleRemoveItems = () => {
+		if (localStorage.getItem('typeOfBuy') === 'addToCart') {
+			cartDispatch(removeAllItemsFromCart());
+		} else {
+			cartDispatch(removeItemFromBuyNow());
+		}
+	};
 
 	if (!stepContext) {
 		throw new Error(
@@ -90,8 +107,14 @@ function CartFormPage () {
 				validationSchema={validationSchema}
 				onSubmit={(values, {setSubmitting}) => {
 					console.log('Form values:', values);
+					if(localStorage.getItem('typeOfBuy') === 'buyNow') {
+						updateOrdersAndSales([cart]);
+					} else {
+						updateOrdersAndSales(cart);
+					}
+					handleRemoveItems();
 					nextStep();
-					navigator('/cart/form/confirm')
+					navigator('/cart/form/confirm');
 					setSubmitting(false);
 				}}>
 				<Form className={style.formWrapper}>

@@ -1,4 +1,4 @@
-import { useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
 import Header from '../Header/Header';
 import IProduct, { IProductWithQuantity } from '../../interfaces/product.interface';
@@ -9,9 +9,9 @@ import Button from '../Button/Button';
 import { useDispatch, useSelector } from 'react-redux';
 import { addItemToCart, addItemToWishlist, removeItemFromWishlist, addItemToBuyNow, removeItemFromCart } from '../../store/actions/actions';
 import StepContext from '../StepsProvider/StepsProvider';
+import IState from '../../interfaces/state.interface';
 
 import style from './styles.module.css';
-import IState from '../../interfaces/state.interface';
 
 
 function SingleProductPage () {
@@ -195,4 +195,4 @@ function SingleProductPage () {
 	)
 }
 
-export default SingleProductPage;
+export default React.memo(SingleProductPage);

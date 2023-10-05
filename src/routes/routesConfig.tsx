@@ -3,6 +3,7 @@ import CartPage from '../components/CartPage/CartPage';
 import ConfirmationPage from '../components/ConfirmationPage/ConfirmationPage';
 import Homepage from '../components/Homepage/Homepage';
 import ProductsPage from '../components/ProductsPage/ProductsPage';
+import SearchResults from '../components/SearchResults/SearchResults';
 import SingleProductPage from '../components/SingleProductPage/SingleProductPage';
 import WishlistPage from '../components/WishlistPage/WishlistPage';
 
@@ -38,6 +39,10 @@ const routesConfig = [
 	{
 		path: '/cart/form/confirm',
 		element: <ConfirmationPage/>
+	},
+	{
+		path: '/search',
+		element: <SearchResults/>
 	}
 	// {
 	// 	path: '*',

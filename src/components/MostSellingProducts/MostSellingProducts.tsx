@@ -32,9 +32,11 @@ function MostSellingProducts () {
 			<Subheader type={'Best selling products'}/>
 			<div>
 				{
-					mostSoldProductObjects.map(el => (
-						<Link key={el.id} to={`/products/${el.category.id}/${el.id}`} style={{textDecoration: 'none'}}><ProductCard product={el}/></Link>
-					))
+					mostSoldProducts.length? (
+						mostSoldProductObjects.map(el => (
+							<Link key={el.id} to={`/products/${el.category.id}/${el.id}`} style={{textDecoration: 'none'}}><ProductCard product={el}/></Link>
+						))
+					): <div>Dont have best selling products</div>
 				}
 			</div>
 		</>

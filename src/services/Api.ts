@@ -61,3 +61,13 @@ export const getSingleProduct = async (id: number): Promise<IProduct | Error> =>
 		throw error;
 	}
 }
+
+export const getProductsBySearch = async (title: string): Promise<IProduct[] | Error> => {
+	try {
+		const response = await axios.get(`https://api.escuelajs.co/api/v1/products/?title=${title}`);
+		return response.data;
+	} catch(error) {
+		console.error('Error fetching products:', error);
+		throw error;
+	}
+}

@@ -45,9 +45,9 @@ const Homepage = () => {
 						</SwiperSlide>
 					</Swiper>
 				</div>
-			</div>
-			<div style={{padding: '2% 11%'}}>
-				<MostSellingProducts/>
+				<div className={style.most}>
+					<MostSellingProducts/>
+				</div>
 			</div>
 		</>
 	)

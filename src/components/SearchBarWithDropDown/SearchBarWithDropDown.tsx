@@ -8,7 +8,7 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import { Search } from '@mui/icons-material';
 import { getProductsBySearch } from '../../services/Api';
 import _ from 'lodash';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 import style from './styles.module.css';
 import { IconButton } from '@mui/joy';
@@ -18,7 +18,6 @@ function SearchBarWithDropDown () {
 	const [searchValue, setSearchValue] = useState('');
 	const [options, setOptions] = useState([]);
 	const [loading, setLoading] = useState(false);
-	const navigator = useNavigate();
 
 	const handleSearchChange = useCallback(
 		_.debounce((value) => {

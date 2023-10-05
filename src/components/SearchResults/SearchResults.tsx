@@ -1,4 +1,4 @@
-import { useLocation } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import Subheader from "../Subheader/Subheader";
 import { useEffect, useState } from "react";
 import { getProductsBySearch } from "../../services/Api";
@@ -36,7 +36,7 @@ function SearchResults () {
 					{
 						results? (
 							results.map (product => (
-								<ProductCard product={product}/>
+								<Link style={{textDecoration: 'none'}} to={`/products/${product.category.id}/${product.id}`}><ProductCard product={product}/></Link>
 							))
 						): <div>Products not found!</div>
 					}

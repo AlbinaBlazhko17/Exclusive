@@ -93,7 +93,7 @@ function Reviews () {
 							value={review.reviewText}
 							rows={5}
 							placeholder="Enter your review here"
-							style={{ width: '100%', resize: 'none', border: '1px solid rgb(205, 215, 225)', borderRadius: '5px', fontWeight: 'bold', fontFamily: 'Poppins' }}
+							style={{ width: '100%', resize: 'none', border: '1px solid rgb(205, 215, 225)', borderRadius: '5px', fontWeight: 'normal', fontSize: '14px', fontFamily: 'Poppins' }}
 							onChange={(e) => {
 								setFieldValue('reviewText', e.target.value)
 								setReview({...review, reviewText: e.target.value})

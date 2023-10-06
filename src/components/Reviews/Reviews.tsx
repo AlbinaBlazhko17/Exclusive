@@ -1,47 +1,47 @@
 import { Input } from '@mui/joy';
 import { Rating } from '@mui/material';
 import { ErrorMessage, Field, Form, Formik } from 'formik';
-import * as fs from "fs";
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import * as Yup from 'yup';
 import Button from '../Button/Button';
 
 import style from './styles.module.css';
 
 function Reviews () {
-	const [review, setReview] = useState();
-	const initialFormDataDelivery = {
-		title: '',
-		rating: 0,
-		review: '',
-	}
+	const initialValues = JSON.parse(localStorage.getItem('review')) || {};
+	const [review, setReview] = useState(initialValues);
 
 	const validationSchema = Yup.object().shape({
 		title: Yup.string()
 			.min(2, 'Title is too short!')
 			.max (20, 'Title is too long!')
 			.required ('Title is required!'),
-		rating: Yup.number()
+		unique: Yup.number()
 			.required ('Rating is required!'),
-		review: Yup.string()
+		reviewText: Yup.string()
 			.required('Review is required!'),
 	})
+
+	// useEffect(() => {
+	// 	const data = JSON.parse(localStorage.getItem('delivery'));
+	// 	if (data) {
+	// 		setReview(data);
+	// 	}
+	// }, []);
 
 	return (
 		<>
 			<Formik
-				initialValues={initialFormDataDelivery}
+				initialValues={review}
 				validationSchema={validationSchema}
 				onSubmit={(values, {setSubmitting}) =>{
-					fs.writeFile('reviews.json', JSON.stringify(values, null, 2), 'utf8', (err) => {
-						if (err) {
-							console.error('Error writing reviews.json:', err);
-							return;
-						}
-
-						console.log('Data has been written to reviews.json');
-					})
-						console.log('It submits')
+						console.log(values);
+						localStorage.setItem('review', JSON.stringify(values));
+						setReview({
+							title: '',
+							unique: '0',
+							reviewText: '',
+						});
 						setSubmitting(false);
 					}
 				}
@@ -53,9 +53,11 @@ function Reviews () {
 						<Field
 							type="text"
 							name="title"
+							value={review.title}
 							component={Input}
-							onChange={(e) =>{
+							onChange={(e) => {
 								setFieldValue('title', e.target.value);
+								setReview({...review, title: e.target.value})
 							}}
 						/>
 						<ErrorMessage name="title" render={(errorMsg) => (
@@ -64,17 +66,20 @@ function Reviews () {
 					</div>
 					<label className={style.label} htmlFor="rating">Rating</label>
 					<div className={style.field}>
-						<Field type="number" name="rating">
+						<Field type="number" name="unique">
 							{({ field }) => (
 								<Rating
 									{...field}
-									name="rating"
-									value={+field.value || 0}
+									name="unique"
+									value={review.unique}
 									size="large"
+									onClick={() => {
+										setReview({...review, unique: field.value})
+									}}
 								/>
 							)}
 						</Field>
-						<ErrorMessage name="rating" render={(errorMsg) => (
+						<ErrorMessage name="unique" render={(errorMsg) => (
 								<div className={style.error}>{errorMsg}</div>
 						)} />
 					</div>
@@ -82,16 +87,19 @@ function Reviews () {
 					<div className={style.field}>
 						<Field
 							type="text"
-							name="review"
+							name="reviewText"
 							as="textarea"
 							aria-label="Review"
+							value={review.reviewText}
 							rows={5}
 							placeholder="Enter your review here"
 							style={{ width: '100%', resize: 'none', border: '1px solid rgb(205, 215, 225)', borderRadius: '5px', fontWeight: 'bold', fontFamily: 'Poppins' }}
-							// formData={formDataDelivery}
-							// setFormData={setFormDataDelivery}
+							onChange={(e) => {
+								setFieldValue('reviewText', e.target.value)
+								setReview({...review, reviewText: e.target.value})
+							}}
 						/>
-						<ErrorMessage name="review" render={(errorMsg) => (
+						<ErrorMessage name="reviewText" render={(errorMsg) => (
 								<div className={style.error}>{errorMsg}</div>
 						)} />
 					</div>

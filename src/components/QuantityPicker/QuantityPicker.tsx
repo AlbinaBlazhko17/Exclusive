@@ -36,7 +36,7 @@ function QuantityPicker({ quantity, onQuantityChange, ...props }: {quantity: num
 				value={quantity}
 				sx={{width: 80}}
 				onChange={handleQuantityChange}
-				inputProps={{min: 1, style: { textAlign: 'center', borderRadius: 0, borderTop: '1px solid rgba(0, 0, 0, 0.50)', borderBottom: '1px solid rgba(0, 0, 0, 0.50)', fontWeight: 'bolder', fontSize: '20px', height: '14px'}}}
+				inputProps={{min: 1, style: { textAlign: 'center', borderRadius: 0, borderTop: '1px solid rgba(0, 0, 0, 0.50)', borderBottom: '1px solid rgba(0, 0, 0, 0.50)', fontWeight: 'bolder', fontSize: '20px', height: '15px'}}}
 			/>
 			<Button appearance={'filled'} style={{borderTopLeftRadius: 0, borderBottomLeftRadius: 0}} className={style.prickerButton} onClick={handleIncrement}>
 		<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">

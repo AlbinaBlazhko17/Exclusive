@@ -1,8 +1,9 @@
 .wrapper {
 	margin: 5% 10%;
+	height: 1300px;
 }
 
-.breadcrumbs a, span {
+.breadcrumbs a, .slash {
 	color: grey;
 	font-size: 14px;
 	font-weight: 400;
@@ -81,6 +82,10 @@
 
 .delivery svg {
 	margin-right: 40px;
+}
+
+.reviews {
+	margin-top: 5%;
 }
 
 @media screen and (max-width: 685px) {

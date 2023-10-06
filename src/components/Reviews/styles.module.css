@@ -1,0 +1,16 @@
+.label {
+	display: block;
+	margin-bottom: 5px;
+}
+
+.field {
+	margin-bottom: 10px;
+}
+
+.form {
+	width: 35%;
+}
+
+.error {
+	color: red;
+}

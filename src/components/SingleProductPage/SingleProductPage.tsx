@@ -12,6 +12,8 @@ import StepContext from '../StepsProvider/StepsProvider';
 import IState from '../../interfaces/state.interface';
 
 import style from './styles.module.css';
+import Reviews from '../Reviews/Reviews';
+import Subheader from '../Subheader/Subheader';
 
 
 function SingleProductPage () {
@@ -104,18 +106,18 @@ function SingleProductPage () {
 
 
 	return (
-		<div style={{color: 'black'}}>
+		<div>
 			<Header/>
 			<div className={style.wrapper}>
 				{!error? (
 					<>
 						<div className={style.breadcrumbs}>
 							<Link to="/">Home</Link>
-							<span> / </span>
+							<span className={style.slash}> / </span>
 							<Link to='/products/'>Products</Link>
-							<span> / </span>
+							<span className={style.slash}> / </span>
 							<Link to={`/products/${categoryId}`}>{singleProduct?.category.name}</Link>
-							<span> / </span>
+							<span className={style.slash}> / </span>
 							<Link to={`/products/${productId}`}>{singleProduct?.title}</Link>
 						</div>
 						<div className={style.product}>
@@ -190,6 +192,10 @@ function SingleProductPage () {
 						</div>
 					</>
 				): <div style={{fontSize: '40px', textAlign: 'center'}}>Product not Found</div>}
+				<div className={style.reviews}>
+					<Subheader type='Reviews'/>
+					<Reviews/>
+				</div>
 			</div>
 		</div>
 	)

@@ -7,7 +7,6 @@ export default defineConfig({
   plugins: [react(), svgLoader()],
   resolve: {
     alias: {
-      // Map the 'assets' alias to the 'src/assets' directory
       assets: './src/assets',
     },
   },

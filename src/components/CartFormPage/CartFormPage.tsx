@@ -13,12 +13,10 @@ import { removeAllItemsFromCart, removeItemFromBuyNow } from '../../store/action
 import store from '../../store/store';
 import { useDispatch } from 'react-redux';
 import { IProductWithQuantity } from '../../interfaces/product.interface';
+import updateOrdersAndSales from '../../utils/Orders';
 type RootState = ReturnType<typeof store.getState>
 
-
-
 import style from './styles.module.css';
-import updateOrdersAndSales from '../../utils/Orders';
 
 function CartFormPage () {
 	const cart = localStorage.getItem('typeOfBuy') === 'addToCart'? (store.getState() as RootState).cart.results as IProductWithQuantity[]: (store.getState() as RootState).buyNow as IProductWithQuantity | null;

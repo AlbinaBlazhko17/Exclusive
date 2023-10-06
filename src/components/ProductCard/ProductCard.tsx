@@ -26,6 +26,7 @@ function ProductCard (
 		e.preventDefault();
 		wishlistDispatch(addItemToCart({...product, cartQuantity }));
 	}
+
 	return (
 		<Card sx={{ maxWidth: 400, minWidth: 250, maxHeight: 'max-content', position: 'relative'}} className={style.card}>
 			{

@@ -25,7 +25,7 @@ function WishlistPage () {
 				<Subheader type={'Wishlist'}/>
 				<div className={style.products}>
 					{wishlist.length !== 0 ? wishlist.map((product: IProduct) => (
-						<Link to={`/products/${product.category.id}/${product.id}`} key={product.id} style={{ textDecoration: 'none', color: 'black' }}>
+						<Link to={`/products/${product?.category?.id}/${product?.id}`} key={product?.id} style={{ textDecoration: 'none', color: 'black' }}>
 							<ProductCard product={product} type={'listOfWishlist'} />
 						</Link>
 					)): <div className={style.empty}>Here is no products</div>}

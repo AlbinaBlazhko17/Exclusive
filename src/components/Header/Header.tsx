@@ -51,7 +51,7 @@ function Header () {
 			</form>
 			
 			<div className={style.interactive}>
-				<div className={style.counter}>
+				<div className={style.counters}>
 					<WishlistCartCounter type="wishlist"/>
 					<WishlistCartCounter type="cart" />
 				</div>

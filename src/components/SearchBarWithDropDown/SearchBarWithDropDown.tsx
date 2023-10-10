@@ -42,10 +42,6 @@ function SearchBarWithDropDown () {
 			}
 		}, 300), [])
 
-		useEffect(() => {
-			console.log(searchValue);
-		}, [searchValue])
-
 	return (
 		<>
 			<Autocomplete

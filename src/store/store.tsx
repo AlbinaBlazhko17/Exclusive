@@ -1,10 +1,30 @@
 import { configureStore } from '@reduxjs/toolkit';
-import rootReducer from './reducers';
+import { 
+  persistStore,
+  FLUSH,
+  REHYDRATE,
+  PAUSE,
+  PERSIST,
+  PURGE,
+  REGISTER,
+ } from 'redux-persist';
+import { persistedReducer } from './reducers';
 
-const store = configureStore(
-  { reducer: rootReducer },
+export const store = configureStore(
+  { reducer: persistedReducer,
+    middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({
+      serializableCheck: {
+        ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
+      },
+    }),
+   },
   window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
 );
+
+export const persister = persistStore(store);
+
+
 
 // store.subscribe(() => {
 //   const state = store.getState();

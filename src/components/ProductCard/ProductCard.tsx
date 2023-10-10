@@ -8,6 +8,7 @@ import Button from '../Button/Button';
 import { useDispatch } from 'react-redux';
 import { addItemToCart, removeItemFromWishlist } from '@store/actions/actions';
 import TrashSvg from '@assets/Trash.svg';
+import NotFound from '@assets/product_not.png';
 
 import style from './styles.module.css';
 
@@ -40,7 +41,7 @@ function ProductCard (
 			<CardMedia
 				component="img"
 				height={type === 'listOfProducts'? '200px': '350px' }
-				image={images[0]}
+				image={images? images[0]: NotFound}
 				sx={{borderRadius: '5%'}}
 				alt={style.title}
 				onError={(e) => {
@@ -50,13 +51,13 @@ function ProductCard (
 			/>
 			<CardContent className={style.descr}>
 				<Typography gutterBottom variant="h5" component="div">
-					{title.slice(0, 15)}
+					{title?.slice(0, 15)}
 				</Typography>
 				<Typography gutterBottom variant="h6" component="div">
 					$ {price}
 				</Typography>
 				<Typography variant="body2" color="text.secondary">
-					{description.slice(0,50)}
+					{description?.slice(0,50)}
 				</Typography>
 					<Button appearance='filled' className={style.addToCart} onClick={handleAddToCart}>Add to card</Button>
 			</CardContent>

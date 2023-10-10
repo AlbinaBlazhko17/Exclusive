@@ -75,6 +75,13 @@
 	display: inline-block;
 }
 
+.empty {
+	text-align: center;
+	color: black;
+	font-size: 40px;
+	font-weight: bolder;
+}
+
 @media screen and (max-width: 685px) {
 	.wrapper {
 		padding: 0 7%;

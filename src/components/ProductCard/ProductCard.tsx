@@ -32,7 +32,7 @@ function ProductCard (
 		<Card sx={{ maxWidth: 400, minWidth: 250, maxHeight: 'max-content', position: 'relative'}} className={style.card}>
 			{
 				type === 'listOfWishlist' && (
-					<div onClick={handleClick} style={{position: 'absolute', width: '40px', height: '40px', right: '10%', top: '10%'}}>
+					<div onClick={handleClick} className={style.trash}>
 						<img src={TrashSvg} alt="Trash Icon"/>
 					</div>
 				)
@@ -58,7 +58,7 @@ function ProductCard (
 				<Typography variant="body2" color="text.secondary">
 					{description.slice(0,50)}
 				</Typography>
-					<Button appearance='filled' style={{width: '100%', marginTop: '20px'}} onClick={handleAddToCart}>Add to card</Button>
+					<Button appearance='filled' className={style.addToCart} onClick={handleAddToCart}>Add to card</Button>
 			</CardContent>
 		</Card>
 	)

@@ -31,3 +31,10 @@
 	grid-auto-flow: row;
 	justify-content: center;
 }
+
+.empty {
+	text-align: center;
+	color: black;
+	font-size: 40px;
+	font-weight: bolder;
+}

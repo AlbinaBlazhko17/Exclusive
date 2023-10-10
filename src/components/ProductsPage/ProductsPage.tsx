@@ -105,7 +105,7 @@ function ProductsPage () {
 
 	
 		if (loading) {
-			return <div style={{color: 'black'}}>Loading...</div>;
+			return <div>Loading...</div>;
 		}
 		
 		if (error) {
@@ -131,7 +131,7 @@ function ProductsPage () {
 								<Link to={`/products/${product.category.id}/${product.id}`} key={product.id} style={{ textDecoration: 'none', color: 'black' }}>
 									<ProductCard product={product} />
 								</Link>
-							)): <div style={{textAlign: 'center', color: 'black', fontSize: '40px', fontWeight: 'bolder'}}>Here is no products</div>}
+							)): <div className={style.empty}>Here is no products</div>}
 						</div>
 						<div className={style.buttonsPagination}>
 							{products.length && maxOffset !== 0 && (

@@ -15,6 +15,31 @@
 	text-align: center;
 }
 
+.subfooter {
+	display: flex;
+	flex-direction: column;
+	align-items: end;
+}
+
+.total {
+	float: right;
+	font-weight: bold;
+	font-size: 20px;
+	margin-right: 5%;
+}
+
+.empty {
+	text-align: center;
+	font-size: 40px;
+	font-weight: bolder;
+}
+
+.product {
+	width: 300px;
+	display: flex;
+	justify-self: start;
+}
+
 @media screen and (max-width: 685px) {
 	.wrapper {
 		padding: 0 5%;

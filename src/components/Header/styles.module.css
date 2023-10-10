@@ -113,6 +113,13 @@
 	transform: translateY(6px) rotate(45deg);
 }
 
+.counters {
+	width: 100px;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+
 @media screen and (max-width: 1025px) {
 	.header {
 		padding: 1% 5%;

@@ -51,7 +51,7 @@ function Header () {
 			</form>
 			
 			<div className={style.interactive}>
-				<div style={{width: '100px', display: 'flex' , alignItems: 'center', justifyContent: 'space-between'}}>
+				<div className={style.counter}>
 					<WishlistCartCounter type="wishlist"/>
 					<WishlistCartCounter type="cart" />
 				</div>

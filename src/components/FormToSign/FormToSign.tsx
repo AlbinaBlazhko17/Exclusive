@@ -2,12 +2,12 @@ import Key from '@mui/icons-material/Key';
 import MailIcon from '@mui/icons-material/Mail';
 import { ErrorMessage, Field, Form, Formik } from 'formik';
 import { ChangeEvent, useState } from 'react';
-import * as Yup from 'yup';
 import { IFormData, setFormDataType } from '@interfaces/formData.interface';
 import Button from '../Button/Button';
 import CustomInput from './CustomInput';
 import CustomInputNumber from './CustomInputNumber';
 import RadioGroup from './RadioGroup';
+import { validationSchema } from './validationSchema';
 
 import 'react-phone-input-2/lib/style.css';
 import style from './styles.module.css';
@@ -20,32 +20,6 @@ function FormToSign ({type, formData, setFormData, handleClose}: { type: string,
 		setShowForgotPassword(true);
 	}
 
-	const validationSchema = Yup.object().shape({
-		email: Yup.string()
-			.email('Invalid email address')
-			.required('Email is required'),
-		password: Yup.string()
-			.when('showForgotPassword', ([showForgotPassword]) => {
-				return showForgotPassword ? Yup.string().min(6, 'Password must be at least 6 characters').required('Password is required') : Yup.string().notRequired();
-			}),
-		showFields: Yup.bool(),
-		confirmPassword: Yup.string()
-				.when('showFields', ([showFields]) => {
-					return showFields ? Yup.string().oneOf([Yup.ref('password'), undefined], 'Passwords must match').required('Password is required') : Yup.string().notRequired();
-				}),
-		tel: Yup.string()
-			.when('showFields', ([showFields]) => {
-				return showFields ? Yup.string().min(10, 'Telephone number must be at least 10 characters').required('Telephone number is required') : Yup.number().notRequired();
-			}),
-		gender: Yup.string()
-				.when('showFields', ([showFields]) => {
-					return showFields ? Yup.string().required('Gender Password is required') : Yup.string().notRequired();
-				}),
-		agreeToPolicy: Yup.bool()
-				.when('showFields', ([showFields]) => {
-					return showFields ? Yup.bool().oneOf([true], 'You must agree'): Yup.bool().notRequired();
-				}),
-		});
 	return (
 		<Formik 
 			initialValues={{

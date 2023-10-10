@@ -2,10 +2,9 @@ import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import Header from "../Header/Header";
 import { useEffect, useState } from 'react';
 import CartItem from '../CartItem/CartItem';
-
 import { IProductWithQuantity } from '@interfaces/product.interface';
 
-
+import style from './styles.module.css';
 
 function ConfirmationPage() {
 	const [order, setOrder] = useState<IProductWithQuantity[]>([]);
@@ -13,7 +12,6 @@ function ConfirmationPage() {
 	const savedOrders = ordersFromLocalStorage? Object.values(JSON.parse(localStorage.getItem('orders'))): [];
 	const lastItem = savedOrders[savedOrders.length - 1];
 	let total = 0;
-
 
 	useEffect(() => {
 		const typeOfBuy = localStorage.getItem('typeOfBuy');
@@ -36,11 +34,11 @@ function ConfirmationPage() {
 	return (
 		<>
 			<Header/>
-			<div style={{display: 'flex', alignItems: 'center', marginTop: '10%', marginBottom: '3%'}}>
+			<div className={style.circleIcon}>
 				<CheckCircleIcon sx={{color: '#74e8ae', width: '100px', height: '100px', margin: 'auto'}} fontSize="large" />
 			</div>
-			<div style={{color: '#74e8ae', fontSize: '40px', textAlign: 'center'}}>Thank you for your order!</div>
-			<div style={{padding: '2% 10%'}}>
+			<div className={style.text}>Thank you for your order!</div>
+			<div className={style.wrapper}>
 				{
 					order.map(orderItem => {
 						const subtotal = orderItem.price * orderItem.cartQuantity;
@@ -51,7 +49,7 @@ function ConfirmationPage() {
 						)
 					})
 				}
-				<div style={{float: 'right', fontWeight: 'bold', fontSize: '20px'}}>Total: {total} $</div>
+				<div className={style.total}>Total: {total} $</div>
 			</div>
 		</>
 	)

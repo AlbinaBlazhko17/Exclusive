@@ -10,6 +10,7 @@ import CartItem from '../CartItem/CartItem';
 import IState from '@interfaces/state.interface';
 import store from '@store/store';
 import { IProductWithQuantity } from '@interfaces/product.interface';
+import cn from 'classnames';
 
 import style from './styles.module.css';
 
@@ -25,6 +26,7 @@ function CartPage () {
 			"stepContext has to be used within <Provider>"
 		);
 	}
+
 	const { nextStep } = stepContext;
 
 	const navigator = useNavigate();
@@ -38,6 +40,11 @@ function CartPage () {
 		navigator(-1);
 	};
 
+	const handleClickProcessToCheckout = () => {
+		nextStep(); navigator('/cart/form');
+		localStorage.setItem('typeOfBuy', 'addToCart')
+	}
+
 	return(
 		<>
 			<Header/>
@@ -47,7 +54,7 @@ function CartPage () {
 					{cart.length !== 0 && (
 						<>
 							<div className={style.header}>
-								<div className={style.headerItem} style={{width: '300px',display: 'flex', justifySelf: 'start'}}>Product</div>
+								<div className={cn(style.headerItem, style.product)}>Product</div>
 								<div className={style.headerItem}>Price</div>
 								<div className={style.headerItem}>Quantity</div>
 								<div className={style.headerItem}>Subtotal</div>
@@ -66,12 +73,12 @@ function CartPage () {
 								)
 							})
 		
-						): <h2 style={{textAlign: 'center', fontSize: '40px', fontWeight: 'bolder'}}>Cart is empty</h2>
+						): <h2 className={style.empty}>Cart is empty</h2>
 						}
 						{cart.length? (
-							<div style={{display: 'flex', flexDirection: 'column', alignItems: 'end' }}>
-								<div style={{float: 'right', fontWeight: 'bold', fontSize: '20px', marginRight: '5%'}}>Total: {total} $</div>
-								<Button appearance='filled' onClick={() => {nextStep(); navigator('/cart/form'); localStorage.setItem('typeOfBuy', 'addToCart')}} style={{marginTop: '20px'}}>Procees to checkout</Button>
+							<div className={style.subfooter}>
+								<div className={style.total}>Total: {total} $</div>
+								<Button appearance='filled' onClick={handleClickProcessToCheckout} style={{marginTop: '20px'}}>Procees to checkout</Button>
 							</div>
 						): null}
 					</div>

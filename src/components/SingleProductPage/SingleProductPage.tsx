@@ -12,7 +12,6 @@ import StepContext from '../StepsProvider/StepsProvider';
 import IState from '@interfaces/state.interface';
 import Reviews from '../Reviews/Reviews';
 import Subheader from '../Subheader/Subheader';
-import WishlistSvg from '@assets/Wishlist.svg';
 import DeliverySvg from '@assets/icon-delivery.svg';
 import ReturnSvg from '@assets/Icon-return.svg';
 

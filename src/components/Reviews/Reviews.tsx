@@ -2,32 +2,14 @@ import { Input } from '@mui/joy';
 import { Rating } from '@mui/material';
 import { ErrorMessage, Field, Form, Formik } from 'formik';
 import { useState } from 'react';
-import * as Yup from 'yup';
 import Button from '../Button/Button';
+import { validationSchema } from './validationSchema';
 
 import style from './styles.module.css';
 
 function Reviews () {
 	const initialValues = JSON.parse(localStorage.getItem('review')) || {};
 	const [review, setReview] = useState(initialValues);
-
-	const validationSchema = Yup.object().shape({
-		title: Yup.string()
-			.min(2, 'Title is too short!')
-			.max (20, 'Title is too long!')
-			.required ('Title is required!'),
-		unique: Yup.number()
-			.required ('Rating is required!'),
-		reviewText: Yup.string()
-			.required('Review is required!'),
-	})
-
-	// useEffect(() => {
-	// 	const data = JSON.parse(localStorage.getItem('delivery'));
-	// 	if (data) {
-	// 		setReview(data);
-	// 	}
-	// }, []);
 
 	return (
 		<>
@@ -93,7 +75,7 @@ function Reviews () {
 							value={review.reviewText}
 							rows={5}
 							placeholder="Enter your review here"
-							style={{ width: '100%', resize: 'none', border: '1px solid rgb(205, 215, 225)', borderRadius: '5px', fontWeight: 'normal', fontSize: '14px', fontFamily: 'Poppins' }}
+							className={style.review}
 							onChange={(e) => {
 								setFieldValue('reviewText', e.target.value)
 								setReview({...review, reviewText: e.target.value})

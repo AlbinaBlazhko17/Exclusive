@@ -7,6 +7,7 @@ import Typography from '@mui/material/Typography';
 import Button from '../Button/Button';
 import { useDispatch } from 'react-redux';
 import { addItemToCart, removeItemFromWishlist } from '@store/actions/actions';
+import TrashSvg from '@assets/Trash.svg';
 
 import style from './styles.module.css';
 
@@ -31,10 +32,8 @@ function ProductCard (
 		<Card sx={{ maxWidth: 400, minWidth: 250, maxHeight: 'max-content', position: 'relative'}} className={style.card}>
 			{
 				type === 'listOfWishlist' && (
-					<div onClick={handleClick}>
-						<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" style={{position: 'absolute', width: '40px', height: '40px', right: '10%', top: '10%'}}>
-							<path d="M20 5.57143H5.33333L6.66667 21H17.3333L18.6667 5.57143H4M12 9.42857V17.1429M15.3333 9.42857L14.6667 17.1429M8.66667 9.42857L9.33333 17.1429M9.33333 5.57143L10 3H14L14.6667 5.57143" stroke="black" stroke-width="1.56" stroke-linecap="round" stroke-linejoin="round"/>
-						</svg>
+					<div onClick={handleClick} style={{position: 'absolute', width: '40px', height: '40px', right: '10%', top: '10%'}}>
+						<img src={TrashSvg} alt="Trash Icon"/>
 					</div>
 				)
 			}

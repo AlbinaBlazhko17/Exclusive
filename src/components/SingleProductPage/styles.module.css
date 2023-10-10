@@ -75,6 +75,14 @@
 	cursor: pointer;
 }
 
+.notInWishlist svg {
+	fill: none;
+}
+
+.wishlistChecked svg {
+	fill: yellow;
+}
+
 .delivery {
 	padding: 10px 16px;
 	display: flex;
@@ -82,10 +90,6 @@
 	border-radius: 4px;
 	border: 1px solid rgba(0, 0, 0, 0.50);
 	font-size: 16px;
-}
-
-.delivery svg {
-	margin-right: 40px;
 }
 
 .reviews {

@@ -5,11 +5,10 @@ import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
 import ListItemIcon from '@mui/material/ListItemIcon';
-import { Search } from '@mui/icons-material';
 import { getProductsBySearch } from '@services/Api';
 import _ from 'lodash';
 import { Link } from 'react-router-dom';
-import * as searchSvg from '@assets/search.svg';
+import searchSvg from '@assets/search.svg';
 
 import style from './styles.module.css';
 import { IconButton } from '@mui/joy';
@@ -91,16 +90,17 @@ function SearchBarWithDropDown () {
 				// 	</List>
 				// 	)}
 			/>
-			{/* <IconButton
+			<IconButton
 				onClick={() => {
 					console.log('Search clicked');
 				}}
 				style={{marginLeft: '10px'}}
 			> 
-				<Link to={`/search?query=${searchValue}`} style={{color: 'black'}}><Search /></Link>
-			</IconButton> */}
-			{/* <img src="src/assets/search.svg" alt="" /> */}
-			<searchSvg/>
+				<Link to={`/search?query=${searchValue}`} style={{color: 'black'}}>
+					<img src={searchSvg} alt="Search" />
+				</Link>
+			</IconButton>
+		
 		</>
 	);
 }

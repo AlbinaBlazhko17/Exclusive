@@ -1,17 +1,18 @@
 import { useContext } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { removeItemFromCart } from '../../store/actions/actions';
+import { removeItemFromCart } from '@store/actions/actions';
 import Button from '../Button/Button';
 import Header from '../Header/Header';
 import StepContext from '../StepsProvider/StepsProvider';
 import Subheader from '../Subheader/Subheader';
 import CartItem from '../CartItem/CartItem';
-import IState from '../../interfaces/state.interface';
-import store from '../../store/store';
+import IState from '@interfaces/state.interface';
+import store from '@store/store';
+import { IProductWithQuantity } from '@interfaces/product.interface';
 
 import style from './styles.module.css';
-import { IProductWithQuantity } from '../../interfaces/product.interface';
+
 type AppDispatch = typeof store.dispatch
 
 function CartPage () {

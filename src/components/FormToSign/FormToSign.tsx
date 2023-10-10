@@ -3,7 +3,7 @@ import MailIcon from '@mui/icons-material/Mail';
 import { ErrorMessage, Field, Form, Formik } from 'formik';
 import { ChangeEvent, useState } from 'react';
 import * as Yup from 'yup';
-import { IFormData, setFormDataType } from '../../interfaces/formData.interface';
+import { IFormData, setFormDataType } from '@interfaces/formData.interface';
 import Button from '../Button/Button';
 import CustomInput from './CustomInput';
 import CustomInputNumber from './CustomInputNumber';

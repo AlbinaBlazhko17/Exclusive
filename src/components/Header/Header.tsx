@@ -2,14 +2,13 @@ import { useEffect, useState } from "react";
 import { Link } from 'react-router-dom';
 import Button from "../Button/Button";
 import Modal from "../Modal/Modal";
-import { IFormData } from "../../interfaces/formData.interface";
+import { IFormData } from "@interfaces/formData.interface";
 import WishlistCartCounter from "../WishlistCartCounter/WishListCartCounter";
-
-import style from './styles.module.css';
 import SearchBarWithDropDown from "../SearchBarWithDropDown/SearchBarWithDropDown";
 
+import style from './styles.module.css';
+
 function Header () {
-	const [searchTerm, setSearchTerm] = useState<string>('');
 	const [open, setOpen] = useState<boolean>(false);
 	const [hamburgerActive, sethamburgerActive] = useState<boolean>(false);
 	const [type, setType] = useState<string>('');

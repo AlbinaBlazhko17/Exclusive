@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
-import { getAllCategories, getAllProducts, getAllProductsPagination, getProductsByCategoryPagination } from "../../services/Api";
-import ICategory from "../../interfaces/category.interface";
+import { getAllCategories, getAllProducts, getAllProductsPagination, getProductsByCategoryPagination } from "@services/Api";
+import ICategory from "@interfaces/category.interface";
 import Header from "../Header/Header";
-import IProduct from "../../interfaces/product.interface";
+import IProduct from "@interfaces/product.interface";
 import cn from 'classnames';
 import { Link, useParams } from "react-router-dom";
 

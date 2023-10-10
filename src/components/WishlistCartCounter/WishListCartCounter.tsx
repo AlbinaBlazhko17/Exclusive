@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 
 import styles from './styles.module.css';
-import IState from '../../interfaces/state.interface';
+import IState from '@interfaces/state.interface';
 
 function WishlistCartCounter ({ type }: {type: string}) {
 	const [count, setCount] = useState<number>();

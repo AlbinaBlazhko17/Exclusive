@@ -1,7 +1,7 @@
 import { Route, Routes, Navigate, useLocation } from 'react-router-dom';
 import { useContext } from 'react';
 import StepContext from '../StepsProvider/StepsProvider';
-import routesConfig from '../../routes/routesConfig';
+import routesConfig from '@routes/routesConfig';
 import { useEffect } from 'react';
 import 'swiper/css';
 import './App.css'

@@ -1,7 +1,7 @@
 import { Link, useLocation } from "react-router-dom";
 import Subheader from "../Subheader/Subheader";
 import { useEffect, useState } from "react";
-import { getProductsBySearch } from "../../services/Api";
+import { getProductsBySearch } from "@services/Api";
 import ProductCard from "../ProductCard/ProductCard";
 
 import style from './styles.module.css';

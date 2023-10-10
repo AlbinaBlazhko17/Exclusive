@@ -1,7 +1,7 @@
 import { Input } from '@mui/joy';
 import { Rating } from '@mui/material';
 import { ErrorMessage, Field, Form, Formik } from 'formik';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import * as Yup from 'yup';
 import Button from '../Button/Button';
 

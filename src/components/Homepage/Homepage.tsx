@@ -2,6 +2,7 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Pagination, Scrollbar, A11y } from 'swiper/modules';
 import Header from '../Header/Header';
 import { Link } from 'react-router-dom';
+import FirstImage from '@assets/slide_1.png';
 
 import 'swiper/css';
 import 'swiper/css/pagination';
@@ -29,7 +30,7 @@ const Homepage = () => {
 						modules={[Navigation, Pagination, Scrollbar, A11y]}
 						>
 						<SwiperSlide>
-							<div className={style.slide}><img src="src/assets/slide_1.png" alt="slide 1" /></div>
+							<div className={style.slide}><img src={FirstImage} alt="slide 1" /></div>
 						</SwiperSlide>
 						<SwiperSlide>
 							<div className={style.slide}><img src="src/assets/slide_2.png" alt="slide 2" /></div>

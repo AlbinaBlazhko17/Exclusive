@@ -3,7 +3,7 @@ import Header from "../Header/Header";
 import { useEffect, useState } from 'react';
 import CartItem from '../CartItem/CartItem';
 
-import { IProductWithQuantity } from '../../interfaces/product.interface';
+import { IProductWithQuantity } from '@interfaces/product.interface';
 
 
 

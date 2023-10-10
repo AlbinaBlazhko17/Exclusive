@@ -1,11 +1,11 @@
 import { useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
-import IProduct from '../../interfaces/product.interface';
+import IProduct from '@interfaces/product.interface';
 import Button from '../Button/Button';
 import Header from '../Header/Header';
 import ProductCard from '../ProductCard/ProductCard';
 import Subheader from '../Subheader/Subheader';
-import IState from '../../interfaces/state.interface';
+import IState from '@interfaces/state.interface';
 
 import style from './styles.module.css';
 

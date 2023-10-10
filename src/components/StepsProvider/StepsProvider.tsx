@@ -1,5 +1,5 @@
 import { createContext, useState, useEffect, ReactNode } from 'react';
-import IStepContextType from '../../interfaces/stepContext.interface';
+import IStepContextType from '@interfaces/stepContext.interface';
 
 const StepContext = createContext<IStepContextType | null>(null);
 

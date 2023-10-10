@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import NotFound from '../../assets/product_not.png';
+import NotFound from '@assets/product_not.png';
 import ICartItem from './CartItem.props';
 
 import style from './styles.module.css';

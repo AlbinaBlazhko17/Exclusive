@@ -9,6 +9,6 @@ export default interface IProduct {
 	images: string[]
 }
 
-export interface IProductWithQuantity extends IProduct{
+export interface IProductWithQuantity extends IProduct {
 	cartQuantity: number;
 }

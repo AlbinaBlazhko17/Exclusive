@@ -1,12 +1,12 @@
-import IProduct from '../../interfaces/product.interface';
-import notFound from '../../assets/product_not.png';
+import IProduct from '@interfaces/product.interface';
+import notFound from '@assets/product_not.png';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import Button from '../Button/Button';
 import { useDispatch } from 'react-redux';
-import { addItemToCart, removeItemFromWishlist } from '../../store/actions/actions';
+import { addItemToCart, removeItemFromWishlist } from '@store/actions/actions';
 
 import style from './styles.module.css';
 

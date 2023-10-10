@@ -1,15 +1,15 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
 import Header from '../Header/Header';
-import IProduct, { IProductWithQuantity } from '../../interfaces/product.interface';
-import { getSingleProduct } from '../../services/Api';
-import notFound from '../../assets/product_not.png';
+import IProduct, { IProductWithQuantity } from '@interfaces/product.interface';
+import { getSingleProduct } from '@services/Api';
+import notFound from '@assets/product_not.png';
 import QuantityPicker from '../QuantityPicker/QuantityPicker';
 import Button from '../Button/Button';
 import { useDispatch, useSelector } from 'react-redux';
-import { addItemToCart, addItemToWishlist, removeItemFromWishlist, addItemToBuyNow, removeItemFromCart } from '../../store/actions/actions';
+import { addItemToCart, addItemToWishlist, removeItemFromWishlist, addItemToBuyNow, removeItemFromCart } from '@store/actions/actions';
 import StepContext from '../StepsProvider/StepsProvider';
-import IState from '../../interfaces/state.interface';
+import IState from '@interfaces/state.interface';
 
 import style from './styles.module.css';
 import Reviews from '../Reviews/Reviews';

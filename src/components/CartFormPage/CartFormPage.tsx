@@ -3,17 +3,17 @@ import * as Yup from 'yup';
 import Header from '../Header/Header';
 import { useContext, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { IFormDataDelivery } from '../../interfaces/formDataDelivery.interface';
-import { setLocalStorage, getLocalStorage } from '../../utils/localStorage';
+import { IFormDataDelivery } from '@interfaces/formDataDelivery.interface';
+import { setLocalStorage, getLocalStorage } from '@utils/localStorage';
 import Button from '../Button/Button';
 import CustomInput from '../FormToSign/CustomInput';
 import CustomInputNumber from '../FormToSign/CustomInputNumber';
 import StepContext from '../StepsProvider/StepsProvider';
-import { removeAllItemsFromCart, removeItemFromBuyNow } from '../../store/actions/actions';
-import store from '../../store/store';
+import { removeAllItemsFromCart, removeItemFromBuyNow } from '@store/actions/actions';
+import store from '@store/store';
 import { useDispatch } from 'react-redux';
-import { IProductWithQuantity } from '../../interfaces/product.interface';
-import updateOrdersAndSales from '../../utils/Orders';
+import { IProductWithQuantity } from '@interfaces/product.interface';
+import updateOrdersAndSales from '@utils/Orders';
 type RootState = ReturnType<typeof store.getState>
 
 import style from './styles.module.css';

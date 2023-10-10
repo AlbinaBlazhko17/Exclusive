@@ -1,5 +1,5 @@
 import { Modal, ModalClose, Sheet, Typography } from '@mui/joy';
-import { IFormData, setFormDataType } from '../../interfaces/formData.interface';
+import { IFormData, setFormDataType } from '@interfaces/formData.interface';
 import FormToSign from '../FormToSign/FormToSign';
 
 function MyModal({

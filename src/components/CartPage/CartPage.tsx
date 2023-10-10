@@ -44,7 +44,7 @@ function CartPage () {
 				<div className={style.wrapper}>
 					<Button appearance='filled' style={{marginRight: '30px'}} onClick={goBack}>Go Back</Button>
 					<Subheader type={'Cart'}/>
-					{cart.length? (
+					{cart.length !== 0 && (
 						<>
 							<div className={style.header}>
 								<div className={style.headerItem} style={{width: '300px',display: 'flex', justifySelf: 'start'}}>Product</div>
@@ -53,7 +53,7 @@ function CartPage () {
 								<div className={style.headerItem}>Subtotal</div>
 							</div>
 						</>
-					): undefined}
+					)}
 					<div>
 					{
 						cart.length? (
@@ -73,7 +73,7 @@ function CartPage () {
 								<div style={{float: 'right', fontWeight: 'bold', fontSize: '20px', marginRight: '5%'}}>Total: {total} $</div>
 								<Button appearance='filled' onClick={() => {nextStep(); navigator('/cart/form'); localStorage.setItem('typeOfBuy', 'addToCart')}} style={{marginTop: '20px'}}>Procees to checkout</Button>
 							</div>
-						): undefined}
+						): null}
 					</div>
 				</div>
 		</>

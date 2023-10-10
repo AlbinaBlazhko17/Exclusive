@@ -5,10 +5,12 @@ import Header from "../Header/Header";
 import IProduct from "@interfaces/product.interface";
 import cn from 'classnames';
 import { Link, useParams } from "react-router-dom";
-
-import style from './styles.module.css';
 import ProductCard from "../ProductCard/ProductCard";
 import Button from "../Button/Button";
+
+const LIMIT = 16;
+
+import style from './styles.module.css';
 
 function ProductsPage () {
 		const [products, setProducts] = useState<IProduct[]>([]);
@@ -17,19 +19,18 @@ function ProductsPage () {
 		const [loading, setLoading] = useState(true);
 		const [error, setError] = useState(false);
 		const [offset, setOffset] = useState(0);
-		const [limit, setLimit] = useState(16);
 		const [maxOffset, setMaxOffset] = useState(0);
 		const [categoryIdTo, setCategorId] = useState<number>(categoryId && +categoryId || 0);
 
 		const nextPage = () => {
 			if (offset < maxOffset) {
-				setOffset(offset + limit);
+				setOffset(offset + LIMIT);
 			}
 		};
 
 		const prevPage = () => {
-			if (offset >= limit) {
-				setOffset(offset - limit);
+			if (offset >= LIMIT) {
+				setOffset(offset - LIMIT);
 			}
 		};
 
@@ -39,7 +40,7 @@ function ProductsPage () {
 					const data = await getAllCategories();
 					const dataForOffset = await getAllProducts();
 					if(!(dataForOffset instanceof Error)) {
-						const max = Math.max(0, dataForOffset - limit)
+						const max = Math.max(0, dataForOffset - LIMIT)
 						setMaxOffset(max);
 					}
 
@@ -67,9 +68,9 @@ function ProductsPage () {
 				try {
 					let data;
 					if (categoryIdTo !== 0) {
-						data = await getProductsByCategoryPagination(offset, limit, categoryIdTo);
+						data = await getProductsByCategoryPagination(offset, LIMIT, categoryIdTo);
 					} else {
-						data = await getAllProductsPagination(offset, limit);
+						data = await getAllProductsPagination(offset, LIMIT);
 					}
 		
 					if (!(data instanceof Error)) {
@@ -81,7 +82,7 @@ function ProductsPage () {
 					setLoading(false);
 				}
 			})();
-		}, [offset, limit, categoryIdTo]);
+		}, [offset, LIMIT, categoryIdTo]);
 
 		// useEffect(() =>{
 		// 	const fetchData = async () => {

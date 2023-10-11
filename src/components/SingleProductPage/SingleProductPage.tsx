@@ -7,7 +7,8 @@ import notFound from '@assets/product_not.png';
 import QuantityPicker from '../QuantityPicker/QuantityPicker';
 import Button from '../Button/Button';
 import { useDispatch, useSelector } from 'react-redux';
-import { addItemToCart, addItemToWishlist, removeItemFromWishlist, addItemToBuyNow, removeItemFromCart } from '@store/actions/actions';
+import { addItemToWishlist, removeItemFromWishlist, addItemToBuyNow } from '@store/actions/actions';
+import {addItemToCart, removeItemFromCart} from '../../store/slices/CartSlice';
 import StepContext from '../StepsProvider/StepsProvider';
 import IState from '@interfaces/state.interface';
 import Reviews from '../Reviews/Reviews';
@@ -77,6 +78,7 @@ function SingleProductPage () {
 			cartQuantity,
 		};
 		localStorage.setItem('typeOfBuy', 'addToCart');
+
 		dispatch(addItemToCart( productWithCartQuantity as IProductWithQuantity ));
 		singleProduct && dispatch(removeItemFromWishlist( singleProduct.id ));
 		setWishlist(false);

@@ -20,7 +20,7 @@ import style from './styles.module.css';
 
 function CartFormPage () {
 	const cart = localStorage.getItem('typeOfBuy') === 'addToCart'
-			? (store.getState() as RootState).cart.results as IProductWithQuantity[]
+			? (store.getState() as RootState).cart as IProductWithQuantity[]
 			: (store.getState() as RootState).buyNow as IProductWithQuantity | null;
 
 	const initialFormDataDelivery = getLocalStorage('delivery') || {

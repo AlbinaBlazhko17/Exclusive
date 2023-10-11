@@ -10,7 +10,7 @@ import IState from '@interfaces/state.interface';
 import style from './styles.module.css';
 
 function WishlistPage () {
-	const wishlist = useSelector((state: IState) => state.wishlist.results);
+	const wishlist = useSelector((state: IState) => state.wishlist);
 	const navigator = useNavigate();
 
 	const goBack = () => {

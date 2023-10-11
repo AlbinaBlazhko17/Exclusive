@@ -17,9 +17,10 @@ import style from './styles.module.css';
 type AppDispatch = typeof store.dispatch
 
 function CartPage () {
-	const cart: IProductWithQuantity[] = useSelector((state: IState) => state.cart.results);
+	const cart: IProductWithQuantity[] = useSelector((state: IState) => state.cart);
 	const cartDispatch: AppDispatch = useDispatch();
 	const stepContext = useContext(StepContext);
+	console.log(cart)
 
 	if (!stepContext) {
 		throw new Error(

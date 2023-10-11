@@ -13,8 +13,7 @@ function SearchResults () {
 
 	const queryParams = new URLSearchParams(location.search);
 	const query = queryParams.get('query');
-  
-	console.log(query);
+
 
 	useEffect(() => {
 		(async () => {

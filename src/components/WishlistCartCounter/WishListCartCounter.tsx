@@ -9,9 +9,9 @@ import styles from './styles.module.css';
 
 function WishlistCartCounter ({ type }: {type: string}) {
 	const [count, setCount] = useState<number>();
-	const storeData = useSelector((state: IState) => (type === 'wishlist'? state.wishlist.results: state.cart.results));
+	const storeData = useSelector((state: IState) => (type === 'wishlist'? state.wishlist: state.cart));
 	useEffect(() => {
-		const length = storeData.length;
+		const length = Object.values(storeData).length;
 		length.toString().length > 2 ? setCount(0) : setCount(length);
 	});
 

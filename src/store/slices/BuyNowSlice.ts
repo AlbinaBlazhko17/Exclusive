@@ -13,5 +13,4 @@ export const buyNowSlice = createSlice({
 	}
 })
 
-export const { addItemToBuyNow, removeItemFromBuyNow } = buyNowSlice.actions;
 export default buyNowSlice.reducer;
